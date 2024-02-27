@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import {createBrowserRouter, RouterProvider,Route,Link,Outlet,} from "react-router-dom";
 import Navbar from "./Components/Navbar";
+import Location from "./Components/Geolocation";
 import "./App.css";
 import Home from "./routes/Home";
 import Hourly from "./routes/Hourly";
@@ -13,6 +14,7 @@ const AppLayout = () => {
     <>
       <Navbar />
       <Outlet />
+      <Location />
     </>
   );
 };
