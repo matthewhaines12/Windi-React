@@ -7,9 +7,10 @@ function getCurrentWeather(){
     
     
     const fetchWeather = async () => {
+        var latlong = Location();
         try{
-            const weather = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}");
-            console.log(weather.data);
+            const CurrentWeather = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat="+latlong[0]+"&lon="+latlong[1]+"&appid=c4dc6e461bacc597e2caa8bc0042f17e");
+            console.log(CurrentWeather.data);
         }catch(err){
             console.error(err)
         }
