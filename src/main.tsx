@@ -9,6 +9,7 @@ import Hourly from "./routes/Hourly";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
 import CurrentWeather from "./Components/CurrentWeather";
+import "./assets/home-page.jpg";
 
 //PLEASE BE WARY OF HOW MANY TIMES PER HOUR YOU RUN THE 'CurrentWeather' FUNCTION!!! ONLY 60 PER HOUR!!!!!
 const AppLayout = () => {
