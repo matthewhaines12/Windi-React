@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
-// import CurrentWeather from "./Components/CurrentWeather.tsx"  // why error here??
+import CurrentWeather from "../../src/Components/CurrentWeather"
 
 function Home() {
-  // const currWeather = CurrentWeather(); // definitley wont work wont work
+
+  CurrentWeather().then((res) =>{ //This is so busted
+    const currWeather = res;
+  });
 
   // filler info for now
   return (
@@ -14,7 +17,7 @@ function Home() {
             <p>Altoona</p>
           </div>
           <div className="temp">
-            {/* <h1>{currWeather}°F</h1> This definitely wont work */}
+            <h1>{currWeather.data}°F</h1>
             <h1>63°F</h1>
           </div>
           <div className="description">

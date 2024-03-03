@@ -14,23 +14,24 @@ Whether you use this file to put the current weather component for the homepage 
 the 'CurrentWeather' object easily. But that depends on how you want to separate the code. Keep components and their API calls together? Or separate the
 files so each component is separate from it's API data.
 */
-function CurrentWeather(){
+async function CurrentWeather(){
     
     const fetchWeather = async () => {
         var latlong = Location(); //This is where the output from Geolocation API is. Obviously, something will need changed when we have an address search. Probably an if-statemet or useEffect?
         try{
             const CurrentWeather = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat="+latlong[0]+"&lon="+latlong[1]+"&appid=c4dc6e461bacc597e2caa8bc0042f17e");
-            console.log(CurrentWeather.data); 
+            console.log(CurrentWeather.data);
+
         }catch(err){
             console.error(err)
         }
     }
 
-    //useEffect(()=> {
+    useEffect(()=> {
         fetchWeather();
-    //}, [])
+    }, [])
 
-    return <div className="WeatherData"></div> //Might want to change this to return 'CurrentWeather'... hopefully that works? I'm tied now and my eyes are crunchy.
+    return CurrentWeather;//fetchWeather();//<div className="WeatherData"></div> //Might want to change this to return 'CurrentWeather'... hopefully that works? I'm tied now and my eyes are crunchy.
 }
 
 export default CurrentWeather;
