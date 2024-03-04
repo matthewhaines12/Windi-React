@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState , useEffect} from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import CurrentWeather from "../../src/Components/CurrentWeather"
@@ -110,12 +111,17 @@ import React, { useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
 // import CurrentWeather from "./Components/CurrentWeather.tsx"  // why error here??
 =======
+=======
+>>>>>>> parent of 566aeec (home screen attempt)
 import React from "react";
 import { createRoot } from "react-dom/client";
 import {createBrowserRouter, RouterProvider,Route,Link,Outlet,} from "react-router-dom";
 import "./App.css";
 import "./Home.css"
 
+<<<<<<< HEAD
+>>>>>>> parent of 566aeec (home screen attempt)
+=======
 >>>>>>> parent of 566aeec (home screen attempt)
 
 function Home() {
@@ -128,8 +134,12 @@ function Home() {
           </div>
           <div className="temp">
 <<<<<<< HEAD
+<<<<<<< HEAD
 //            { <h1>{currWeather}°F</h1> This definitely wont work }
             <h1>63°F</h1>
+=======
+            <h1>60°F</h1>
+>>>>>>> parent of 566aeec (home screen attempt)
 =======
             <h1>60°F</h1>
 >>>>>>> parent of 566aeec (home screen attempt)
