@@ -17,8 +17,6 @@ const AppLayout = () => {
     <>
       <Navbar />
       <Outlet />
-      <Location />
-      <CurrentWeather />  
     </>
   );
 };

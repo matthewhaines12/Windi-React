@@ -8,7 +8,7 @@ the coords, [latitude, longitude]. Then, the Success() function outputs the lat 
 the if-statement and the useEffect(), There is another delayed debug to print the lat and long to console. The delay is needed! <-- https://youtu.be/ZcQyJ-gxke0
 When the Location() function ends it returns the latlong array.
 */
-function Location() {
+async function Location() {
 
   var latlong: Array<number> = [0.0, 0.0]
 
@@ -25,15 +25,7 @@ function Location() {
   that has latitude, longitude, accuracy, and probably more but I didn't bother checking.
   */
   function Success(position: { coords: any; }){
-    //var coord = position.coords;
-
-    //console.log("Your current position is:");
-    //console.log(`Latitude : ${coord.latitude}`);
-    //console.log(`Longitude: ${coord.longitude}`);
-    //console.log(`More or less ${coord.accuracy} meters.`);
-
-    //These will need removed before the end of the semester ^^^
-
+    
     latlong[0] = position.coords.latitude; 
     latlong[1] = position.coords.longitude;
 
@@ -77,10 +69,10 @@ function Location() {
   This is kinda hard to explain, just watch the video I put in the description at the top: https://youtu.be/ZcQyJ-gxke0
   */
 
-  setTimeout(()=> {
-    console.log(`Latitude1 : ${latlong[0]}`);
-    console.log(`Longitude1 : ${latlong[1]}`);
-  }, 200);
+  //setTimeout(()=> {
+  //  console.log(`Latitude1 : ${latlong[0]}`);
+  //  console.log(`Longitude1 : ${latlong[1]}`);
+  //}, 200);
 
   return latlong;
 }

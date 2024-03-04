@@ -16,22 +16,22 @@ files so each component is separate from it's API data.
 */
 async function CurrentWeather(){
     
-    const fetchWeather = async () => {
-        var latlong = Location(); //This is where the output from Geolocation API is. Obviously, something will need changed when we have an address search. Probably an if-statemet or useEffect?
-        try{
-            const CurrentWeather = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat="+latlong[0]+"&lon="+latlong[1]+"&appid=c4dc6e461bacc597e2caa8bc0042f17e");
-            console.log(CurrentWeather.data);
+    const latlong = await Location(); //This is where the output from Geolocation API is. Obviously, something will need changed when we have an address search. Probably an if-statemet or useEffect?
 
+    const fetchWeather = async () => {
+        try{
+            const CurrentWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latlong[0]}&lon=${latlong[1]}&appid=c4dc6e461bacc597e2caa8bc0042f17e`);
+            console.log(CurrentWeather.data);
+            return CurrentWeather;
         }catch(err){
             console.error(err)
         }
     }
 
-    useEffect(()=> {
-        fetchWeather();
-    }, [])
-
-    return CurrentWeather;//fetchWeather();//<div className="WeatherData"></div> //Might want to change this to return 'CurrentWeather'... hopefully that works? I'm tied now and my eyes are crunchy.
+    //useEffect(()=> {
+    //    fetchWeather();
+    //}, [])
+    return fetchWeather();//<div className="WeatherData"></div> //Might want to change this to return 'CurrentWeather'... hopefully that works? I'm tied now and my eyes are crunchy.
 }
 
 export default CurrentWeather;
