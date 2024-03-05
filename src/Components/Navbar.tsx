@@ -33,13 +33,11 @@ function Navbar() {
             </div>
 
             <ul className={click ? "nav-menu active" : "nav-menu"}>
-              
               <form className="search-box" role="search">
                 <input
                   className="search-input"
                   type="search"
-                  placeholder="City/Zipcode"
-                  aria-label="City/Zipcode"
+                  placeholder="City/Zip..."
                 />
                 <button className="search-button" type="submit">
                   Search
