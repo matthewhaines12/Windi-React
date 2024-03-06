@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
 import { AiOutlineHome } from "react-icons/ai";
 import getWeather from "../../src/Components/FetchCurrent"
+import "../../src/App.css";
 
 /*
 Consider making this into smaller components?
