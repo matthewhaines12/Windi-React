@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-function getWeather() {
+async function getWeather() {
     var currWeather: Array<number | string> = [];
     var latlong: Array<number> = [0.0, 0.0]
+    //var weatherObject = {};
   
     var options = {
       highAccuracyEnabled: true,
@@ -27,6 +28,7 @@ function getWeather() {
             try{
                 const CurrentWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latlong[0]}&lon=${latlong[1]}&appid=c4dc6e461bacc597e2caa8bc0042f17e`);
                 console.log(CurrentWeather.data);
+                //weatherObject = CurrentWeather.data;
                 currWeather[0] = CurrentWeather.data.name;
                 currWeather[1] = CurrentWeather.data.main.temp;
                 currWeather[2] = CurrentWeather.data.clouds.all;
@@ -64,6 +66,7 @@ function getWeather() {
     }, []);
   
     return currWeather;
+    //return (weatherObject);
   }
 
   export default getWeather;
