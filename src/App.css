@@ -8,8 +8,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
-
- /*regular page views, will have to separate when we start actually make each page*/
+/*regular page views, will have to separate when we start actually make each page*/
 /* .home, */
 .hourly,/*just general css taking care of the pages*/
 .radar {
@@ -35,7 +34,8 @@
   width: 100%;
 }
 
-@media screen and (max-width: 960px) { /*mobile view*/
+@media screen and (max-width: 960px) {
+  /*mobile view*/
   .home,
   .hourly,
   .radar {
@@ -48,30 +48,30 @@
   }
 }
 
-/* home page css stuff move later*/
+/* home page css stuff move later
+  Lots of missing code here somehow, should be fixed now
+*/
 
-.home {
+/* .home {
   width: 100%;
   height: 100vh;
   position: relative;
   background-color: rgba rgba(0, 0, 0, 0.61);
-  color:#fff;
+  color: #fff;
 }
 
 .home:before {
-  content: '';
-  background: url('./assets/home-page.jpg') no-repeat center center/cover;
-  position: fixed;
+  content: "";
+  background: url("assets/home-page.jpg") no-repeat center center/cover;
+  filter: brightness(73%);
+  position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }
 
 .home .container {
   max-width: 700px;
-  height: 700px;
+  height: 500px;
   margin: auto;
   padding: 0 1rem;
   position: relative;
@@ -93,11 +93,11 @@
 }
 
 .home .middle {
-  margin:auto;
+  margin: auto;
   padding: 20px;
   text-align: center;
   position: relative;
-  top: -45px; 
+  top: -45px;
   border-radius: 12px;
   background-color: rgba(236, 236, 236, 0.2);
 }
@@ -119,42 +119,40 @@ p {
 
 h1 {
   font-size: 6rem;
-}
+} */
 
 /* hourly css stuff for now
 Very broken and unfinished
 */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Open Sans", sans-serif;
+.search-engine {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
 }
 
-.hourly:before { 
-  content: ''; 
-  background: url('assets/home-page.jpg')no-repeat center center/cover; 
-  filter: brightness(73%); 
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}  
+.search-engine input {
+  width: 70%;
+  height: 45px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 2px 15px;
+  font-size: 16px;
+  outline: none;
+  background-color: #fff;
+  color: rgb(46, 46, 46);
+}
 
-.hourly-container {
-  max-width: 700px;
-  height: 500px;
-  margin: auto;
-  padding: 0 1rem;
-  position: relative;
-  top: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-} 
-
-.hourly-images img {
-  width: 120px; 
-  height: auto; 
+.search-engine button {
+  border: none;
+  border-radius: 8px;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  outline: none;
+  cursor: pointer;
+  padding: 13px 15px;
 }

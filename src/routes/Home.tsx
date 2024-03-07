@@ -1,29 +1,32 @@
-import React, { useState , useEffect} from "react";
-import { AiOutlineHome } from "react-icons/ai";
-import getWeather from "../../src/Components/FetchCurrent"
-import "../../src/App.css";
+import React from "react";
+import { WeatherContext } from "../Components/WeatherContext";
+import "../Components/Home.css";
 
-/*
-Consider making this into smaller components?
-That way they can be individually be called and updated
+interface HomeProps {
+  city: string;
+  temperature: number;
+  description: string;
+  feelsLike: number;
+}
 
-Just a hypothesis, don't go betting it will work
-*/
-function Home() {
-  console.log(`Test1: Home`);
-
+const Home: React.FC<HomeProps> = ({
+  city,
+  temperature,
+  description,
+  feelsLike,
+}) => {
   return (
     <div className="home">
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>City</p>
+            <p>{city}</p>
           </div>
           <div className="temp">
-            <h1>°F</h1>
+            <h1>{Math.round(temperature)}°F</h1>
           </div>
           <div className="description">
-            <p>Clouds</p>
+            <p>{description}</p>
           </div>
         </div>
         <div className="middle">
@@ -67,7 +70,7 @@ function Home() {
         </div>
         <div className="bottom">
           <div className="feels">
-            <p>55°F</p>
+            <p>{Math.round(feelsLike)}°F</p>
             <p>Feels Like</p>
           </div>
           <div className="uv">
@@ -82,6 +85,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

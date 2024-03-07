@@ -10,14 +10,12 @@ function Navbar() {
   /*functional component for the Navbar*/
   const [click, setClick] =
     useState(false); /* State to manage the mobile menu visibility*/
-
   const handleClick = () =>
     setClick(!click); /*Function to toggle the mobile menu visibility*/
   const closeMobileMenu = () =>
     setClick(
       false
     ); /* Function to close the mobile menu when a link is clicked*/
-
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -27,11 +25,9 @@ function Navbar() {
               <CustomIcon className="navbar-icon" />
               Windi
             </Link>
-
             <div className="menu-icon" onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
             </div>
-
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               <form className="search-box" role="search">
                 <input
@@ -43,9 +39,6 @@ function Navbar() {
                   Search
                 </button>
               </form>
-
-              
-
               <li className="nav-item">
                 <NavLink
                   to="/"
