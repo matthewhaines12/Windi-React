@@ -94,13 +94,13 @@ const router = createBrowserRouter([
 
 //Learning how to render each part individually
 
-var test = true;
-var root = createRoot(document.getElementById("root"))
+//var test = true;
+//var root = createRoot(document.getElementById("root"))
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
-if(test){
-  console.log(`Test ran`);
-  root.render(<Home />);
-}
+//if(test){
+//  console.log(`Test ran`);
+//  root.render(<Home />);
+//}
 
