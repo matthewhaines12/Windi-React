@@ -7,7 +7,12 @@
   font-family: "Open Sans", sans-serif;
 }
 
+<<<<<<< Updated upstream
 .home, /*regular page views, will have to seperate when we start actually make each page*/
+=======
+/*regular page views, will have to separate when we start actually make each page*/
+/* .home, */
+>>>>>>> Stashed changes
 .hourly,/*just general css taking care of the pages*/
 .radar {
   display: flex;
@@ -32,7 +37,8 @@
   width: 100%;
 }
 
-@media screen and (max-width: 960px) { /*mobile view*/
+@media screen and (max-width: 960px) {
+  /*mobile view*/
   .home,
   .hourly,
   .radar {
@@ -43,4 +49,151 @@
     margin-left: 1rem;
     font-size: 80px;
   }
+<<<<<<< Updated upstream
 }
+=======
+}
+
+/* home page css stuff move later
+  Lots of missing code here somehow, should be fixed now
+*/
+
+.home {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: rgba rgba(0, 0, 0, 0.61);
+  color: #fff;
+}
+
+.home:before {
+  content: "";
+  background: url("assets/home-page.jpg") no-repeat center center/cover;
+  filter: brightness(73%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.home .container {
+  max-width: 700px;
+  height: 500px;
+  margin: auto;
+  padding: 0 1rem;
+  position: relative;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.home .top {
+  position: relative;
+  padding: 10px;
+  top: -35px;
+  width: 35%;
+  margin: 1rem auto;
+  border-radius: 12px;
+  background-color: rgba(236, 236, 236, 0.2);
+}
+
+.home .middle {
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  top: -45px;
+  border-radius: 12px;
+  background-color: rgba(236, 236, 236, 0.2);
+}
+
+.home .bottom {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 550px;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: rgba(236, 236, 236, 0.2);
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+/* hourly css stuff for now
+Very broken and unfinished
+*/
+
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+} */
+
+.hourly:before {
+  content: "";
+  background: url("assets/home-page.jpg") no-repeat center center/cover;
+  filter: brightness(73%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hourly-container {
+  max-width: 700px;
+  height: 500px;
+  margin: auto;
+  padding: 0 1rem;
+  position: relative;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hourly-images img {
+  width: 120px;
+  height: auto;
+}
+
+.search-engine {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.search-engine input {
+  width: 70%;
+  height: 45px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 2px 15px;
+  font-size: 16px;
+  outline: none;
+  background-color: #fff;
+  color: rgb(46, 46, 46);
+}
+
+.search-engine button {
+  border: none;
+  border-radius: 8px;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
+  outline: none;
+  cursor: pointer;
+  padding: 13px 15px;
+}
+>>>>>>> Stashed changes
