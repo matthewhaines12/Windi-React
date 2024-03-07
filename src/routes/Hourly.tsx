@@ -1,15 +1,7 @@
 import React from "react";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-<<<<<<< Updated upstream
-
-function Hourly() {
-  return (
-    <div className="hourly">
-      <h1>Hourly</h1>
-      <TiWeatherPartlySunny className="page-icon" />
-    </div>
-=======
 import Weather from "../Components/Weather";
+import "../Components/Hourly.css";
 
 function Hourly() {
   return (
@@ -100,7 +92,6 @@ function Hourly() {
         </div>
       </div>
     </>
->>>>>>> Stashed changes
   );
 }
 

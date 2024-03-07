@@ -29,7 +29,6 @@ function Navbar() {
               {click ? <FaTimes /> : <FaBars />}
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
-              
               <form className="search-box" role="search">
                 <input
                   className="search-input"

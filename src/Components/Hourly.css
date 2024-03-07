@@ -9,8 +9,7 @@
 
 .hourly:before {
   content: "";
-  /* background: url('assets/home-page.jpg')no-repeat center center/cover; */
-  background: linear-gradient(135deg, #000000, #1b1b1b, #000000);
+  background: url("assets/home-page.jpg") no-repeat center center/cover;
   filter: brightness(73%);
   position: absolute;
   width: 100%;

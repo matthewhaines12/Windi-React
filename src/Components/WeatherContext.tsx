@@ -3,7 +3,14 @@ import React from "react";
 export const WeatherContext = React.createContext({
   city: "",
   temp: "",
-  setWeather: (city: string, temp: string) => {},
+  description: "",
+  feelsLike: "",
+  setWeather: (
+    city: string,
+    temp: number,
+    description: string,
+    feelsLike: number
+  ) => {},
 });
 
 export default WeatherContext;

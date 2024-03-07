@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import React from "react";
-=======
 // import React, { useEffect } from "react";
->>>>>>> Stashed changes
 import { createRoot } from "react-dom/client";
 // import {
 //   createBrowserRouter,
@@ -56,6 +52,7 @@ import { createRoot } from "react-dom/client";
 
 import React from "react";
 import { render } from "react-dom";
+``;
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Location from "./Components/Geolocation";
@@ -64,53 +61,59 @@ import Home from "./routes/Home";
 import Hourly from "./routes/Hourly";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
-<<<<<<< Updated upstream
-import CurrentWeather from "./Components/CurrentWeather";
-
-//PLEASE BE WARY OF HOW MANY TIMES PER HOUR YOU RUN THE 'CurrentWeather' FUNCTION!!! ONLY 60 PER HOUR!!!!!
-const AppLayout = () => {
-=======
 import Weather from "./Components/Weather";
 
-const AppLayout: React.FC<{ city: string; temperature: number }> = ({
-  city,
-  temperature,
-}) => {
->>>>>>> Stashed changes
+const AppLayout: React.FC<{
+  city: string;
+  temperature: number;
+  description: string;
+  feelsLike: number;
+}> = ({ city, temperature, description, feelsLike }) => {
   return (
     <>
-      <Home city={city} temperature={temperature} />
+      <Home
+        city={city}
+        temperature={temperature}
+        description={description}
+        feelsLike={feelsLike}
+      />
       <Navbar />
       <Outlet />
-<<<<<<< Updated upstream
-      <Location />
-      <CurrentWeather />  
-=======
->>>>>>> Stashed changes
     </>
   );
 };
 
-<<<<<<< Updated upstream
-=======
 const App: React.FC = () => {
-  const [city, setCity] = React.useState("");
+  const [city, setCity] = React.useState("test");
   const [temperature, setTemperature] = React.useState(0);
+  const [description, setDescription] = React.useState("Test");
+  const [feelsLike, setFeelsLike] = React.useState(0);
 
-  const handleWeatherUpdate = (city: string, temperature: number) => {
+  const handleWeatherUpdate = (
+    city: string,
+    temperature: number,
+    description: string,
+    feelsLike: number
+  ) => {
     setCity(city);
     setTemperature(temperature);
+    setDescription(description);
+    setFeelsLike(feelsLike);
   };
 
   return (
     <>
       <Weather onWeatherUpdate={handleWeatherUpdate} />
-      <AppLayout city={city} temperature={temperature} />
+      <AppLayout
+        city={city}
+        temperature={temperature}
+        description={description}
+        feelsLike={feelsLike}
+      />
     </>
   );
 };
 
->>>>>>> Stashed changes
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -118,7 +121,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home city={""} temperature={0} />,
+        element: (
+          <Home city={""} temperature={0} description={""} feelsLike={0} />
+        ),
       },
       {
         path: "hourly",
@@ -132,6 +137,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
-);
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  createRoot(rootElement).render(<RouterProvider router={router} />);
+}
