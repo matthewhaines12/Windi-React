@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 * {
-  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
 }
 
 /*regular page views, will have to separate when we start actually make each page*/

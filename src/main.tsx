@@ -71,12 +71,12 @@ const AppLayout: React.FC<{
 }> = ({ city, temperature, description, feelsLike }) => {
   return (
     <>
-      <Home
+      {/* <Home
         city={city}
         temperature={temperature}
         description={description}
         feelsLike={feelsLike}
-      />
+      /> */}
       <Navbar />
       <Outlet />
     </>

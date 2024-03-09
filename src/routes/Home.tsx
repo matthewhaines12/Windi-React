@@ -1,6 +1,9 @@
 import React from "react";
-import { WeatherContext } from "../Components/WeatherContext";
+// import { WeatherContext } from "../Components/WeatherContext";
 import "../Components/Home.css";
+import { FaLocationArrow } from "react-icons/fa";
+import { FaTemperatureHigh } from "react-icons/fa";
+import { CiCloudOn } from "react-icons/ci";
 
 interface HomeProps {
   city: string;
@@ -20,71 +23,74 @@ const Home: React.FC<HomeProps> = ({
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>{city}</p>
+            <FaLocationArrow className="location-icon" />
+            <p>Altoona{city}</p>
           </div>
           <div className="temp">
-            <h1>{Math.round(temperature)}°F</h1>
+            <h1>6{Math.round(temperature)}°F</h1>
           </div>
           <div className="description">
-            <p>{description}</p>
+            <p>Cloudy{description}</p>
           </div>
         </div>
         <div className="middle">
-          <table>
-            <caption>5-Day Forecast</caption>
-            <thead>
-              <tr>
-                <th>Day</th>
-                <th>Temperature</th>
-                <th>Weather</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Monday</td>
-                <td>72°F</td>
-                <td>Sunny</td>
-              </tr>
-              <tr>
-                <td>Tuesday</td>
-                <td>68°F</td>
-                <td>Partly Cloudy</td>
-              </tr>
-              <tr>
-                <td>Wednesday</td>
-                <td>70°F</td>
-                <td>Rainy</td>
-              </tr>
-              <tr>
-                <td>Thursday</td>
-                <td>75°F</td>
-                <td>Cloudy</td>
-              </tr>
-              <tr>
-                <td>Friday</td>
-                <td>78°F</td>
-                <td>Sunny</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="bottom">
-          <div className="feels">
-            <p>{Math.round(feelsLike)}°F</p>
-            <p>Feels Like</p>
+          <div>
+            <ul className="days-list">
+              <li>
+                <CiCloudOn className="cloud-5day" />
+                <span>Sat</span>
+                <span className="day-temp">65°F</span>
+              </li>
+              <li>
+                <CiCloudOn className="cloud-5day" />
+                <span>Sun</span>
+                <span className="day-temp">65°F</span>
+              </li>
+              <li>
+                <CiCloudOn className="cloud-5day" />
+                <span>Mon</span>
+                <span className="day-temp">67°F</span>
+              </li>
+              <li>
+                <CiCloudOn className="cloud-5day" />
+                <span>Tue</span>
+                <span className="day-temp">62°F</span>
+              </li>
+              <li>
+                <CiCloudOn className="cloud-5day" />
+                <span>Wed</span>
+                <span className="day-temp">61°F</span>
+              </li>
+            </ul>
+            <div />
           </div>
-          <div className="uv">
-            <p>4</p>
-            <p>UV Index</p>
-          </div>
-          <div className="wind">
-            <p>5mph</p>
-            <p>Wind Speed</p>
+          <div className="bottom">
+            <div className="day-info">
+              <div>
+                <span className="title">PRECIPITATION </span>
+                <span className="value">0 %</span>
+              </div>
+              <div>
+                <span className="title">HUMIDITY </span>
+                <span className="value">22 %</span>
+              </div>
+              <div>
+                <span className="title">WIND SPEED </span>
+                <span className="value">4 mp/h</span>
+              </div>
+              <div>
+                <span className="title">FEELS LIKE </span>
+                <span className="value">{Math.round(feelsLike)}°F</span>
+              </div>
+              <div>
+                <span className="title">WIND SPEED </span>
+                <span className="value">4 mp/h</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default Home;

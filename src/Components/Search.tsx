@@ -19,7 +19,7 @@ const Search: React.FC<SearchProps> = ({ search, setSearch }) => {
     const temp = fetchWeatherData(search);
 
     if (temp) {
-      setWeather(search, temp);
+      //setWeather(search, temp);
     } else {
       // Handle the case when the temperature is not available
     }
