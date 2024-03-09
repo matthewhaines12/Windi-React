@@ -33,8 +33,7 @@ function Navbar() {
                 <input
                   className="search-input"
                   type="search"
-                  placeholder="City/Zipcode"
-                  aria-label="City/Zipcode"
+                  placeholder="City/Zip..."
                 />
                 <button className="search-button" type="submit">
                   Search

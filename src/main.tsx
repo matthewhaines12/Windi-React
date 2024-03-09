@@ -55,7 +55,6 @@ import { render } from "react-dom";
 ``;
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navbar from "./Components/Navbar";
-import Location from "./Components/Geolocation";
 import "./App.css";
 import Home from "./routes/Home";
 import Hourly from "./routes/Hourly";
@@ -113,7 +112,54 @@ const App: React.FC = () => {
     </>
   );
 };
+/*
+async function Data(){
+  console.log(`Test1: Data Retrieved`);
+  const [currWeather, setCurrentWeather] = useState<Array<number|string>>([]);
+  useEffect(()=>{
+    const weather = () => {
+      getWeather().then((weatherArray)=>{
+        setCurrentWeather(weatherArray);
+      });
+    }
 
+      weather();
+    }, []);
+  return currWeather;
+}
+*/
+/*Data()
+.then((result) => {
+  console.log(`Data() ran...`);
+  setWeatherData(result);
+    const router = createBrowserRouter([
+      {
+        element: <AppLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/",
+            element: Home(weatherData),
+          },
+          {
+            path: "hourly",
+            element: <Hourly />,
+          },
+          {
+            path: "radar",
+            element: <Radar />,
+          },
+        ],
+      },
+    ]);
+  useEffect(()=>{
+    createRoot(document.getElementById("root")).render(
+      <RouterProvider router={router} />
+    );
+  }, [weatherData])
+    
+});
+*/
 const router = createBrowserRouter([
   {
     element: <App />,
