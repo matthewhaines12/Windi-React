@@ -2,10 +2,27 @@ import React from "react";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import Weather from "../Components/Weather";
 import "../Components/Hourly.css";
+import { useState } from "react";
 
+
+const api ={
+  key: "0f7763cd90d1123c22aea7a9a765fe9b",
+  base: "https://api.openweathermap.org/data/2.5/",
+};
+
+const search= "latrobe";
 
 function Hourly() {
-  return (
+  //const[search, setSearch] = useState("");
+  //const searchPressed = () =>{
+    fetch(`${api.base}forecast/hourly?q=${search}&units=imperial&APPID=${api.key}`)
+    .then((res) => res.json())
+    .then((result)=> {
+      console.log(result);
+    })
+  //}
+
+    return (
     <>
       <div className="home">
         <div className="container">
