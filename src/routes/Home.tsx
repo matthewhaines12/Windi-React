@@ -24,13 +24,13 @@ const Home: React.FC<HomeProps> = ({
         <div className="top">
           <div className="location">
             <FaLocationArrow className="location-icon" />
-            <p>Altoona{city}</p>
+            <p>{city}</p>
           </div>
           <div className="temp">
-            <h1>6{Math.round(temperature)}°F</h1>
+            <h1>{Math.round(temperature)}°F</h1>
           </div>
           <div className="description">
-            <p>Cloudy{description}</p>
+            <p>{description}</p>
           </div>
         </div>
         <div className="middle">
