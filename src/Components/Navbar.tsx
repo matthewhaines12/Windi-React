@@ -5,6 +5,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { NavLink } from "react-router-dom";
 import CustomIcon from "./CustomIcon";
+import Search from "./Search"
 
 function Navbar() {
   /*functional component for the Navbar*/

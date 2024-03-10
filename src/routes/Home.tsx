@@ -6,8 +6,6 @@ function Home(){
     <div>
       <HomeCurrentWeather/>
     </div>
-    
-    
   )
 };
 export default Home;
