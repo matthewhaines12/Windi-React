@@ -17,12 +17,18 @@ interface City {
   // Add other properties as needed
 }
 
+interface WeatherItem {
+  icon: string;
+  // Add other properties as needed
+}
+
 interface ListItem {
   dt_txt: string;
   main: {
     temp: number;
   // Add other properties as needed
 };
+weather: WeatherItem[];
 }
 
 interface HourlyData {
@@ -82,62 +88,58 @@ useEffect(() => {
                 <tr className="hourly-images">
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[0]?.weather?.[0]?.icon}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[1]?.weather?.[0]?.icon}.png`}
+                      
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[2]?.weather?.[0]?.icon}.png`}
+                      
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[3]?.weather?.[0]?.icon}.png`}
+                      
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[4]?.weather?.[0]?.icon}.png`}
+                      
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[5]?.weather?.[0]?.icon}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[6]?.weather?.[0]?.icon}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src="./Images/warm-weather.png"
-                      alt="warm-weather-img"
+                      src={`http://openweathermap.org/img/w/${hours.list?.[7]?.weather?.[0]?.icon}.png`}
                     />
                   </td>
                 </tr>
                 <tr className="hourly-temp">
-                  <td>{hours.list?.[0]?.main?.temp}</td>
-                  <td>{hours.list?.[1]?.main?.temp}</td>
-                  <td>{hours.list?.[2]?.main?.temp}</td>
-                  <td>{hours.list?.[3]?.main?.temp}</td>
-                  <td>{hours.list?.[4]?.main?.temp}</td>
-                  <td>{hours.list?.[5]?.main?.temp}</td>
-                  <td>{hours.list?.[6]?.main?.temp}</td>
-                  <td>{hours.list?.[7]?.main?.temp}</td>
+                  <td>{hours.list?.[0]?.main?.temp} °F</td>
+                  <td>{hours.list?.[1]?.main?.temp} °F</td>
+                  <td>{hours.list?.[2]?.main?.temp} °F</td>
+                  <td>{hours.list?.[3]?.main?.temp} °F</td>
+                  <td>{hours.list?.[4]?.main?.temp} °F</td>
+                  <td>{hours.list?.[5]?.main?.temp} °F</td>
+                  <td>{hours.list?.[6]?.main?.temp} °F</td>
+                  <td>{hours.list?.[7]?.main?.temp} °F</td>
                 </tr>
               </tbody>
             </table>
