@@ -1,6 +1,6 @@
 import React from "react";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import Weather from "../Components/Weather";
+
 import "../Components/Hourly.css";
 import { useState, useEffect } from "react";
 

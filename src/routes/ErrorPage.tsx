@@ -1,6 +1,5 @@
 import { useRouteError } from "react-router-dom";
 import "../App.css";
-import Weather from "../Components/Weather";
 
 export default function ErrorPage() {
   const error = useRouteError();
