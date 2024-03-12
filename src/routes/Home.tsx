@@ -30,28 +30,16 @@ interface LocationData {
   }[];
 }
 
-function Home() {
-  const [locationData, setLocationData] = useState<LocationData>({
-    Array: [
-      {
-        lon: 0,
-        lat: 0,
-      },
-    ],
-  });
 
-  const handleLocationUpdate = (newLocationData: LocationData) => {
-    setLocationData(newLocationData);
-    console.log("Location data updated in Home:", newLocationData);
-  };
+import { useLocation } from "../Components/LocationContext";
+
+function Home() {
+  const { locationData, handleLocationUpdate } = useLocation();
 
   return (
     <div>
-      
-      {locationData?.Array?.[0]?.lat !== undefined && locationData?.Array?.[0]?.lon !== undefined && (
-        <HomeCurrentWeather locationData={locationData} />
-      )}
-      
+      <HomeCurrentWeather locationData={locationData} />
+      {/* You can now remove the local state and useState import since it's managed globally */}
     </div>
   );
 }

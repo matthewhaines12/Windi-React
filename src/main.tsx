@@ -196,7 +196,7 @@ import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
 import { createRoot } from 'react-dom/client';
 import App from "./SearchShare";
-
+import { LocationProvider } from './Components/LocationContext';
 
 interface LocationData {
   Array: {
@@ -205,7 +205,7 @@ interface LocationData {
     // other properties if any
   }[];
 }
-const AppLayout = () => {
+/*const AppLayout = () => {
   const [locationData, setLocationData] = useState<LocationData>({
     Array: [
       {
@@ -227,7 +227,7 @@ const AppLayout = () => {
       <Outlet />
     </>
   );
-};
+};*/
 
 
 const router = createBrowserRouter([
@@ -251,6 +251,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
+  <LocationProvider>
   <RouterProvider router={router} />
+  </LocationProvider>
 );

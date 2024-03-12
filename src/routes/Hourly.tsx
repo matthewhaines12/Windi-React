@@ -68,7 +68,7 @@ useEffect(() => {
         <div className="container">
           <div className="top">
             <h3 className="hourly-title">Hourly Forecast</h3>
-            <th>{hours.city.name}</th>
+            <div>{hours.city.name}</div>
           </div>
           <div className="middle">
             <table className="hourly-outline">

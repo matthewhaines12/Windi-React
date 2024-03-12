@@ -1,15 +1,10 @@
-import React from "react";
+
 // import { WeatherContext } from "../Components/WeatherContext";
 import "../Components/Home.css";
 import { FaLocationArrow } from "react-icons/fa";
-import { useState, useEffect } from "react";
 import HomeForecast from "./HomeForecast";
-
-const api = {
-    key: "51792902640cee7f3338178dbd96604a",
-    base: "https://pro.openweathermap.org/data/2.5/",
-  };
-  
+import React, { useEffect, useState } from 'react';
+import { useLocation } from './LocationContext'; //
   
   interface Weather {
     description: string;
@@ -39,47 +34,31 @@ const api = {
     // Add other properties if needed
   }
 
-  interface LocationData {
-    Array: {
-        lat: number;
-        lon: number;
-        // other properties if any
-      }[];
+const api = {
+  key: "51792902640cee7f3338178dbd96604a",
+  base: "https://pro.openweathermap.org/data/2.5/",
+};
+
+function HomeCurrentWeather() {
+  const { locationData } = useLocation(); // This uses the context we've set up
+  const [home, setWeatherData] = useState<HomeData | null>(null); // Initialize weatherData state
+
+  useEffect(() => {
+    if (locationData.locations.length > 0) {
+      const { lat, lon } = locationData.locations[0];
+      // Use the lat and lon to fetch weather data
+      fetch(`${api.base}weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=imperial`)
+        .then(res => res.json())
+        .then(data => {
+          setWeatherData(data); // Update state with fetched weather data
+          console.log(data); // Logging for debugging purposes
+        })
+        .catch(error => console.error("Failed to fetch weather data", error));
     }
-    
+  }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
+
+  // Ensure the rendering logic below does not contain undefined references
   
-  interface HomeCurrentWeatherProps {
-    locationData: LocationData;
-  }
-
-function HomeCurrentWeather({locationData}: HomeCurrentWeatherProps) {
-var latitude = locationData?.Array?.[0]?.lat;
-var longitude = locationData?.Array?.[0]?.lon;
-  //const[search, setSearch] = useState("");
-  //const searchPressed = () =>{
-  const [home, setHome] = useState<HomeData | null>(null);
-    
-useEffect(() => {
-  console.log("Location data in HomeCurrentWeather:", locationData);
-  console.log("Lat and Long updated:", latitude, longitude);
-  if (latitude !== undefined && longitude !== undefined) {
-    console.log("Fetching data...");
-  fetch(`${api.base}weather?lat=${latitude}&lon=${longitude}&APPID=${api.key}&units=imperial`)
-    .then((res) => res.json())
-    .then((result : HomeData) => {
-      console.log("API Response:", result);
-      setHome(result);
-    })
-    .catch((error) => {
-      console.error("Error fetching hourly data:", error);
-    });
-  }
-}, [latitude, longitude, locationData]);
-
-if (!home) {
-  // Render loading state or return null until data is fetched
-  return null;
-}
 
   return (
     <div className="home">
