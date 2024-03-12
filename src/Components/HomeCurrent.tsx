@@ -26,11 +26,16 @@ import { useLocation } from './LocationContext'; //
     // Add other properties if needed
   }
   
+  interface country{
+   country: string;
+  }
+
   interface HomeData {
     weather: Weather[];
     main: Main;
     wind: Wind;
     name: string;
+    sys: country;
     // Add other properties if needed
   }
 
@@ -67,6 +72,7 @@ function HomeCurrentWeather() {
           <div className="location">
             <FaLocationArrow className="location-icon" />
             <p>{home?.name}</p>
+            <p>, {home?.sys?.country}</p>
           </div>
           <div className="temp">
             <h1>{home?.main?.temp}°F</h1>
