@@ -64,7 +64,7 @@ useEffect(() => {
 
   return (
     <>
-      <div className="home">
+      <div className="hourly">
         <div className="container">
           <div className="top">
             <h3 className="hourly-title">Hourly Forecast</h3>
