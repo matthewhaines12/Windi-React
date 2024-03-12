@@ -2,51 +2,49 @@
 //import { WeatherContext } from "./WeatherContext";
 
 //interface SearchProps {
-  //search: string;
-  //setSearch: React.Dispatch<React.SetStateAction<string>>;
+//search: string;
+//setSearch: React.Dispatch<React.SetStateAction<string>>;
 //}
 
 //const Search: React.FC<SearchProps> = ({ search, setSearch }) => {
-  //const { setWeather } = useContext(WeatherContext);
+//const { setWeather } = useContext(WeatherContext);
 
-  //const fetchWeatherData = (city: string): string => {
-    // Implement the logic to fetch weather data for the city
-    // and return the temperature as a string
-   // return "";
-  //};
+//const fetchWeatherData = (city: string): string => {
+// Implement the logic to fetch weather data for the city
+// and return the temperature as a string
+// return "";
+//};
 
-  //const handleSearch = () => {
-    //const temp = fetchWeatherData(search);
+//const handleSearch = () => {
+//const temp = fetchWeatherData(search);
 
-    //if (temp) {
-      //setWeather(search, temp);
-    //} else {
-      // Handle the case when the temperature is not available
-    //}
-  //};
+//if (temp) {
+//setWeather(search, temp);
+//} else {
+// Handle the case when the temperature is not available
+//}
+//};
 
-  //return (
-    //<div className="search-engine">
-      //<input
-       // type="text"
-        //className="city-search"
-        //placeholder="City/Zip..."
-        //name="search"
-        //value={search}
-        //onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          //setSearch(event.target.value)
-        //}
-      ///>
-      //<button className="search-button" onClick={handleSearch}>
-        //Search
-      //</button>
-    //</div>
-  //);
+//return (
+//<div className="search-engine">
+//<input
+// type="text"
+//className="city-search"
+//placeholder="City/Zip..."
+//name="search"
+//value={search}
+//onChange={(event: ChangeEvent<HTMLInputElement>) =>
+//setSearch(event.target.value)
+//}
+///>
+//<button className="search-button" onClick={handleSearch}>
+//Search
+//</button>
+//</div>
+//);
 //};
 
 //export default Search;
-
-
 
 /*interface LocationData {
 lon: number;
@@ -88,7 +86,7 @@ function Search(){
 }
 export default Search; */
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 interface LocationData {
   Array: {
@@ -102,14 +100,11 @@ const api = {
   base: "https://pro.openweathermap.org/geo/1.0/",
 };
 
-
 interface SearchProps {
   onLocationUpdate: (newLocationData: LocationData) => void;
 }
 
-
-
-function Search({ onLocationUpdate } : SearchProps) {
+function Search({ onLocationUpdate }: SearchProps) {
   const [search, setSearch] = useState("");
 
   const searchPressed = () => {
@@ -128,8 +123,8 @@ function Search({ onLocationUpdate } : SearchProps) {
         };
         // Update the location data
         onLocationUpdate(locationData);
-      console.log("Longitude:", locationData.Array[0]?.lon);
-      console.log("Latitude:", locationData.Array[0]?.lat);
+        console.log("Longitude:", locationData.Array[0]?.lon);
+        console.log("Latitude:", locationData.Array[0]?.lat);
       })
       .catch((error) => {
         console.error("Error fetching hourly data:", error);
@@ -140,7 +135,7 @@ function Search({ onLocationUpdate } : SearchProps) {
     <div>
       <input
         type="text"
-        placeholder="Enter City,State Code,Country Code"
+        placeholder="Enter City..."
         onChange={(e) => setSearch(e.target.value)}
       />
       <button onClick={searchPressed}>Search</button>
