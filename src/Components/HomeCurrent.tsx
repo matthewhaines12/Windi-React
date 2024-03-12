@@ -41,8 +41,8 @@ const api = {
 
   interface LocationData {
     Array: {
-        lon: number;
         lat: number;
+        lon: number;
         // other properties if any
       }[];
     }
@@ -53,26 +53,33 @@ const api = {
   }
 
 function HomeCurrentWeather({locationData}: HomeCurrentWeatherProps) {
-const long = locationData?.Array?.[0]?.lon;
-const lat = locationData?.Array?.[0]?.lat;
+var latitude = locationData?.Array?.[0]?.lat;
+var longitude = locationData?.Array?.[0]?.lon;
   //const[search, setSearch] = useState("");
   //const searchPressed = () =>{
-  const [home, setHome] = useState<HomeData>({
-    name: "", // Add default value for the 'name' property
-    weather: [{ description: "" }], // Add default values for nested objects
-    main: { temp: 0, humidity: 0, feels_like: 0, temp_min: 0, temp_max: 0 }, // Add default values for nested objects
-    wind: { speed: 0, gust: 0 }, // Add default values for nested objects
-  });
+  const [home, setHome] = useState<HomeData | null>(null);
+    
 useEffect(() => {
-  fetch(`${api.base}weather?lat=${lat}&lon=${long}&APPID=${api.key}&units=imperial`)
+  console.log("Location data in HomeCurrentWeather:", locationData);
+  console.log("Lat and Long updated:", latitude, longitude);
+  if (latitude !== undefined && longitude !== undefined) {
+    console.log("Fetching data...");
+  fetch(`${api.base}weather?lat=${latitude}&lon=${longitude}&APPID=${api.key}&units=imperial`)
     .then((res) => res.json())
     .then((result : HomeData) => {
+      console.log("API Response:", result);
       setHome(result);
     })
     .catch((error) => {
       console.error("Error fetching hourly data:", error);
     });
-}, []);
+  }
+}, [latitude, longitude, locationData]);
+
+if (!home) {
+  // Render loading state or return null until data is fetched
+  return null;
+}
 
   return (
     <div className="home">

@@ -46,12 +46,7 @@
 
 //export default Search;
 
-import React, {useState} from "react";
 
-const api = {
-  key: "51792902640cee7f3338178dbd96604a",
-  base: "https://pro.openweathermap.org/geo/1.0/",
-};
 
 /*interface LocationData {
 lon: number;
@@ -92,25 +87,49 @@ function Search(){
   );
 }
 export default Search; */
-interface SearchProps {
-  onLocationUpdate: (newLocationData: LocationData) => void;
-}
+
+import React, {useState} from "react";
+
 interface LocationData {
   Array: {
     lon: number;
     lat: number;
-    // other properties if any
   }[];
 }
+
+const api = {
+  key: "51792902640cee7f3338178dbd96604a",
+  base: "https://pro.openweathermap.org/geo/1.0/",
+};
+
+
+interface SearchProps {
+  onLocationUpdate: (newLocationData: LocationData) => void;
+}
+
+
 
 function Search({ onLocationUpdate } : SearchProps) {
   const [search, setSearch] = useState("");
 
   const searchPressed = () => {
+    console.log("Search pressed. Location data:", Location);
     fetch(`${api.base}direct?q=${search}&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
-        onLocationUpdate(result); // Pass the result to the parent component
+        console.log("API Response:", result);
+        const locationData = {
+          Array: [
+            {
+              lat: result[0]?.lat,
+              lon: result[0]?.lon,
+            },
+          ],
+        };
+        // Update the location data
+        onLocationUpdate(locationData);
+      console.log("Longitude:", locationData.Array[0]?.lon);
+      console.log("Latitude:", locationData.Array[0]?.lat);
       })
       .catch((error) => {
         console.error("Error fetching hourly data:", error);

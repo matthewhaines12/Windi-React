@@ -1,9 +1,6 @@
 import React from "react";
 // import { WeatherContext } from "../Components/WeatherContext";
 import "../Components/Home.css";
-import { FaLocationArrow } from "react-icons/fa";
-import { FaTemperatureHigh } from "react-icons/fa";
-import { CiCloudOn } from "react-icons/ci";
 import { useState, useEffect } from "react";
 
 const api = {

@@ -1,5 +1,5 @@
 // import React, { useEffect } from "react";
-import { createRoot } from "react-dom/client";
+//import { createRoot } from "react-dom/client";
 // import {
 //   createBrowserRouter,
 //   RouterProvider,
@@ -50,16 +50,16 @@ import { createRoot } from "react-dom/client";
 //   <RouterProvider router={router} />
 // );
 
-import React from "react";
-import { render } from "react-dom";
-``;
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Navbar from "./Components/Navbar";
-import "./App.css";
-import Home from "./routes/Home";
-import Hourly from "./routes/Hourly";
-import Radar from "./routes/Radar";
-import ErrorPage from "./routes/ErrorPage";
+//import React from "react";
+//import { render } from "react-dom";
+//``;
+//import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+//import Navbar from "./Components/Navbar";
+//import "./App.css";
+//import Home from "./routes/Home";
+//import Hourly from "./routes/Hourly";
+//import Radar from "./routes/Radar";
+//import ErrorPage from "./routes/ErrorPage";
 //import Weather from "./Components/Weather";
 
 //const AppLayout: React.FC<{
@@ -187,6 +187,17 @@ async function Data(){
 //if (rootElement) {
  // createRoot(rootElement).render(<RouterProvider router={router} />);
 //}
+import React, { useState } from "react";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Home from "./routes/Home";
+import Hourly from "./routes/Hourly";
+import Radar from "./routes/Radar";
+import ErrorPage from "./routes/ErrorPage";
+import { createRoot } from 'react-dom/client';
+import App from "./SearchShare";
+
+
 interface LocationData {
   Array: {
     lon: number;
@@ -195,6 +206,21 @@ interface LocationData {
   }[];
 }
 const AppLayout = () => {
+  const [locationData, setLocationData] = useState<LocationData>({
+    Array: [
+      {
+        lon: 0,
+        lat: 0,
+      },
+    ],
+  });
+
+  const handleLocationUpdate = (newLocationData: LocationData) => {
+    // Handle location update logic here
+    setLocationData(newLocationData);
+    console.log("Location data updated in App:", newLocationData);
+    // You can update state or perform any other logic here
+  };
   return (
     <>
       <Navbar onLocationUpdate={handleLocationUpdate}/>
@@ -203,15 +229,10 @@ const AppLayout = () => {
   );
 };
 
-const handleLocationUpdate = (newLocationData: LocationData) => {
-  // Handle location update logic here
-  console.log("Location data updated in App:", newLocationData);
-  // You can update state or perform any other logic here
-};
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
