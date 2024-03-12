@@ -1,7 +1,7 @@
 import React from "react";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import Weather from "../Components/Weather";
-import "../Components/Hourly.css";
+
+import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
 
 const api = {
@@ -64,7 +64,7 @@ useEffect(() => {
 
   return (
     <>
-      <div className="home">
+      <div className="hourly">
         <div className="container">
           <div className="top">
             <h3 className="hourly-title">Hourly Forecast</h3>

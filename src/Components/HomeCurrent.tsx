@@ -1,9 +1,7 @@
 import React from "react";
 // import { WeatherContext } from "../Components/WeatherContext";
-import "../Components/Home.css";
+import "../Styles/Home.css";
 import { FaLocationArrow } from "react-icons/fa";
-import { FaTemperatureHigh } from "react-icons/fa";
-import { CiCloudOn } from "react-icons/ci";
 import { useState, useEffect } from "react";
 import HomeForecast from "./HomeForecast";
 
@@ -12,8 +10,6 @@ const api = {
     base: "https://pro.openweathermap.org/data/2.5/",
   };
   
-  const lat = "40.3212";
-  const long = "-79.3795";
   
   interface Weather {
     description: string;
@@ -43,8 +39,22 @@ const api = {
     // Add other properties if needed
   }
 
-function HomeCurrentWeather() {
+  interface LocationData {
+    Array: {
+        lon: number;
+        lat: number;
+        // other properties if any
+      }[];
+    }
+    
+  
+  interface HomeCurrentWeatherProps {
+    locationData: LocationData;
+  }
 
+function HomeCurrentWeather({locationData}: HomeCurrentWeatherProps) {
+const long = locationData?.Array?.[0]?.lon;
+const lat = locationData?.Array?.[0]?.lat;
   //const[search, setSearch] = useState("");
   //const searchPressed = () =>{
   const [home, setHome] = useState<HomeData>({
@@ -70,13 +80,13 @@ useEffect(() => {
         <div className="top">
           <div className="location">
             <FaLocationArrow className="location-icon" />
-            <p>{home.name}</p>
+            <p>{home?.name}</p>
           </div>
           <div className="temp">
-            <h1>{home.main.temp}°F</h1>
+            <h1>{home?.main?.temp}°F</h1>
           </div>
           <div className="description">
-            <p>{home.weather[0].description}</p>
+            <p>{home?.weather?.[0]?.description}</p>
           </div>
         </div>
         <div className="middle">
@@ -90,23 +100,23 @@ useEffect(() => {
             <div className="day-info">
               <div>
                 <span className="title">Min/Max </span>
-                <span className="value">{home.main.temp_min}°F/{home.main.temp_max}°F</span>
+                <span className="value">{home?.main?.temp_min}°F/{home?.main?.temp_max}°F</span>
               </div>
               <div>
                 <span className="title">HUMIDITY </span>
-                <span className="value">{home.main.humidity} %</span>
+                <span className="value">{home?.main?.humidity} %</span>
               </div>
               <div>
                 <span className="title">WIND GUSTS </span>
-                <span className="value">{home.wind.gust} mp/h</span>
+                <span className="value">{home?.wind?.gust} mph</span>
               </div>
               <div>
                 <span className="title">FEELS LIKE </span>
-                <span className="value">{home.main.feels_like} °F</span>
+                <span className="value">{home?.main?.feels_like} °F</span>
               </div>
               <div>
                 <span className="title">WIND SPEED </span>
-                <span className="value">{home.wind.speed} mp/h</span>
+                <span className="value">{home?.wind?.speed} mph</span>
               </div>
             </div>
           </div>

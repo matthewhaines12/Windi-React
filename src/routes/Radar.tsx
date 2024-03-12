@@ -1,6 +1,5 @@
 import React from "react";
 import { GiRadarSweep } from "react-icons/gi";
-import Weather from "../Components/Weather";
 
 function Radar() {
   return (

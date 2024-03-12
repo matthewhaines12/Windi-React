@@ -12,7 +12,8 @@
 }
 
 .container {
-  margin: auto;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 .top {

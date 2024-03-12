@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import "../Styles/Navbar.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { NavLink } from "react-router-dom";
 import CustomIcon from "./CustomIcon";
 import Search from "./Search"
 
-function Navbar() {
+interface CustomLocationData {
+  Array: {
+    lon: number;
+    lat: number;
+    // other properties if any
+  }[];
+}
+
+interface LocationData {
+  Array: {
+    lon: number;
+    lat: number;
+    // other properties if any
+  }[];
+}
+
+interface NavbarProps {
+  onLocationUpdate: (newLocationData: LocationData) => void;
+}
+
+function Navbar({ onLocationUpdate }: NavbarProps) {
   /*functional component for the Navbar*/
   const [click, setClick] =
     useState(false); /* State to manage the mobile menu visibility*/
@@ -17,6 +37,13 @@ function Navbar() {
     setClick(
       false
     ); /* Function to close the mobile menu when a link is clicked*/
+    
+    const handleLocationUpdate = (newLocationData: LocationData) => {
+      // Handle location update logic here
+      console.log("New location data:", newLocationData);
+      onLocationUpdate(newLocationData as CustomLocationData);
+    };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -30,16 +57,9 @@ function Navbar() {
               {click ? <FaTimes /> : <FaBars />}
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
-              <form className="search-box" role="search">
-                <input
-                  className="search-input"
-                  type="search"
-                  placeholder="City/Zip..."
-                />
-                <button className="search-button" type="submit">
-                  Search
-                </button>
-              </form>
+              
+              <Search onLocationUpdate={handleLocationUpdate}/>
+
               <li className="nav-item">
                 <NavLink
                   to="/"

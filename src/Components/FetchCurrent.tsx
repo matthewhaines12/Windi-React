@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+/*import { useEffect } from "react";
 import axios from "axios";
 
 function getWeather() {
@@ -17,7 +17,7 @@ function getWeather() {
     the getCurrentPosition() function. 'coords' is another object within the 'position' object
     that has latitude, longitude, accuracy, and probably more but I didn't bother checking.
     */
-  function Success(position: { coords: any }) {
+ /* function Success(position: { coords: any }) {
     latlong[0] = position.coords.latitude;
     latlong[1] = position.coords.longitude;
 
@@ -64,4 +64,4 @@ function getWeather() {
   return currWeather;
 }
 
-export default getWeather;
+export default getWeather; */
