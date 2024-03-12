@@ -6,7 +6,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
-
+import getWeather from "./FetchCurrent";
 
 interface LocationData {
   Array: {
@@ -30,12 +30,12 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
     setClick(
       false
     ); /* Function to close the mobile menu when a link is clicked*/
-    
-    const handleLocationUpdate = (newLocationData: LocationData) => {
-      // Handle location update logic here
-      console.log("New location data:", newLocationData);
-      onLocationUpdate(newLocationData);
-    };
+
+  const handleLocationUpdate = (newLocationData: LocationData) => {
+    // Handle location update logic here
+    console.log("New location data:", newLocationData);
+    onLocationUpdate(newLocationData);
+  };
 
   return (
     <>
@@ -50,8 +50,7 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
               {click ? <FaTimes /> : <FaBars />}
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
-              
-              <Search onLocationUpdate={handleLocationUpdate}/>
+              <Search onLocationUpdate={handleLocationUpdate} />
 
               <li className="nav-item">
                 <NavLink

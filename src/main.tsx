@@ -63,54 +63,54 @@
 //import Weather from "./Components/Weather";
 
 //const AppLayout: React.FC<{
-  //city: string;
- // temperature: number;
- // description: string;
-  //feelsLike: number;
+//city: string;
+// temperature: number;
+// description: string;
+//feelsLike: number;
 //}> = ({ city, temperature, description, feelsLike }) => {
-  //return (
-    //<>
-      //<Home
-        //city={city}
-       // temperature={temperature}
-       // description={description}
-       // feelsLike={feelsLike}
-     // />
-    //  <Navbar />
-     // <Outlet />
-   // </>
- // );
+//return (
+//<>
+//<Home
+//city={city}
+// temperature={temperature}
+// description={description}
+// feelsLike={feelsLike}
+// />
+//  <Navbar />
+// <Outlet />
+// </>
+// );
 //};
 
 //const App: React.FC = () => {
-  //const [city, setCity] = React.useState("test");
-  //const [temperature, setTemperature] = React.useState(0);
-  //const [description, setDescription] = React.useState("Test");
-  //const [feelsLike, setFeelsLike] = React.useState(0);
+//const [city, setCity] = React.useState("test");
+//const [temperature, setTemperature] = React.useState(0);
+//const [description, setDescription] = React.useState("Test");
+//const [feelsLike, setFeelsLike] = React.useState(0);
 
-  //const handleWeatherUpdate = (
-   // city: string,
-   // temperature: number,
-    //description: string,
-    //feelsLike: number
-  //) => {
-    //setCity(city);
-   // setTemperature(temperature);
-    //setDescription(description);
-    //setFeelsLike(feelsLike);
- // };
+//const handleWeatherUpdate = (
+// city: string,
+// temperature: number,
+//description: string,
+//feelsLike: number
+//) => {
+//setCity(city);
+// setTemperature(temperature);
+//setDescription(description);
+//setFeelsLike(feelsLike);
+// };
 
-  //return (
-    //<>
-     // <Weather onWeatherUpdate={handleWeatherUpdate} />
-     // <AppLayout
-      //  city={city}
-       // temperature={temperature}
-       // description={description}
-       // feelsLike={feelsLike}
-      ///>
-   // </>
-  //);
+//return (
+//<>
+// <Weather onWeatherUpdate={handleWeatherUpdate} />
+// <AppLayout
+//  city={city}
+// temperature={temperature}
+// description={description}
+// feelsLike={feelsLike}
+///>
+// </>
+//);
 //};
 /*
 async function Data(){
@@ -161,31 +161,31 @@ async function Data(){
 });
 */
 //const router = createBrowserRouter([
-  //{
-    //element: <App />,
-    //errorElement: <ErrorPage />,
-    //children: [
-      //{
-       // path: "/",
-        //element: (
-        //  <Home/>
-        //),
-      //},
-      //{
-      //  path: "hourly",
-      //  element: <Hourly />,
-     // },
-     // {
-      //  path: "radar",
-        //element: <Radar />,
-     // },
-   // ],
-  //},
+//{
+//element: <App />,
+//errorElement: <ErrorPage />,
+//children: [
+//{
+// path: "/",
+//element: (
+//  <Home/>
+//),
+//},
+//{
+//  path: "hourly",
+//  element: <Hourly />,
+// },
+// {
+//  path: "radar",
+//element: <Radar />,
+// },
+// ],
+//},
 //]);
 
 //const rootElement = document.getElementById("root");
 //if (rootElement) {
- // createRoot(rootElement).render(<RouterProvider router={router} />);
+// createRoot(rootElement).render(<RouterProvider router={router} />);
 //}
 import React, { useState } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -194,9 +194,8 @@ import Home from "./routes/Home";
 import Hourly from "./routes/Hourly";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import App from "./SearchShare";
-
 
 interface LocationData {
   Array: {
@@ -223,12 +222,11 @@ const AppLayout = () => {
   };
   return (
     <>
-      <Navbar onLocationUpdate={handleLocationUpdate}/>
+      <Navbar onLocationUpdate={handleLocationUpdate} />
       <Outlet />
     </>
   );
 };
-
 
 const router = createBrowserRouter([
   {
@@ -251,6 +249,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
-);
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  createRoot(rootElement).render(<RouterProvider router={router} />);
+}
