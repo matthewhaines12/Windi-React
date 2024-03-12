@@ -1,7 +1,7 @@
 import React from "react";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 
-import "../Components/Hourly.css";
+import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
 
 const api = {

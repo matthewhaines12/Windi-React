@@ -1,6 +1,6 @@
 import React from "react";
 // import { WeatherContext } from "../Components/WeatherContext";
-import "../Components/Home.css";
+import "../Styles/Home.css";
 import { FaLocationArrow } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import HomeForecast from "./HomeForecast";
