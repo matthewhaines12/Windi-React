@@ -1,4 +1,4 @@
-import HomeCurrentWeather from "../Components/HomeCurrent";
+/*import HomeCurrentWeather from "../Components/HomeCurrent";
 import HomeForecast from "../Components/HomeForecast";
 
 function Home(){
@@ -16,4 +16,30 @@ function Home(){
     </div>
   )
 };
+export default Home; */
+import React, { useState } from "react";
+import HomeCurrentWeather from "../Components/HomeCurrent";
+import Search from "../Components/Search";
+
+interface LocationData {
+  Array: {
+    lon: number;
+    lat: number;
+  }[];
+}
+
+
+import { useLocation } from "../Components/LocationContext";
+
+function Home() {
+  const { locationData, handleLocationUpdate } = useLocation();
+
+  return (
+    <div>
+      <HomeCurrentWeather locationData={locationData} />
+      {/* You can now remove the local state and useState import since it's managed globally */}
+    </div>
+  );
+}
+
 export default Home;

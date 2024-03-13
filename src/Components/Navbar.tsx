@@ -1,19 +1,12 @@
 import React, { useState } from "react";
+import CustomIcon from "./CustomIcon";
 import { Link } from "react-router-dom";
 import "../Styles/Navbar.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { NavLink } from "react-router-dom";
-import CustomIcon from "./CustomIcon";
-import Search from "./Search"
+import Search from "./Search";
 
-interface CustomLocationData {
-  Array: {
-    lon: number;
-    lat: number;
-    // other properties if any
-  }[];
-}
 
 interface LocationData {
   Array: {
@@ -41,7 +34,7 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
     const handleLocationUpdate = (newLocationData: LocationData) => {
       // Handle location update logic here
       console.log("New location data:", newLocationData);
-      onLocationUpdate(newLocationData as CustomLocationData);
+      onLocationUpdate(newLocationData);
     };
 
   return (
@@ -58,7 +51,7 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               
-              <Search onLocationUpdate={handleLocationUpdate}/>
+              <Search />
 
               <li className="nav-item">
                 <NavLink
