@@ -1,43 +1,42 @@
-
 // import { WeatherContext } from "../Components/WeatherContext";
 import "../Styles/Home.css";
 import { FaLocationArrow } from "react-icons/fa";
 import HomeForecast from "./HomeForecast";
-import React, { useEffect, useState } from 'react';
-import { useLocation } from './LocationContext'; //
-  
-  interface Weather {
-    description: string;
-    // Add other properties if needed
-  }
-  
-  interface Main {
-    temp: number;
-    humidity: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    // Add other properties if needed
-  }
-  
-  interface Wind {
-    speed: number;
-    gust: number;
-    // Add other properties if needed
-  }
-  
-  interface country{
-   country: string;
-  }
+import React, { useEffect, useState } from "react";
+import { useLocation } from "./LocationContext"; //
 
-  interface HomeData {
-    weather: Weather[];
-    main: Main;
-    wind: Wind;
-    name: string;
-    sys: country;
-    // Add other properties if needed
-  }
+interface Weather {
+  description: string;
+  // Add other properties if needed
+}
+
+interface Main {
+  temp: number;
+  humidity: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  // Add other properties if needed
+}
+
+interface Wind {
+  speed: number;
+  gust: number;
+  // Add other properties if needed
+}
+
+interface country {
+  country: string;
+}
+
+interface HomeData {
+  weather: Weather[];
+  main: Main;
+  wind: Wind;
+  name: string;
+  sys: country;
+  // Add other properties if needed
+}
 
 const api = {
   key: "51792902640cee7f3338178dbd96604a",
@@ -52,18 +51,19 @@ function HomeCurrentWeather() {
     if (locationData.locations.length > 0) {
       const { lat, lon } = locationData.locations[0];
       // Use the lat and lon to fetch weather data
-      fetch(`${api.base}weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=imperial`)
-        .then(res => res.json())
-        .then(data => {
+      fetch(
+        `${api.base}weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=imperial`
+      )
+        .then((res) => res.json())
+        .then((data) => {
           setWeatherData(data); // Update state with fetched weather data
           console.log(data); // Logging for debugging purposes
         })
-        .catch(error => console.error("Failed to fetch weather data", error));
+        .catch((error) => console.error("Failed to fetch weather data", error));
     }
   }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
 
   // Ensure the rendering logic below does not contain undefined references
-  
 
   return (
     <div className="home">
@@ -75,7 +75,9 @@ function HomeCurrentWeather() {
             <p>, {home?.sys?.country}</p>
           </div>
           <div className="temp">
-            <h1>{home?.main?.temp}°F</h1>
+            <h1>
+              {`${Math.round(Number(home?.main?.temp))}°F` || "Loading..."}
+            </h1>
           </div>
           <div className="description">
             <p>{home?.weather?.[0]?.description}</p>
@@ -84,7 +86,7 @@ function HomeCurrentWeather() {
         <div className="middle">
           <div>
             <ul className="days-list">
-            <HomeForecast/>
+              <HomeForecast />
             </ul>
             <div />
           </div>
@@ -92,7 +94,9 @@ function HomeCurrentWeather() {
             <div className="day-info">
               <div>
                 <span className="title">Min/Max </span>
-                <span className="value">{home?.main?.temp_min}°F/{home?.main?.temp_max}°F</span>
+                <span className="value">
+                  {home?.main?.temp_min}°F'/{home?.main?.temp_max}°F
+                </span>
               </div>
               <div>
                 <span className="title">HUMIDITY </span>
@@ -116,5 +120,5 @@ function HomeCurrentWeather() {
       </div>
     </div>
   );
-};
+}
 export default HomeCurrentWeather;

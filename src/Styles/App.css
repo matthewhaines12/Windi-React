@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-
 * {
   font-family: "Open Sans", sans-serif;
   margin: 0;
@@ -10,7 +9,7 @@
 
 /*regular page views, will have to separate when we start actually make each page*/
 /* .home, */
-.hourly,/*just general css taking care of the pages*/
+/*,just general css taking care of the pages */
 .radar {
   display: flex;
   height: 90vh;
