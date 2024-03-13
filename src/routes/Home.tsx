@@ -1,59 +1,36 @@
-/*import HomeCurrentWeather from "../Components/HomeCurrent";
-import HomeForecast from "../Components/HomeForecast";
+import React, { Component } from 'react';
 
-function Home(){
-  const locationData = {
-    Array: [
-      {
-        lon: 0,
-        lat: 0,
-      },
-    ],
-  };
-  return(
-    <div>
-      <HomeCurrentWeather locationData={locationData}/>
-    </div>
-    
-    
-  )
-};
-export default Home; */
-import React, { useState } from "react";
-import HomeCurrentWeather from "../Components/HomeCurrent";
-import Search from "../Components/Search";
+class Home extends Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      currentTemp: props.currentTemp || 0,
+      cloudCoverage: props.cloudCoverage || 0,
+      city: props.city || 'Unknown'
+    };
+  }
 
-interface LocationData {
-  Array: {
-    lon: number;
-    lat: number;
-  }[];
-}
+  render() {
+    const { currentTemp, cloudCoverage, city } = this.state;
 
-function Home() {
-  const [locationData, setLocationData] = useState<LocationData>({
-    Array: [
-      {
-        lon: 0,
-        lat: 0,
-      },
-    ],
-  });
-
-  const handleLocationUpdate = (newLocationData: LocationData) => {
-    setLocationData(newLocationData);
-    console.log("Location data updated in Home:", newLocationData);
-  };
-
-  return (
-    <div>
-      
-      {locationData?.Array?.[0]?.lat !== undefined && locationData?.Array?.[0]?.lon !== undefined && (
-        <HomeCurrentWeather locationData={locationData} />
-      )}
-      
-    </div>
-  );
+    return (
+      <div className="home">
+        <div className="container">
+          <div className="top">
+            <div className="location">
+              <p>{city}</p>
+            </div>
+            <div className="temp">
+              <h1>{currentTemp}°F</h1>
+            </div>
+            <div className="description">
+              <p>Cloud Coverage: {cloudCoverage}%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Home;

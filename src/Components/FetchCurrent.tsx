@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-function getWeather() {
+function getWeather(GlobalWeather: Array<{}>) {
   var currWeather: Array<number | string> = [];
   var latlong: Array<number> = [0.0, 0.0];
 
@@ -11,12 +11,6 @@ function getWeather() {
     maxAge: 0,
   };
 
-  /*
-    'position' is an object given by the getCurrentPosition() function. The getCurrentPosition()
-    function doesn't return anything, though, we just have access to it since Success() was passed to
-    the getCurrentPosition() function. 'coords' is another object within the 'position' object
-    that has latitude, longitude, accuracy, and probably more but I didn't bother checking.
-    */
   function Success(position: { coords: any }) {
     latlong[0] = position.coords.latitude;
     latlong[1] = position.coords.longitude;
@@ -30,11 +24,14 @@ function getWeather() {
         currWeather[0] = CurrentWeather.data.name;
         currWeather[1] = CurrentWeather.data.main.temp;
         currWeather[2] = CurrentWeather.data.clouds.all;
+        GlobalWeather = CurrentWeather.data;
       } catch (err) {
         console.error(err);
       }
     };
-    fetchWeather();
+    useEffect(()=>{
+      fetchWeather();
+    })
   }
 
   function Errors(err: { code: any; message: any }) {
@@ -61,7 +58,12 @@ function getWeather() {
     }
   }, []);
 
-  return currWeather;
+  return GlobalWeather;
 }
 
 export default getWeather;
+
+function AutoWeather(){
+  const [userLocation, setUserLocation] = useState(null);
+  
+}
