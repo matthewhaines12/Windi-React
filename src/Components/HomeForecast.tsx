@@ -2,7 +2,6 @@
 // import { WeatherContext } from "../Components/WeatherContext";
 import "../Components/Home.css";
 import "../Components/Home.css";
-import { FaLocationArrow } from "react-icons/fa";
 import React, { useEffect, useState } from 'react';
 import { useLocation } from './LocationContext'; //
   
@@ -11,8 +10,6 @@ const api = {
     base: "https://pro.openweathermap.org/data/2.5/",
   };
   
-  const lat = "40.3212";
-  const long = "-79.3795";
 
   interface HomeForecastData {
     list: {
@@ -44,7 +41,7 @@ const api = {
       if (locationData.locations.length > 0) {
         const { lat, lon } = locationData.locations[0];
         // Use the lat and lon to fetch weather data
-        fetch(`${api.base}forecast/daily?lat=${lat}&lon=${long}&APPID=${api.key}&units=imperial`)
+        fetch(`${api.base}forecast/daily?lat=${lat}&lon=${lon}&APPID=${api.key}&units=imperial`)
           .then(res => res.json())
           .then(data => {
             setWeatherData(data); // Update state with fetched weather data

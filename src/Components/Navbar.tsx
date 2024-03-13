@@ -51,7 +51,7 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               
-              <Search onLocationUpdate={handleLocationUpdate}/>
+              <Search />
 
               <li className="nav-item">
                 <NavLink
