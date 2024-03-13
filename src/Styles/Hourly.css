@@ -1,57 +1,67 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-.hourly {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  padding: 20px;
-  font-size: medium;
-}
-
-.container {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-.top {
-  text-align: center;
-  align-items: center;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 2px solid #333;
-  border-radius: 5px;
-}
-.top:hover {
-  transform: scale(1.1);
-}
-
-.bottom {
-  margin-top: 30px;
-}
-
-.hourly:before {
-  content: "";
-  background: url("assets/home-page.jpg") no-repeat center center/cover;
-  filter: brightness(73%);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 .hourly .container {
-  max-width: 90%px;
-  height: 500px;
-  margin: auto;
-  padding: 0 1rem;
-  position: relative;
-  top: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.hourly-images img {
-  width: 120px;
-  height: auto;
+/* Top area styling */
+.hourly .top {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.hourly .top .hourly-title {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Table styling */
+.hourly .hourly-outline {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hourly .hourly-outline th,
+.hourly .hourly-outline td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Header styling */
+.hourly .hourly-times th {
+  background-color: #282828;
+  color: white;
+  font-weight: normal;
+}
+
+/* Image and temperature row styling */
+.hourly .hourly-images img,
+.hourly .hourly-temp td {
+  vertical-align: middle;
+}
+
+/* Temperature styling */
+.hourly .hourly-temp td {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .hourly .container {
+    padding: 10px;
+  }
+
+  .hourly .hourly-outline th,
+  .hourly .hourly-outline td {
+    padding: 5px;
+  }
+
+  .hourly .top .hourly-title {
+    font-size: 20px;
+  }
 }

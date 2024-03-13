@@ -28,15 +28,14 @@ interface LocationData {
   }[];
 }
 
-
 import { useLocation } from "../Components/LocationContext";
 
 function Home() {
-  const { locationData, handleLocationUpdate } = useLocation();
+  const {} = useLocation();
 
   return (
     <div>
-      <HomeCurrentWeather locationData={locationData} />
+      <HomeCurrentWeather />
       {/* You can now remove the local state and useState import since it's managed globally */}
     </div>
   );
