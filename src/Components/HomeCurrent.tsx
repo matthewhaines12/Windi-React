@@ -71,16 +71,14 @@ function HomeCurrentWeather() {
         <div className="top">
           <div className="location">
             <FaLocationArrow className="location-icon" />
-            <p>{home?.name}</p>
+            <p>{home?.name ?? "Enter city"}</p>
             <p>, {home?.sys?.country}</p>
           </div>
           <div className="temp">
-            <h1>
-              {`${Math.round(Number(home?.main?.temp))}°F` ?? "Loading..."}
-            </h1>
+            <h1>{`${Math.round(Number(home?.main?.temp ?? 0))}°F`}</h1>
           </div>
           <div className="description">
-            <p>{home?.weather?.[0]?.description}</p>
+            <p>{home?.weather?.[0]?.description ?? "No description"}</p>
           </div>
         </div>
         <div className="middle">
@@ -101,7 +99,7 @@ function HomeCurrentWeather() {
               </div>
               <div>
                 <span className="title">HUMIDITY </span>
-                <span className="value">{home?.main?.humidity} %</span>
+                <span className="value">{home?.main?.humidity ?? 0} %</span>
               </div>
               <div>
                 <span className="title">WIND GUSTS </span>
@@ -117,7 +115,9 @@ function HomeCurrentWeather() {
               </div>
               <div>
                 <span className="title">WIND SPEED </span>
-                <span className="value">{home?.wind?.speed} mph</span>
+                <span className="value">
+                  {Math.round(home?.wind?.speed ?? 0)} mph
+                </span>
               </div>
             </div>
           </div>
