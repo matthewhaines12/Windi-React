@@ -76,7 +76,7 @@ function HomeCurrentWeather() {
           </div>
           <div className="temp">
             <h1>
-              {`${Math.round(Number(home?.main?.temp))}°F` || "Loading..."}
+              {`${Math.round(Number(home?.main?.temp))}°F` ?? "Loading..."}
             </h1>
           </div>
           <div className="description">
@@ -95,7 +95,8 @@ function HomeCurrentWeather() {
               <div>
                 <span className="title">Min/Max </span>
                 <span className="value">
-                  {home?.main?.temp_min}°F'/{home?.main?.temp_max}°F
+                  {Math.round(home?.main?.temp_min ?? 0)}°F/
+                  {Math.round(home?.main?.temp_max ?? 0)}°F
                 </span>
               </div>
               <div>
@@ -104,11 +105,15 @@ function HomeCurrentWeather() {
               </div>
               <div>
                 <span className="title">WIND GUSTS </span>
-                <span className="value">{home?.wind?.gust} mph</span>
+                <span className="value">
+                  {Math.round(home?.wind?.gust ?? 0)} mph
+                </span>
               </div>
               <div>
                 <span className="title">FEELS LIKE </span>
-                <span className="value">{home?.main?.feels_like} °F</span>
+                <span className="value">
+                  {Math.round(home?.main?.feels_like ?? 0)}°F
+                </span>
               </div>
               <div>
                 <span className="title">WIND SPEED </span>

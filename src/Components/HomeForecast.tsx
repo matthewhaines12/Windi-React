@@ -70,8 +70,8 @@ function HomeForecast() {
               {forecast?.list?.[0]?.dt && formatDate(forecast.list?.[0]?.dt)}
             </span>
             <span className="day-temp">
-              {forecast?.list?.[0]?.temp?.min}°F/
-              {forecast?.list?.[0]?.temp?.max}°F
+              {Math.round(forecast?.list?.[0]?.temp?.min ?? 0)}°F/
+              {Math.round(forecast?.list?.[0]?.temp?.max ?? 0)}°F
             </span>
           </li>
           <li>
@@ -82,8 +82,8 @@ function HomeForecast() {
               {forecast?.list?.[1]?.dt && formatDate(forecast.list?.[1]?.dt)}
             </span>
             <span className="day-temp">
-              {forecast?.list?.[1]?.temp?.min}°F/
-              {forecast?.list?.[1]?.temp?.max}°F
+              {Math.round(forecast?.list?.[1]?.temp?.min ?? 0)}°F/
+              {Math.round(forecast?.list?.[1]?.temp?.max ?? 0)}°F
             </span>
           </li>
           <li>
@@ -94,8 +94,8 @@ function HomeForecast() {
               {forecast?.list?.[2]?.dt && formatDate(forecast.list?.[2]?.dt)}
             </span>
             <span className="day-temp">
-              {forecast?.list?.[2]?.temp?.min}°F/
-              {forecast?.list?.[2]?.temp?.max}°F
+              {Math.round(forecast?.list?.[2]?.temp?.min ?? 0)}°F/
+              {Math.round(forecast?.list?.[2]?.temp?.max ?? 0)}°F
             </span>
           </li>
           <li>
@@ -106,8 +106,8 @@ function HomeForecast() {
               {forecast?.list?.[3]?.dt && formatDate(forecast.list?.[3]?.dt)}
             </span>
             <span className="day-temp">
-              {forecast?.list?.[3]?.temp?.min}°F/
-              {forecast?.list?.[3]?.temp?.max}°F
+              {Math.round(forecast?.list?.[3]?.temp?.min ?? 0)}°F/
+              {Math.round(forecast?.list?.[3]?.temp?.max ?? 0)}°F
             </span>
           </li>
           <li>
@@ -118,8 +118,8 @@ function HomeForecast() {
               {forecast?.list?.[4]?.dt && formatDate(forecast.list?.[4]?.dt)}
             </span>
             <span className="day-temp">
-              {forecast?.list?.[4]?.temp?.min}°F/
-              {forecast?.list?.[4]?.temp?.max}°F
+              {Math.round(forecast?.list?.[4]?.temp?.min ?? 0)}°F/
+              {Math.round(forecast?.list?.[4]?.temp?.max ?? 0)}°F
             </span>
           </li>
         </ul>

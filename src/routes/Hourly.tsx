@@ -3,13 +3,12 @@ import { TiWeatherPartlySunny } from "react-icons/ti";
 
 import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
-import { useLocation } from "../Components/LocationContext"; 
+import { useLocation } from "../Components/LocationContext";
 
 const api = {
   key: "51792902640cee7f3338178dbd96604a",
   base: "https://pro.openweathermap.org/data/2.5/",
 };
-
 
 interface City {
   name: string;
@@ -25,9 +24,9 @@ interface ListItem {
   dt_txt: string;
   main: {
     temp: number;
-  // Add other properties as needed
-};
-weather: WeatherItem[];
+    // Add other properties as needed
+  };
+  weather: WeatherItem[];
 }
 
 interface HourlyData {
@@ -38,10 +37,12 @@ interface HourlyData {
 function Hourly() {
   const { locationData } = useLocation(); // This uses the context we've set up
   const [hours, setWeatherData] = useState<HourlyData | null>(null); // Initialize weatherData state
-  
+
   const convertToEST = (utcTime: string): string => {
     const utcDate = new Date(utcTime.replace(/ /, "T") + "Z");
-    const estDate = new Date(utcDate.toLocaleString("en-US", { timeZone: "America/New_York" }));
+    const estDate = new Date(
+      utcDate.toLocaleString("en-US", { timeZone: "America/New_York" })
+    );
     return estDate.toLocaleString();
   };
 
@@ -49,18 +50,19 @@ function Hourly() {
     if (locationData.locations.length > 0) {
       const { lat, lon } = locationData.locations[0];
       // Use the lat and lon to fetch weather data
-      fetch(`${api.base}forecast/hourly?lat=${lat}&lon=${lon}&APPID=${api.key}&units=imperial`)
-        .then(res => res.json())
-        .then(data => {
+      fetch(
+        `${api.base}forecast/hourly?lat=${lat}&lon=${lon}&APPID=${api.key}&units=imperial`
+      )
+        .then((res) => res.json())
+        .then((data) => {
           setWeatherData(data); // Update state with fetched weather data
           console.log(data); // Logging for debugging purposes
         })
-        .catch(error => console.error("Failed to fetch weather data", error));
+        .catch((error) => console.error("Failed to fetch weather data", error));
     }
   }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
 
   // Ensure the rendering logic below does not contain undefined references
- 
 
   return (
     <>
@@ -74,14 +76,38 @@ function Hourly() {
             <table className="hourly-outline">
               <thead className="hourly-times">
                 <tr>
-                  <th>{hours?.list?.[0]?.dt_txt && convertToEST(hours.list[0].dt_txt)}</th>
-                  <th>{hours?.list?.[1]?.dt_txt && convertToEST(hours.list[1].dt_txt)}</th>
-                  <th>{hours?.list?.[2]?.dt_txt && convertToEST(hours.list[2].dt_txt)}</th>
-                  <th>{hours?.list?.[3]?.dt_txt && convertToEST(hours.list[3].dt_txt)}</th>
-                  <th>{hours?.list?.[4]?.dt_txt && convertToEST(hours.list[4].dt_txt)}</th>
-                  <th>{hours?.list?.[5]?.dt_txt && convertToEST(hours.list[5].dt_txt)}</th>
-                  <th>{hours?.list?.[6]?.dt_txt && convertToEST(hours.list[6].dt_txt)}</th>
-                  <th>{hours?.list?.[7]?.dt_txt && convertToEST(hours.list[7].dt_txt)}</th>
+                  <th>
+                    {hours?.list?.[0]?.dt_txt &&
+                      convertToEST(hours.list[0].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[1]?.dt_txt &&
+                      convertToEST(hours.list[1].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[2]?.dt_txt &&
+                      convertToEST(hours.list[2].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[3]?.dt_txt &&
+                      convertToEST(hours.list[3].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[4]?.dt_txt &&
+                      convertToEST(hours.list[4].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[5]?.dt_txt &&
+                      convertToEST(hours.list[5].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[6]?.dt_txt &&
+                      convertToEST(hours.list[6].dt_txt)}
+                  </th>
+                  <th>
+                    {hours?.list?.[7]?.dt_txt &&
+                      convertToEST(hours.list[7].dt_txt)}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -94,25 +120,21 @@ function Hourly() {
                   <td>
                     <img
                       src={`http://openweathermap.org/img/w/${hours?.list?.[1]?.weather?.[0]?.icon}.png`}
-                      
                     />
                   </td>
                   <td>
                     <img
                       src={`http://openweathermap.org/img/w/${hours?.list?.[2]?.weather?.[0]?.icon}.png`}
-                      
                     />
                   </td>
                   <td>
                     <img
                       src={`http://openweathermap.org/img/w/${hours?.list?.[3]?.weather?.[0]?.icon}.png`}
-                      
                     />
                   </td>
                   <td>
                     <img
                       src={`http://openweathermap.org/img/w/${hours?.list?.[4]?.weather?.[0]?.icon}.png`}
-                      
                     />
                   </td>
                   <td>
@@ -132,14 +154,14 @@ function Hourly() {
                   </td>
                 </tr>
                 <tr className="hourly-temp">
-                  <td>{hours?.list?.[0]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[1]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[2]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[3]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[4]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[5]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[6]?.main?.temp} °F</td>
-                  <td>{hours?.list?.[7]?.main?.temp} °F</td>
+                  <td>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)} °F</td>
+                  <td>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)} °F</td>
                 </tr>
               </tbody>
             </table>
