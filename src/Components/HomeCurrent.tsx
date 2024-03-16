@@ -1,9 +1,8 @@
-// import { WeatherContext } from "../Components/WeatherContext";
 import "../Styles/Home.css";
 import { FaLocationArrow } from "react-icons/fa";
 import HomeForecast from "./HomeForecast";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "./LocationContext"; //
+import { useEffect, useState } from "react";
+import { useLocation } from "./LocationContext";
 
 interface Weather {
   description: string;
@@ -43,9 +42,13 @@ const api = {
   base: "https://pro.openweathermap.org/data/2.5/",
 };
 
+var firstRun = true;
+
 function HomeCurrentWeather() {
   const { locationData } = useLocation(); // This uses the context we've set up
   const [home, setWeatherData] = useState<HomeData | null>(null); // Initialize weatherData state
+
+  
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
@@ -60,6 +63,56 @@ function HomeCurrentWeather() {
           console.log(data); // Logging for debugging purposes
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
+    }
+    if(firstRun){
+        var latlong: Array<number> = [0.0, 0.0];
+        
+        var options = {
+          highAccuracyEnabled: true,
+          timeout: 10000,
+          maxAge: 0,
+        };
+        
+        function Success(position: { coords: any }) {
+          console.log(`LOCATION RECEIVED`);
+          latlong[0] = position.coords.latitude;
+          latlong[1] = position.coords.longitude;
+
+          fetch(
+            `${api.base}weather?lat=${latlong[0]}&lon=${latlong[1]}&appid=${api.key}&units=imperial`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setWeatherData(data); // Update state with fetched weather data
+              console.log(data); // Logging for debugging purposes
+            })
+            .catch((error) => console.error("Failed to fetch weather data", error));
+        }
+        
+        function Errors(err: { code: any; message: any }) {
+          console.warn(`ERROR(${err.code}): ${err.message}`); //Basic error function, not much to explain
+        }
+        
+        if (navigator.geolocation) {
+          navigator.permissions
+            .query({ name: "geolocation" })
+            .then((result) => {
+              console.log(result);
+              if (result.state === "granted") {
+                console.log(`LOCATION REQUEST 1`);
+                navigator.geolocation.getCurrentPosition(Success, Errors, options);
+              } else if (result.state === "prompt") {
+                console.log(`LOCATION REQUEST 2`);
+                navigator.geolocation.getCurrentPosition(Success, Errors, options);
+              } else if (result.state === "denied") {
+                //If denied then you have to show instructions to enable location
+              }
+            });
+        } else {
+          console.log("Geolocation not supported");
+        }
+        
+        //firstRun = false;
     }
   }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
 
