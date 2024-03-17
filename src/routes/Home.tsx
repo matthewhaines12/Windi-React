@@ -1,4 +1,6 @@
 import HomeCurrentWeather from "../Components/HomeCurrent";
+import HomeHourly from "../Components/HomeHourly";
+//import HomeForecast from "../Components/HomeForecast";
 
 interface LocationData {
   Array: {
@@ -15,6 +17,7 @@ function Home() {
   return (
     <div>
       <HomeCurrentWeather />
+      <HomeHourly />
       {/* You can now remove the local state and useState import since it's managed globally */}
     </div>
   );

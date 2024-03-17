@@ -1,5 +1,6 @@
 import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
+//import HomeForecast from "../Components/HomeForecast";
 import { useLocation } from "../Components/LocationContext";
 
 const api = {
@@ -34,7 +35,7 @@ interface HourlyData {
 
 var firstRun = true;
 
-function Hourly() {
+function HomeHourly() {
   const { locationData } = useLocation(); // This uses the context we've set up
   const [hours, setWeatherData] = useState<HourlyData | null>(null); // Initialize weatherData state
 
@@ -60,15 +61,15 @@ function Hourly() {
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
     }
-    if(firstRun){
+    if (firstRun) {
       var latlong: Array<number> = [0.0, 0.0];
-      
+
       var options = {
         highAccuracyEnabled: true,
         timeout: 10000,
         maxAge: 0,
       };
-      
+
       function Success(position: { coords: any }) {
         console.log(`LOCATION RECEIVED`);
         latlong[0] = position.coords.latitude;
@@ -81,32 +82,32 @@ function Hourly() {
             setWeatherData(data); // Update state with fetched weather data
             console.log(data); // Logging for debugging purposes
           })
-          .catch((error) => console.error("Failed to fetch weather data", error));
+          .catch((error) =>
+            console.error("Failed to fetch weather data", error)
+          );
       }
-      
+
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`); //Basic error function, not much to explain
       }
-      
+
       if (navigator.geolocation) {
-        navigator.permissions
-          .query({ name: "geolocation" })
-          .then((result) => {
-            console.log(result);
-            if (result.state === "granted") {
-              console.log(`LOCATION REQUEST 1`);
-              navigator.geolocation.getCurrentPosition(Success, Errors, options);
-            } else if (result.state === "prompt") {
-              console.log(`LOCATION REQUEST 2`);
-              navigator.geolocation.getCurrentPosition(Success, Errors, options);
-            } else if (result.state === "denied") {
-              //If denied then you have to show instructions to enable location
-            }
-          });
+        navigator.permissions.query({ name: "geolocation" }).then((result) => {
+          console.log(result);
+          if (result.state === "granted") {
+            console.log(`LOCATION REQUEST 1`);
+            navigator.geolocation.getCurrentPosition(Success, Errors, options);
+          } else if (result.state === "prompt") {
+            console.log(`LOCATION REQUEST 2`);
+            navigator.geolocation.getCurrentPosition(Success, Errors, options);
+          } else if (result.state === "denied") {
+            //If denied then you have to show instructions to enable location
+          }
+        });
       } else {
         console.log("Geolocation not supported");
       }
-      
+
       //firstRun = false;
     }
   }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
@@ -119,7 +120,6 @@ function Hourly() {
         <div className="container">
           <div className="top">
             <h3 className="hourly-title">Hourly Forecast</h3>
-            <div>{hours?.city.name}</div>
           </div>
           <div className="middle">
             <table className="hourly-outline">
@@ -221,4 +221,4 @@ function Hourly() {
   );
 }
 
-export default Hourly;
+export default HomeHourly;

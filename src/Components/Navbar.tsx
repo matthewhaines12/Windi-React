@@ -7,7 +7,6 @@ import { IconContext } from "react-icons/lib";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
 
-
 interface LocationData {
   Array: {
     lon: number;
@@ -30,12 +29,12 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
     setClick(
       false
     ); /* Function to close the mobile menu when a link is clicked*/
-    
-    const handleLocationUpdate = (newLocationData: LocationData) => {
-      // Handle location update logic here
-      console.log("New location data:", newLocationData);
-      onLocationUpdate(newLocationData);
-    };
+
+  const handleLocationUpdate = (newLocationData: LocationData) => {
+    // Handle location update logic here
+    console.log("New location data:", newLocationData);
+    onLocationUpdate(newLocationData);
+  };
 
   return (
     <>
@@ -50,7 +49,6 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
               {click ? <FaTimes /> : <FaBars />}
             </div>
             <ul className={click ? "nav-menu active" : "nav-menu"}>
-              
               <Search />
 
               <li className="nav-item">
@@ -62,17 +60,6 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
                   onClick={closeMobileMenu}
                 >
                   Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/hourly"
-                  className={({ isActive }) =>
-                    "nav-links" + (isActive ? " activated" : "")
-                  }
-                  onClick={closeMobileMenu}
-                >
-                  Hourly
                 </NavLink>
               </li>
               <li className="nav-item">

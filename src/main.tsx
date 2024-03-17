@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-import Hourly from "./routes/Hourly";
+//import Hourly from "./routes/Hourly";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import App from "./SearchShare";
-import { LocationProvider } from './Components/LocationContext';
+import { LocationProvider } from "./Components/LocationContext";
 
 interface LocationData {
   Array: {
@@ -23,10 +23,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "hourly",
-        element: <Hourly />,
-      },
+      // {
+      //   path: "hourly",
+      //   element: <Hourly />,
+      // },
       {
         path: "radar",
         element: <Radar />,
@@ -37,6 +37,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <LocationProvider>
-  <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </LocationProvider>
 );

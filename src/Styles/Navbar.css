@@ -1,8 +1,4 @@
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-} */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 .navbar {
   background: linear-gradient(90deg, #000000, #1b1b1b, #000000, #1b1b1b);
@@ -87,25 +83,6 @@
   display: none;
 }
 
-.search-bar {
-  color: #fff;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  height: 100%;
-  width: 430px;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  height: 100%;
-  width: 475px;
-}
-
 @media screen and (max-width: 960px) {
   /*mobile view*/
   .NavbarItems {
@@ -168,7 +145,7 @@
     cursor: pointer;
   }
 
-  .search-bar {
+  /* .search-bar {
     align-items: center;
     width: 200px;
   }
@@ -176,5 +153,76 @@
   .search-box {
     align-items: center;
     width: 200px;
-  }
+  } */
+}
+
+/* .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px; 
+}
+
+
+.search-input {
+  padding: 8px 12px;
+  width: 100%; 
+  font-size: 16px; 
+  border: 1px solid #ddd; 
+  border-radius: 4px 0 0 4px; 
+  outline: none;
+}
+
+
+.search-btn {
+  padding: 8px 12px;
+  background-color: hsl(193, 93%, 49%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+}
+
+.search-btn:hover {
+  background-color: hsl(193, 80%, 49%);
+}
+
+.search-btn:active {
+  background-color: hsl(193, 103%, 49%);
+} */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.search-input {
+  height: 40px;
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.search-btn {
+  height: 40px;
+  padding: 8px 12px;
+  background-color: hsl(193, 93%, 49%);
+  color: #fff;
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.search-btn:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.search-btn:active {
+  background-color: hsl(193, 113%, 49%);
 }
