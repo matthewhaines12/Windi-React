@@ -60,8 +60,7 @@ function HomeHourly() {
           console.log(data); // Logging for debugging purposes
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
-    }
-    if (firstRun) {
+    } else if (firstRun) {
       var latlong: Array<number> = [0.0, 0.0];
 
       var options = {
@@ -108,7 +107,7 @@ function HomeHourly() {
         console.log("Geolocation not supported");
       }
 
-      //firstRun = false;
+      firstRun = false;
     }
   }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
 

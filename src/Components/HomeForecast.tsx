@@ -52,16 +52,15 @@ function HomeForecast() {
           console.log(data); // Logging for debugging purposes
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
-    }
-    if(firstRun){
+    } else if (firstRun) {
       var latlong: Array<number> = [0.0, 0.0];
-      
+
       var options = {
         highAccuracyEnabled: true,
         timeout: 10000,
         maxAge: 0,
       };
-      
+
       function Success(position: { coords: any }) {
         console.log(`LOCATION RECEIVED`);
         latlong[0] = position.coords.latitude;
@@ -74,33 +73,33 @@ function HomeForecast() {
             setWeatherData(data); // Update state with fetched weather data
             console.log(data); // Logging for debugging purposes
           })
-          .catch((error) => console.error("Failed to fetch weather data", error));
+          .catch((error) =>
+            console.error("Failed to fetch weather data", error)
+          );
       }
-      
+
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`); //Basic error function, not much to explain
       }
-      
+
       if (navigator.geolocation) {
-        navigator.permissions
-          .query({ name: "geolocation" })
-          .then((result) => {
-            console.log(result);
-            if (result.state === "granted") {
-              console.log(`LOCATION REQUEST 1`);
-              navigator.geolocation.getCurrentPosition(Success, Errors, options);
-            } else if (result.state === "prompt") {
-              console.log(`LOCATION REQUEST 2`);
-              navigator.geolocation.getCurrentPosition(Success, Errors, options);
-            } else if (result.state === "denied") {
-              //If denied then you have to show instructions to enable location
-            }
-          });
+        navigator.permissions.query({ name: "geolocation" }).then((result) => {
+          console.log(result);
+          if (result.state === "granted") {
+            console.log(`LOCATION REQUEST 1`);
+            navigator.geolocation.getCurrentPosition(Success, Errors, options);
+          } else if (result.state === "prompt") {
+            console.log(`LOCATION REQUEST 2`);
+            navigator.geolocation.getCurrentPosition(Success, Errors, options);
+          } else if (result.state === "denied") {
+            //If denied then you have to show instructions to enable location
+          }
+        });
       } else {
         console.log("Geolocation not supported");
       }
-      
-      //firstRun = false;
+
+      firstRun = false;
     }
   }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
 

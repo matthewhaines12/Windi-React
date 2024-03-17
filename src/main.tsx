@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-//import Hourly from "./routes/Hourly";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
 import { createRoot } from "react-dom/client";
@@ -23,10 +22,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      // {
-      //   path: "hourly",
-      //   element: <Hourly />,
-      // },
       {
         path: "radar",
         element: <Radar />,
