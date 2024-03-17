@@ -1,10 +1,6 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Navbar from "./Components/Navbar";
-import Home from "./routes/Home";
-import Hourly from "./routes/Hourly";
-import Radar from "./routes/Radar";
-import ErrorPage from "./routes/ErrorPage";
 
 interface LocationData {
     Array: {
