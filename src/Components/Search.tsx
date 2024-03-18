@@ -25,6 +25,13 @@ function Search() {
       })
       .catch((error) => console.error("Error fetching location data:", error));
   };
+  
+  const handleKeyDown = (e: any) => {
+    if (e.key === 'Enter') {
+      // Call searchPressed function when 'Enter' key is pressed
+      searchPressed();
+    }
+  };
 
   return (
     <div className="search-bar">
@@ -32,6 +39,8 @@ function Search() {
         className="search-input"
         type="text"
         placeholder="Enter City..."
+        value={search} // Ensure input value is controlled by state
+        onKeyDown={handleKeyDown} // Call handleKeyDown on key press
         onChange={(e) => setSearch(e.target.value)}
       />
       <button className="search-btn" onClick={searchPressed}>
