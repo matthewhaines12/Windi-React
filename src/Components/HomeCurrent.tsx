@@ -3,6 +3,7 @@ import { FaLocationArrow } from "react-icons/fa";
 import HomeForecast from "./HomeForecast";
 import { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext";
+import HomeHourly from "./HomeHourly";
 
 interface Weather {
   description: string;
@@ -72,9 +73,7 @@ function HomeCurrentWeather() {
       };
 
       function Success(position: { coords: any }) {
-        //console.log(`LOCATION RECEIVED`);
-        //latlong[0] = position.coords.latitude;
-        //latlong[1] = position.coords.longitude;
+        
         setLocationData({locations: [{ lat: position.coords.latitude, lon: position.coords.longitude }],});
 
         fetch(
@@ -133,6 +132,7 @@ function HomeCurrentWeather() {
             <p>{home?.weather?.[0]?.description ?? "No description"}</p>
           </div>
         </div>
+        <HomeHourly />
         <div className="middle">
           <div>
             <ul className="days-list">

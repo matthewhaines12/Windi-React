@@ -17,7 +17,6 @@ function Home() {
   return (
     <div>
       <HomeCurrentWeather />
-      <HomeHourly />
       {/* You can now remove the local state and useState import since it's managed globally */}
     </div>
   );
