@@ -7,7 +7,6 @@ import HomeHourly from "./HomeHourly";
 
 interface Weather {
   description: string;
-  // Add other properties if needed
 }
 
 interface Main {
@@ -16,13 +15,11 @@ interface Main {
   feels_like: number;
   temp_min: number;
   temp_max: number;
-  // Add other properties if needed
 }
 
 interface Wind {
   speed: number;
   gust: number;
-  // Add other properties if needed
 }
 
 interface country {
@@ -35,7 +32,6 @@ interface HomeData {
   wind: Wind;
   name: string;
   sys: country;
-  // Add other properties if needed
 }
 
 const api = {
@@ -63,8 +59,8 @@ function HomeCurrentWeather() {
           console.log(data); // Logging for debugging purposes
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
+
     } else if (firstRun) {
-      var latlong: Array<number> = [0.0, 0.0];
 
       var options = {
         highAccuracyEnabled: true,
@@ -90,7 +86,7 @@ function HomeCurrentWeather() {
       }
 
       function Errors(err: { code: any; message: any }) {
-        console.warn(`ERROR(${err.code}): ${err.message}`); //Basic error function, not much to explain
+        console.warn(`ERROR(${err.code}): ${err.message}`);
       }
 
       if (navigator.geolocation) {
@@ -104,17 +100,19 @@ function HomeCurrentWeather() {
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
           } else if (result.state === "denied") {
             //If denied then you have to show instructions to enable location
+            //Or just rely on default data
           }
         });
       } else {
         console.log("Geolocation not supported");
+        setLocationData({locations: [{ lat: 90, lon: 90 }],});
       }
-
       firstRun = false;
-    }
-  }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
 
-  // Ensure the rendering logic below does not contain undefined references
+    } else {
+      //Add a default in case there is an issue getting weather data
+    }
+  }, [locationData]);
 
   return (
     <div className="home">
