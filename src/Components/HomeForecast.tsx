@@ -63,9 +63,7 @@ function HomeForecast() {
       };
 
       function Success(position: { coords: any }) {
-        //console.log(`LOCATION RECEIVED`);
-        //latlong[0] = position.coords.latitude;
-        //latlong[1] = position.coords.longitude;
+
         setLocationData({locations: [{ lat: position.coords.latitude, lon: position.coords.longitude }],});
         fetch(
           `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`

@@ -18,12 +18,11 @@ const CustomIcon: React.FC<CustomIconProps> = ({
   const style: CSSProperties = {
     width,
     height,
-    /*Add any other style properties you want to use*/
   };
 
   return (
     <img
-      src="./Images/WindiLogo.png" /*Adjust the path accordingly*/
+      src="./Images/WindiLogo.png"
       alt="Custom Icon"
       className={`navbar-icon ${className || ""}`}
       style={style}

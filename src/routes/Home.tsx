@@ -2,7 +2,7 @@ import HomeCurrentWeather from "../Components/HomeCurrent";
 
 function Home() {
   return (
-    <div>
+    <div className="HomeContainer">
       <HomeCurrentWeather />
     </div>
   );

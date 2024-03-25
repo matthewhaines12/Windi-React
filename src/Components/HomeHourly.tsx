@@ -1,6 +1,5 @@
 import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
-//import HomeForecast from "../Components/HomeForecast";
 import { useLocation } from "../Components/LocationContext";
 
 const api = {
@@ -10,19 +9,16 @@ const api = {
 
 interface City {
   name: string;
-  // Add other properties as needed
 }
 
 interface WeatherItem {
   icon: string;
-  // Add other properties as needed
 }
 
 interface ListItem {
   dt_txt: string;
   main: {
     temp: number;
-    // Add other properties as needed
   };
   weather: WeatherItem[];
 }
@@ -30,7 +26,6 @@ interface ListItem {
 interface HourlyData {
   city: City;
   list: ListItem[];
-  // Add other properties as needed
 }
 
 var firstRun = true;
@@ -51,7 +46,6 @@ function HomeHourly() {
   useEffect(() => {
     if (locationData.locations.length > 0) {
       const { lat, lon } = locationData.locations[0];
-      // Use the lat and lon to fetch weather data
       fetch(
         `${api.base}forecast/hourly?lat=${lat}&lon=${lon}&APPID=${api.key}&units=imperial`
       )
