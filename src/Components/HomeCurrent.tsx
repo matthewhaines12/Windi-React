@@ -105,7 +105,7 @@ function HomeCurrentWeather() {
         });
       } else {
         console.log("Geolocation not supported");
-        setLocationData({locations: [{ lat: 90, lon: 90 }],});
+        setLocationData({locations: [{ lat: 90, lng: 90 }],});
       }
       firstRun = false;
 
