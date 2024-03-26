@@ -54,7 +54,6 @@ function HomeForecast() {
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else if (firstRun) {
-      var latlong: Array<number> = [0.0, 0.0];
 
       var options = {
         highAccuracyEnabled: true,

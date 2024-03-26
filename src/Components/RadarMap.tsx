@@ -1,14 +1,55 @@
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
-import L, { TileLayer } from "leaflet";
-import { useLocation } from "./LocationContext";
-import { useEffect } from "react";
-import { MapContainer } from "react-leaflet";
+import L from "leaflet";
+import { useEffect, useRef } from "react";
+import axios from "axios";
+
+function RadarMap(): JSX.Element {
+  const mapRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapRef.current) {
+      // Create the map
+      mapRef.current = L.map('map').setView([0, 0], 2);
+
+      // Add OpenStreetMap tile layer
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(mapRef.current);
+    }
+
+    // Fetch weather data
+    axios.get<string>('http://maps.openweathermap.org/maps/2.0/weather/TA2/0/0/0?appid=51792902640cee7f3338178dbd96604a')
+      .then(response => {
+        // Log the URL received from the API
+        console.log("Weather image URL:", response.data);
+
+        // Extract the URL of the weather image from the response data
+        const imageUrl: string = response.data;
+
+        // Create an image overlay using the URL
+        L.imageOverlay(imageUrl, [[-90, -180], [90, 180]]).addTo(mapRef.current!);
+      })
+      .catch(error => {
+        console.error('Error fetching weather data:', error);
+      });
+
+    return () => {
+      // Clean up the map instance when component unmounts
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, []);
+
+  return <div id="map" style={{ width: '100%', height: '600px' }} />;
+}
+
+export default RadarMap;
 
 
-//http://maps.openweathermap.org/maps/2.0/weather/TA2/0/0/0?appid=51792902640cee7f3338178dbd96604a
-
-function RadarMap(){
+  /*
     var map: any;
     var firstRun = true;
     const { locationData } = useLocation(); // This uses the context we've set up
@@ -31,9 +72,16 @@ function RadarMap(){
 
             map = L.map('map').setView(locationData.locations[0], 13);
 
-            L.tileLayer('http://maps.openweathermap.org/maps/2.0/weather/TA2/0/0/0?appid=51792902640cee7f3338178dbd96604a', {
+            axios.get('http://maps.openweathermap.org/maps/2.0/weather/TA2/13/0/0?appid=51792902640cee7f3338178dbd96604a')
+            .then(response => {
+              L.tileLayer(response.data, {
               attribution: '© OpenWeatherMap contributors'
             }).addTo(map);
+              //L.imageOverlay(response.data, [[-90, -180], [90, 180]]).addTo(map);
+            })
+            .catch(error => {
+              console.error('Error fetching weather data:', error);
+            });
           }
     
           function Errors(err: { code: any; message: any }) {
@@ -62,8 +110,5 @@ function RadarMap(){
       }, [locationData]);
 
   return(
-    <div id="map" style={{ width: '100%', height: '400px' }}></div>
-  );
-}
-
-export default RadarMap;
+    <div id="map" style={{ width: '100%', height: '90%' }}></div>
+  );*/
