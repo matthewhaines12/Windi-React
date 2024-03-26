@@ -48,10 +48,10 @@ function HomeCurrentWeather() {
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
-      const { lat, lon } = locationData.locations[0];
+      const { lat, lng } = locationData.locations[0];
       // Use the lat and lon to fetch weather data
       fetch(
-        `${api.base}weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=imperial`
+        `${api.base}weather?lat=${lat}&lon=${lng}&appid=${api.key}&units=imperial`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -70,7 +70,7 @@ function HomeCurrentWeather() {
 
       function Success(position: { coords: any }) {
         
-        setLocationData({locations: [{ lat: position.coords.latitude, lon: position.coords.longitude }],});
+        setLocationData({locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }],});
 
         fetch(
           `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
