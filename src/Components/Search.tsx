@@ -27,7 +27,7 @@ function Search() {
   };
   
   const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key == 'Return') {
       // Call searchPressed function when 'Enter' key is pressed
       searchPressed();
     }
