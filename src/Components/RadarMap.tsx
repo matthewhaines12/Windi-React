@@ -1,16 +1,16 @@
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
-import L from "leaflet";
+import L, { marker } from "leaflet";
 import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useLocation } from "../Components/LocationContext";
-import * as React from 'react';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Switch from '@mui/material/Switch';
+import * as React from "react";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import Switch from "@mui/material/Switch";
 
 let firstRun = true;
 
@@ -23,6 +23,7 @@ function RadarMap() {
     clouds: false,
     temp: false,
   });
+  const markerRef = useRef<L.Marker | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -42,8 +43,26 @@ function RadarMap() {
       }).addTo(mapRef.current);
     }
 
-    const weatherMapURL ="http://maps.openweathermap.org/maps/2.0/weather/TA2/0/0/0?appid=51792902640cee7f3338178dbd96604a";
-    
+    if (locationData.locations.length > 0) {
+      const { lat, lng } = locationData.locations[0];
+      const customMarkerIcon = L.icon({
+        iconUrl: "/Images/map-marker.png",
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+      });
+
+      if (markerRef.current) {
+        markerRef.current.setLatLng([lat, lng]);
+      } else {
+        markerRef.current = L.marker([lat, lng], {
+          icon: customMarkerIcon,
+        }).addTo(mapRef.current);
+      }
+    }
+
+    const weatherMapURL =
+      "http://maps.openweathermap.org/maps/2.0/weather/TA2/0/0/0?appid=51792902640cee7f3338178dbd96604a";
+
     if (state.temp && !Temp.current) {
       // Fetch and display weather data as a map overlay
       axios
@@ -51,17 +70,21 @@ function RadarMap() {
         .then((response) => {
           const imageUrl = response.data; // Assuming this is the direct URL to the image
           if (mapRef.current) {
-            Temp.current = L.imageOverlay(weatherMapURL, [[-90, -180],[90, 180],]);
+            Temp.current = L.imageOverlay(weatherMapURL, [
+              [-90, -180],
+              [90, 180],
+            ]);
             Temp.current.addTo(mapRef.current);
           }
         })
         .catch((error) => console.error("Error fetching weather data:", error));
-    }else if(!state.temp && Temp.current != null){
-      mapRef.current.removeLayer(Temp.current)
-      Temp.current=null;
+    } else if (!state.temp && Temp.current != null) {
+      mapRef.current.removeLayer(Temp.current);
+      Temp.current = null;
     }
 
-    const weatherMapURL2 ="http://maps.openweathermap.org/maps/2.0/weather/CL/0/0/0?opacity=0.9&appid=51792902640cee7f3338178dbd96604a";
+    const weatherMapURL2 =
+      "http://maps.openweathermap.org/maps/2.0/weather/CL/0/0/0?opacity=0.9&appid=51792902640cee7f3338178dbd96604a";
 
     if (state.clouds && !Clouds.current) {
       // Fetch and display weather data as a map overlay
@@ -70,14 +93,17 @@ function RadarMap() {
         .then((response) => {
           const imageUrl = response.data; // Assuming this is the direct URL to the image
           if (mapRef.current) {
-            Clouds.current = L.imageOverlay(weatherMapURL2, [[-90, -180],[90, 180],]);
+            Clouds.current = L.imageOverlay(weatherMapURL2, [
+              [-90, -180],
+              [90, 180],
+            ]);
             Clouds.current.addTo(mapRef.current);
           }
         })
         .catch((error) => console.error("Error fetching weather data:", error));
-    }else if(!state.clouds && Clouds.current != null){
-      mapRef.current.removeLayer(Clouds.current)
-      Clouds.current=null;
+    } else if (!state.clouds && Clouds.current != null) {
+      mapRef.current.removeLayer(Clouds.current);
+      Clouds.current = null;
     }
 
     // Update map view if there are locations available
@@ -108,34 +134,42 @@ function RadarMap() {
 
       firstRun = false;
     }
-  }, [locationData,state]); // Adding setLocationData to the dependency array as it's used inside the effect
+  }, [locationData, state]); // Adding setLocationData to the dependency array as it's used inside the effect
 
-  return( <div>
-  <div id="map" style={{ width: "100%", height: "600px" }}></div>
-  <div className="switch-container">
-  <FormControl component="fieldset" variant="standard">
-      <FormLabel component="legend">Layers</FormLabel>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch checked={state.clouds} onChange={handleChange} name="clouds" />
-          }
-          label="Cloud Coverage"
-        />
-        <FormControlLabel
-          control={
-            <Switch checked={state.temp} onChange={handleChange} name="temp" />
-          }
-          label="Temperature"
-        />
-      </FormGroup>
-    </FormControl>
-    </div>
+  return (
+    <div>
+      <div id="map" style={{ width: "1000px", height: "600px" }}></div>
+      <div className="switch-container">
+        <FormControl component="fieldset" variant="standard">
+          <FormLabel component="legend">Layers</FormLabel>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={state.clouds}
+                  onChange={handleChange}
+                  name="clouds"
+                />
+              }
+              label="Cloud Coverage"
+            />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={state.temp}
+                  onChange={handleChange}
+                  name="temp"
+                />
+              }
+              label="Temperature"
+            />
+          </FormGroup>
+        </FormControl>
+      </div>
     </div>
   );
 }
 export default RadarMap;
-
 
 /*function RadarMap(): JSX.Element {
   const mapRef = useRef<L.Map | null>(null);
@@ -338,4 +372,3 @@ export default RadarMap;*/
   }
   
   export default RadarMap;*/
-
