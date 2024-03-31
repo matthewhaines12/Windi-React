@@ -138,7 +138,7 @@ function RadarMap() {
 
   return (
     <div>
-      <div id="map" style={{ width: "1000px", height: "600px" }}></div>
+      <div id="map" style={{ width: "950px", height: "550px" }}></div>
       <div className="switch-container">
         <FormControl component="fieldset" variant="standard">
           <FormLabel component="legend">Layers</FormLabel>

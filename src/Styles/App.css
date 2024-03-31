@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
+body {
+  /* font-family: "Open Sans", sans-serif; */
+  background-color: rgb(227, 227, 227);
+  background-size: cover;
+  /* padding: 20px; */
+}
+
 * {
   font-family: "Open Sans", sans-serif;
   margin: 0;
@@ -10,7 +17,7 @@
 /*regular page views, will have to separate when we start actually make each page*/
 /* .home, */
 /*,just general css taking care of the pages */
-.radar {
+/* .radar {
   display: flex;
   height: 90vh;
   align-items: center;
@@ -18,7 +25,7 @@
   font-size: 3rem;
   background-color: #000;
   color: #fff;
-}
+} */
 
 .page-icon {
   margin-left: 1rem;
