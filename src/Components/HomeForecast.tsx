@@ -110,7 +110,7 @@ function HomeForecast() {
         <ul className="days-list">
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[0]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[0]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[0]?.dt && formatDate(forecast.list?.[0]?.dt)}
@@ -122,7 +122,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[1]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[1]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[1]?.dt && formatDate(forecast.list?.[1]?.dt)}
@@ -134,7 +134,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[2]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[2]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[2]?.dt && formatDate(forecast.list?.[2]?.dt)}
@@ -146,7 +146,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[3]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[3]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[3]?.dt && formatDate(forecast.list?.[3]?.dt)}
@@ -158,7 +158,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[4]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[4]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[4]?.dt && formatDate(forecast.list?.[4]?.dt)}

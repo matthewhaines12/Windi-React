@@ -159,42 +159,42 @@ function HomeHourly() {
                 <tr className="hourly-images">
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[0]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[0]?.weather?.[0]?.icon ?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[1]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[1]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[2]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[2]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[3]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[3]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[4]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[4]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[5]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[5]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[6]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[6]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[7]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[7]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                 </tr>
