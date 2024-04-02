@@ -19,9 +19,11 @@ function RadarMap() {
   const mapRef = useRef<L.Map | null>(null);
   const Temp = useRef<L.ImageOverlay | null>(null);
   const Clouds = useRef<L.ImageOverlay | null>(null);
+  const Wind = useRef<L.ImageOverlay | null>(null);
   const [state, setState] = React.useState({
     clouds: false,
     temp: false,
+    wind: false,
   });
   const markerRef = useRef<L.Marker | null>(null);
 
@@ -106,6 +108,29 @@ function RadarMap() {
       Clouds.current = null;
     }
 
+    const weatherMapURL3 =
+      "https://maps.openweathermap.org/maps/2.0/weather/PR0/0/0/0/?appid=51792902640cee7f3338178dbd96604a";
+
+    if (state.wind && !Wind.current) {
+      // Fetch and display weather data as a map overlay
+      axios
+        .get(weatherMapURL3)
+        .then((response) => {
+          const imageUrl = response.data; // Assuming this is the direct URL to the image
+          if (mapRef.current) {
+            Wind.current = L.imageOverlay(weatherMapURL3, [
+              [-90, -180],
+              [90, 180],
+            ]);
+            Wind.current.addTo(mapRef.current);
+          }
+        })
+        .catch((error) => console.error("Error fetching weather data:", error));
+    } else if (!state.wind && Wind.current != null) {
+      mapRef.current.removeLayer(Wind.current);
+      Wind.current = null;
+    }
+
     // Update map view if there are locations available
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
@@ -162,6 +187,17 @@ function RadarMap() {
                 />
               }
               label="Temperature"
+            />
+
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={state.wind}
+                  onChange={handleChange}
+                  name="wind"
+                />
+              }
+              label="Precipitation"
             />
           </FormGroup>
         </FormControl>
