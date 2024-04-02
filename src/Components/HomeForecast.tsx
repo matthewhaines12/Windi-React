@@ -42,10 +42,10 @@ function HomeForecast() {
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
-      const { lat, lon } = locationData.locations[0];
+      const { lat, lng } = locationData.locations[0];
       // Use the lat and lon to fetch weather data
       fetch(
-        `${api.base}forecast/daily?lat=${lat}&lon=${lon}&APPID=${api.key}&units=imperial`
+        `${api.base}forecast/daily?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -54,7 +54,6 @@ function HomeForecast() {
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else if (firstRun) {
-      var latlong: Array<number> = [0.0, 0.0];
 
       var options = {
         highAccuracyEnabled: true,
@@ -64,7 +63,7 @@ function HomeForecast() {
 
       function Success(position: { coords: any }) {
 
-        setLocationData({locations: [{ lat: position.coords.latitude, lon: position.coords.longitude }],});
+        setLocationData({locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }],});
         fetch(
           `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
         )
@@ -111,7 +110,7 @@ function HomeForecast() {
         <ul className="days-list">
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[0]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[0]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[0]?.dt && formatDate(forecast.list?.[0]?.dt)}
@@ -123,7 +122,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[1]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[1]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[1]?.dt && formatDate(forecast.list?.[1]?.dt)}
@@ -135,7 +134,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[2]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[2]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[2]?.dt && formatDate(forecast.list?.[2]?.dt)}
@@ -147,7 +146,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[3]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[3]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[3]?.dt && formatDate(forecast.list?.[3]?.dt)}
@@ -159,7 +158,7 @@ function HomeForecast() {
           </li>
           <li>
             <img
-              src={`http://openweathermap.org/img/w/${forecast?.list?.[4]?.weather?.[0]?.icon}.png`}
+              src={`http://openweathermap.org/img/w/${(forecast?.list?.[4]?.weather?.[0]?.icon?? "02d")}.png`}
             />
             <span>
               {forecast?.list?.[4]?.dt && formatDate(forecast.list?.[4]?.dt)}

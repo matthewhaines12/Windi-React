@@ -45,9 +45,9 @@ function HomeHourly() {
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
-      const { lat, lon } = locationData.locations[0];
+      const { lat, lng } = locationData.locations[0];
       fetch(
-        `${api.base}forecast/hourly?lat=${lat}&lon=${lon}&APPID=${api.key}&units=imperial`
+        `${api.base}forecast/hourly?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -68,7 +68,7 @@ function HomeHourly() {
         //console.log(`LOCATION RECEIVED`);
         //latlong[0] = position.coords.latitude;
         //latlong[1] = position.coords.longitude;
-        setLocationData({locations: [{ lat: position.coords.latitude, lon: position.coords.longitude }],});
+        setLocationData({locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }],});
 
         fetch(
           `${api.base}forecast/hourly?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
@@ -159,42 +159,42 @@ function HomeHourly() {
                 <tr className="hourly-images">
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[0]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[0]?.weather?.[0]?.icon ?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[1]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[1]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[2]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[2]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[3]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[3]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[4]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[4]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[5]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[5]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[6]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[6]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                   <td>
                     <img
-                      src={`http://openweathermap.org/img/w/${hours?.list?.[7]?.weather?.[0]?.icon}.png`}
+                      src={`http://openweathermap.org/img/w/${(hours?.list?.[7]?.weather?.[0]?.icon?? "02d")}.png`}
                     />
                   </td>
                 </tr>

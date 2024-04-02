@@ -17,7 +17,7 @@ function Search() {
       .then((result) => {
         if (result && result.length > 0) {
           setLocationData({
-            locations: [{ lat: result[0].lat, lon: result[0].lon }],
+            locations: [{ lat: result[0].lat, lng: result[0].lon }],
           });
         } else {
           console.log("No results found.");
@@ -27,7 +27,7 @@ function Search() {
   };
   
   const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key == 'Return') {
       // Call searchPressed function when 'Enter' key is pressed
       searchPressed();
     }

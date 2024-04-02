@@ -1,11 +1,9 @@
-import React from "react";
-import { GiRadarSweep } from "react-icons/gi";
+import RadarMap from "../Components/RadarMap";
 
 function Radar() {
   return (
     <div className="radar">
-      <h1>Radar</h1>
-      <GiRadarSweep className="page-icon" />
+      <RadarMap />
     </div>
   );
 }
