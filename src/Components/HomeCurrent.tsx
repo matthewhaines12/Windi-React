@@ -4,6 +4,7 @@ import HomeForecast from "./HomeForecast";
 import { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext";
 import HomeHourly from "./HomeHourly";
+import Popup from "./Popup";
 
 interface Weather {
   description: string;
@@ -40,6 +41,7 @@ const api = {
 };
 
 var firstRun = true;
+var locationFailed = false;
 
 function HomeCurrentWeather() {
   const { locationData } = useLocation(); // This uses the context we've set up
@@ -87,6 +89,8 @@ function HomeCurrentWeather() {
 
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
+        locationFailed = true;
+        Popup("No location access");
       }
 
       if (navigator.geolocation) {
@@ -99,8 +103,7 @@ function HomeCurrentWeather() {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
           } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
-            //Or just rely on default data
+            locationFailed = true;
           }
         });
       } else {
@@ -173,6 +176,7 @@ function HomeCurrentWeather() {
           </div>
         </div>
       </div>
+      <Popup trigger={locationFailed}></Popup>
     </div>
   );
 }
