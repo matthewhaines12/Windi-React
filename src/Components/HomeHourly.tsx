@@ -1,3 +1,5 @@
+//This file focuses on displaying the hourly forecast
+//For help regarding how this code works, look at the comments within HomeCurrent.tsx
 import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "../Components/LocationContext";
@@ -31,9 +33,9 @@ interface HourlyData {
 var firstRun = true;
 
 function HomeHourly() {
-  const { locationData } = useLocation(); // This uses the context we've set up
+  const { locationData } = useLocation(); 
   const { setLocationData } = useLocation();
-  const [hours, setWeatherData] = useState<HourlyData | null>(null); // Initialize weatherData state
+  const [hours, setWeatherData] = useState<HourlyData | null>(null); 
 
   const convertToEST = (utcTime: string): string => {
     const utcDate = new Date(utcTime.replace(/ /, "T") + "Z");
@@ -51,13 +53,12 @@ function HomeHourly() {
       )
         .then((res) => res.json())
         .then((data) => {
-          setWeatherData(data); // Update state with fetched weather data
-          console.log(data); // Logging for debugging purposes
+          setWeatherData(data); 
+          console.log(data); 
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else if (firstRun) {
-      var latlong: Array<number> = [0.0, 0.0];
-
+     
       var options = {
         highAccuracyEnabled: true,
         timeout: 10000,
@@ -65,9 +66,7 @@ function HomeHourly() {
       };
 
       function Success(position: { coords: any }) {
-        //console.log(`LOCATION RECEIVED`);
-        //latlong[0] = position.coords.latitude;
-        //latlong[1] = position.coords.longitude;
+        
         setLocationData({locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }],});
 
         fetch(
@@ -75,8 +74,8 @@ function HomeHourly() {
         )
           .then((res) => res.json())
           .then((data) => {
-            setWeatherData(data); // Update state with fetched weather data
-            console.log(data); // Logging for debugging purposes
+            setWeatherData(data); 
+            console.log(data); 
           })
           .catch((error) =>
             console.error("Failed to fetch weather data", error)
@@ -84,7 +83,7 @@ function HomeHourly() {
       }
 
       function Errors(err: { code: any; message: any }) {
-        console.warn(`ERROR(${err.code}): ${err.message}`); //Basic error function, not much to explain
+        console.warn(`ERROR(${err.code}): ${err.message}`); 
       }
 
       if (navigator.geolocation) {
@@ -97,7 +96,7 @@ function HomeHourly() {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
           } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
+            
           }
         });
       } else {
@@ -106,9 +105,9 @@ function HomeHourly() {
 
       firstRun = false;
     }
-  }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
+  }, [locationData]); 
 
-  // Ensure the rendering logic below does not contain undefined references
+  
 
   return (
     <>

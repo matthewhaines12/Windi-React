@@ -1,3 +1,6 @@
+//This file focuses on displaying the 5-day forecast
+//For help regarding how this code works, look at the comments within HomeCurrent.tsx
+
 import "../Styles/Home.css";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext"; //
@@ -19,15 +22,18 @@ interface HomeForecastData {
     }[];
   }[];
 }
+
 var firstRun = true;
+
 function HomeForecast() {
-  const { locationData } = useLocation(); // This uses the context we've set up
+  const { locationData } = useLocation(); 
   const { setLocationData } = useLocation();
-  const [forecast, setWeatherData] = useState<HomeForecastData | null>(null); // Initialize weatherData state
+  const [forecast, setWeatherData] = useState<HomeForecastData | null>(null); 
+  
   const formatDate = (timestamp: number | undefined): string => {
     if (!timestamp) return "";
 
-    const date = new Date(timestamp * 1000); // Convert Unix timestamp to milliseconds
+    const date = new Date(timestamp * 1000); // Convert the time provided to est time and format it to normal look
     const options: Intl.DateTimeFormatOptions = {
       weekday: "long",
       month: "long",
@@ -43,14 +49,14 @@ function HomeForecast() {
   useEffect(() => {
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
-      // Use the lat and lon to fetch weather data
+      
       fetch(
         `${api.base}forecast/daily?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
       )
         .then((res) => res.json())
         .then((data) => {
-          setWeatherData(data); // Update state with fetched weather data
-          console.log(data); // Logging for debugging purposes
+          setWeatherData(data); 
+          console.log(data);
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else if (firstRun) {
@@ -69,8 +75,8 @@ function HomeForecast() {
         )
           .then((res) => res.json())
           .then((data) => {
-            setWeatherData(data); // Update state with fetched weather data
-            console.log(data); // Logging for debugging purposes
+            setWeatherData(data); 
+            console.log(data); 
           })
           .catch((error) =>
             console.error("Failed to fetch weather data", error)
@@ -78,7 +84,7 @@ function HomeForecast() {
       }
 
       function Errors(err: { code: any; message: any }) {
-        console.warn(`ERROR(${err.code}): ${err.message}`); //Basic error function, not much to explain
+        console.warn(`ERROR(${err.code}): ${err.message}`); 
       }
 
       if (navigator.geolocation) {
@@ -91,7 +97,7 @@ function HomeForecast() {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
           } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
+            
           }
         });
       } else {
@@ -100,9 +106,7 @@ function HomeForecast() {
 
       firstRun = false;
     }
-  }, [locationData]); // Dependency array includes locationData to re-run effect when locationData changes
-
-  // Ensure the rendering logic below does not contain undefined references
+  }, [locationData]); //includes location data so when changed, the use effect will run again
 
   return (
     <div className="middle">

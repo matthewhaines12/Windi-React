@@ -1,3 +1,5 @@
+//routing for the homepage
+
 import HomeCurrentWeather from "../Components/HomeCurrent";
 
 function Home() {

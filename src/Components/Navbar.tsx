@@ -1,3 +1,4 @@
+//sets up navbar and the buttons within it, also calls on the search function
 import { useState } from "react";
 import CustomIcon from "./CustomIcon";
 import { Link } from "react-router-dom";
@@ -11,12 +12,12 @@ interface LocationData {
   Array: {
     lon: number;
     lat: number;
-    // other properties if any
+    
   }[];
 }
 
 interface NavbarProps {
-  onLocationUpdate: (newLocationData: LocationData) => void;
+  onLocationUpdate: (newLocationData: LocationData) => void; //up
 }
 
 function Navbar({ onLocationUpdate }: NavbarProps) {
@@ -30,12 +31,11 @@ function Navbar({ onLocationUpdate }: NavbarProps) {
       false
     ); /* Function to close the mobile menu when a link is clicked*/
 
-  const handleLocationUpdate = (newLocationData: LocationData) => {
-    // Handle location update logic here
+  const handleLocationUpdate = (newLocationData: LocationData) => { //may not be necessary, ignore for now
     console.log("New location data:", newLocationData);
     onLocationUpdate(newLocationData);
   };
-
+//includes all the buttons for the different pages and calls on search
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>

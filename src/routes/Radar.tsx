@@ -1,3 +1,5 @@
+//routing for the radar page
+
 import RadarMap from "../Components/RadarMap";
 
 function Radar() {
