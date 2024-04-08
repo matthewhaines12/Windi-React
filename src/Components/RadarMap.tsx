@@ -37,7 +37,7 @@ function RadarMap() {
   useEffect(() => {
     if (!mapRef.current) {
       // Initialize the map
-      mapRef.current = L.map("map").setView([0, 0], 2);
+      mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3); // limit how far users can zoom out
 
       // Add OpenStreetMap tiles
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

@@ -1,4 +1,4 @@
-/*Used to turn our logo into a typical react icon. Made calling on the image far easier and less cluttered*/
+/* Used to turn our logo into a typical react icon. Made calling on the image far easier and less cluttered */
 import React, { CSSProperties } from "react";
 
 interface CustomIconProps {

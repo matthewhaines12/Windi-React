@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode, useState } from 'react';
+import React, { createContext, useContext, ReactNode, useState } from "react";
 
 interface Location {
   lng: number;
@@ -6,27 +6,36 @@ interface Location {
 }
 
 interface LocationData {
-  locations: Location[];
+  locations: Location[]; // Array of location objects
 }
 
 interface LocationContextType {
   locationData: LocationData;
-  setLocationData: (newLocationData: LocationData) => void;
+  setLocationData: (newLocationData: LocationData) => void; // Function to update the location data
 }
 
-const LocationContext = createContext<LocationContextType | undefined>(undefined);
+const LocationContext = createContext<LocationContextType | undefined>(
+  undefined
+);
 
+// Custom hook to use the location context
 export const useLocation = () => {
   const context = useContext(LocationContext);
   if (context === undefined) {
-    throw new Error('useLocation must be used within a LocationProvider');
+    throw new Error("useLocation must be used within a LocationProvider");
   }
   return context;
 };
 
-export const LocationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [locationData, setLocationData] = useState<LocationData>({ locations: [] });
+// // Provides location context and state management
+export const LocationProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [locationData, setLocationData] = useState<LocationData>({
+    locations: [], // Initialize state for location data
+  });
 
+  // Set up the context value and wrap children with it
   return (
     <LocationContext.Provider value={{ locationData, setLocationData }}>
       {children}

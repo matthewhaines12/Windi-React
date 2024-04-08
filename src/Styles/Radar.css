@@ -16,11 +16,12 @@
 
 .switch-container {
   position: absolute;
-  top: 150px;
-  right: 75px;
+  bottom: 25px;
+  left: 165px;
   z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #000;
 }

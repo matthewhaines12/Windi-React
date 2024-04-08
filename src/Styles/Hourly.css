@@ -6,7 +6,6 @@
   padding: 20px;
 }
 
-/* Top area styling */
 .hourly .top {
   text-align: center;
   padding-bottom: 20px;
@@ -18,7 +17,6 @@
   color: #333;
 }
 
-/* Table styling */
 .hourly .hourly-outline {
   width: 100%;
   border-collapse: collapse;
@@ -31,26 +29,22 @@
   border: 1px solid #ddd;
 }
 
-/* Header styling */
 .hourly .hourly-times th {
   background-color: #282828;
   color: white;
   font-weight: normal;
 }
 
-/* Image and temperature row styling */
 .hourly .hourly-images img,
 .hourly .hourly-temp td {
   vertical-align: middle;
 }
 
-/* Temperature styling */
 .hourly .hourly-temp td {
   background-color: #f2f2f2;
   color: #333;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
   .hourly .container {
     padding: 10px;

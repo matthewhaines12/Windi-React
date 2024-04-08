@@ -3,9 +3,10 @@ import Home from "./routes/Home";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
 import { createRoot } from "react-dom/client";
-import App from "./SearchShare";
+import App from "./AppLayout";
 import { LocationProvider } from "./Components/LocationContext";
 
+// interface for the location data expected in the LocationContext
 interface LocationData {
   Array: {
     lon: number;
@@ -15,7 +16,7 @@ interface LocationData {
 
 const router = createBrowserRouter([
   {
-    element: <App />,
+    element: <App />, // Main application element
     errorElement: <ErrorPage />,
     children: [
       {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   },
 ]);
 
+// wraps the RouterProvider in a LocationProvider to provide location context globally
 createRoot(document.getElementById("root")!).render(
   <LocationProvider>
     <RouterProvider router={router} />

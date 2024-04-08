@@ -1,95 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-
-/* .home {
-  font-family: Arial, sans-serif;
-  background-color: rgb(255, 255, 255);
-  background-size: cover;
-  padding: 20px;
-} */
-/* 
-.container {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-.top {
-  text-align: center;
-  align-items: center;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 2px solid #333;
-  border-radius: 5px;
-}
-.top:hover {
-  transform: scale(1.1);
-}
-
-.temp h1 {
-  font-size: 3em;
-  margin: 10px 0;
-  color: #333;
-}
-
-.home .description p {
-  font-size: 1.2em;
-  color: #666;
-}
-
-.home .location {
-  display: flex;
-  align-items: center;
-}
-
-.location-icon {
-  margin-right: 5px;
-}
-
-.middle {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-}
-
-.days-list {
-  list-style: none;
-  padding: 0;
-}
-
-.days-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.days-list li span {
-  margin-left: 10px;
-  font-size: 1.2em;
-}
-
-.day-temp {
-  margin-left: auto;
-}
-
-.bottom {
-  margin-top: 30px;
-}
-
-.day-info {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.title {
-  font-weight: bold;
-}
-
-.value {
-  color: #666;
-} */
-
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
 
 body,
@@ -97,7 +5,7 @@ html {
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
-  background-color: #f7f7f7; /* Light grey background for subtle contrast */
+  background-color: #f7f7f7;
 }
 
 .container {
@@ -155,26 +63,26 @@ html {
   display: flex;
   justify-content: space-between;
   justify-content: center;
-  overflow-x: auto; /* Allows horizontal scrolling */
+  overflow-x: auto;
   padding: 0.5rem;
   gap: 0.5rem;
-  list-style: none; /* Removes default list styling */
-  align-items: center; /* Align list items vertically */
+  list-style: none;
+  align-items: center;
 }
 
 .days-list li {
-  flex: 0 0 auto; /* Elements will not grow or shrink */
-  white-space: nowrap; /* Keeps the list item content on a single line */
-  margin: 0 0.5rem; /* Provides margin to the left and right */
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin: 0 0.5rem;
   align-items: center;
   display: flex;
-  flex-direction: column; /* Stack icon and text vertically */
+  flex-direction: column;
 }
 
 .days-list img {
   width: 30px;
   height: auto;
-  margin-bottom: 0.5rem; /* Space between image and text */
+  margin-bottom: 0.5rem;
 }
 
 .days-list span {
@@ -200,4 +108,4 @@ html {
   font-weight: 300;
 }
 
-/* Media queries can be added if needed for responsiveness */
+/* add media queries later */
