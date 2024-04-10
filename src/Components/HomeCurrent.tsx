@@ -6,6 +6,7 @@ import HomeForecast from "./HomeForecast";
 import { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext";
 import HomeHourly from "./HomeHourly";
+import Popup from "./Popup";
 
 interface Weather { /* items found within the weather array*/    
   description: string;
@@ -42,11 +43,13 @@ const api = {
 };
 
 var firstRun = true;
+var locationFailed = false;
 
 function HomeCurrentWeather() {
-  const { locationData } = useLocation(); //initialize location used for search bar
-  const { setLocationData } = useLocation(); //initializes set location used for geolocation
-  const [home, setWeatherData] = useState<HomeData | null>(null); //initializes weather data
+  const { locationData } = useLocation(); // This uses the context we've set up
+  const { setLocationData } = useLocation();
+  const [home, setWeatherData] = useState<HomeData | null>(null); // Initialize weatherData state
+  const [locationFailed, setLocationFailed] = useState(false);
 
   useEffect(() => {
     if (locationData.locations.length > 0) { //if there is already stored locationdata then use it for the api call
@@ -89,6 +92,7 @@ function HomeCurrentWeather() {
 
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
+        setLocationFailed(true);
       }
 
       if (navigator.geolocation) {
@@ -100,8 +104,6 @@ function HomeCurrentWeather() {
           } else if (result.state === "prompt") {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
-          } else if (result.state === "denied") {
-            //rely on filler info
           }
         });
       } else {
@@ -118,6 +120,11 @@ function HomeCurrentWeather() {
   //parse through what API Call's info using home from setWeatherData and the interfaces
   return (
     <div className="home">
+      <Popup trigger={locationFailed}>
+        <h2>No Location Permission!</h2>
+        <br/>
+        <p>Enable location!</p>
+      </Popup>
       <div className="container">
         <div className="top">
           <div className="location">
