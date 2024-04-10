@@ -91,7 +91,6 @@ function HomeCurrentWeather() {
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
         setLocationFailed(true);
-        Popup("No location access");
       }
 
       if (navigator.geolocation) {
@@ -103,8 +102,6 @@ function HomeCurrentWeather() {
           } else if (result.state === "prompt") {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
-          } else if (result.state === "denied") {
-            setLocationFailed(true);
           }
         });
       } else {
@@ -120,7 +117,11 @@ function HomeCurrentWeather() {
 
   return (
     <div className="home">
-      <Popup trigger={locationFailed}></Popup>
+      <Popup trigger={locationFailed}>
+        <h2>No Location Permission!</h2>
+        <br/>
+        <p>Enable location!</p>
+      </Popup>
       <div className="container">
         <div className="top">
           <div className="location">
