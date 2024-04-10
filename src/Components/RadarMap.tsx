@@ -15,7 +15,9 @@ import Switch from "@mui/material/Switch";
 let firstRun = true;
 
 function RadarMap() {
-  const { locationData, setLocationData } = useLocation(); // Destructure both values and functions from the context
+  //const { locationData, setLocationData } = useLocation(); // Destructure both values and functions from the context
+  const { locationData } = useLocation(); // This uses the context we've set up
+  const { setLocationData } = useLocation();
   const mapRef = useRef<L.Map | null>(null);
   const Temp = useRef<L.ImageOverlay | null>(null);
   const Clouds = useRef<L.ImageOverlay | null>(null);
@@ -135,7 +137,12 @@ function RadarMap() {
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
       mapRef.current.setView([lat, lng], 10);
-    } else if (firstRun) {
+    }
+    if ((mapRef.current !== null) && (locationData.locations.length > 0)) {
+      const { lat, lng } = locationData.locations[0];
+      mapRef.current.setView([lat, lng], 15);
+    }
+    /*else if (firstRun) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -158,7 +165,7 @@ function RadarMap() {
       );
 
       firstRun = false;
-    }
+    }*/
   }, [locationData, state]); // Adding setLocationData to the dependency array as it's used inside the effect
 
   return (

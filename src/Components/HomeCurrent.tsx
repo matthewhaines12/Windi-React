@@ -47,6 +47,7 @@ function HomeCurrentWeather() {
   const { locationData } = useLocation(); // This uses the context we've set up
   const { setLocationData } = useLocation();
   const [home, setWeatherData] = useState<HomeData | null>(null); // Initialize weatherData state
+  const [locationFailed, setLocationFailed] = useState(false);
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
@@ -89,7 +90,7 @@ function HomeCurrentWeather() {
 
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
-        locationFailed = true;
+        setLocationFailed(true);
         Popup("No location access");
       }
 
@@ -103,7 +104,7 @@ function HomeCurrentWeather() {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
           } else if (result.state === "denied") {
-            locationFailed = true;
+            setLocationFailed(true);
           }
         });
       } else {
@@ -119,6 +120,7 @@ function HomeCurrentWeather() {
 
   return (
     <div className="home">
+      <Popup trigger={locationFailed}></Popup>
       <div className="container">
         <div className="top">
           <div className="location">
@@ -176,7 +178,6 @@ function HomeCurrentWeather() {
           </div>
         </div>
       </div>
-      <Popup trigger={locationFailed}></Popup>
     </div>
   );
 }

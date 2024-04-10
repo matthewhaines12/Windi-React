@@ -6,13 +6,6 @@ import { createRoot } from "react-dom/client";
 import App from "./SearchShare";
 import { LocationProvider } from "./Components/LocationContext";
 
-interface LocationData {
-  Array: {
-    lon: number;
-    lat: number;
-  }[];
-}
-
 const router = createBrowserRouter([
   {
     element: <App />,
