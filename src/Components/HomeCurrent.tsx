@@ -93,6 +93,7 @@ function HomeCurrentWeather() {
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
         setLocationFailed(true);
+        //locationFailed = true;
       }
 
       if (navigator.geolocation) {
@@ -120,10 +121,12 @@ function HomeCurrentWeather() {
   //parse through what API Call's info using home from setWeatherData and the interfaces
   return (
     <div className="home">
-      <Popup trigger={locationFailed}>
+      <Popup trigger={locationFailed} setTrigger={setLocationFailed}>
         <h2>No Location Permission!</h2>
         <br/>
-        <p>Enable location!</p>
+        <p>You will need to enter location manually</p>
+        <br/>
+        <p>Press the X to continue using the site.</p>
       </Popup>
       <div className="container">
         <div className="top">
