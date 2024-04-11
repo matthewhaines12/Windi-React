@@ -98,6 +98,15 @@ html {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 0.5rem;
+  margin: auto;
+
+}
+
+.day-stat {
+  position:relative;
+  margin: auto;
+  left: 100%;
+  text-wrap:nowrap;
 }
 
 .title {

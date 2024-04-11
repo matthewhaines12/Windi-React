@@ -152,30 +152,30 @@ function HomeCurrentWeather() {
           </div>
           <div className="bottom">
             <div className="day-info">
-              <div>
+              <div className="day-stat">
                 <span className="title">Min/Max </span>
                 <span className="value">
                   {Math.round(home?.main?.temp_min ?? 0)}°F/
                   {Math.round(home?.main?.temp_max ?? 0)}°F
                 </span>
               </div>
-              <div>
+              <div className="day-stat">
                 <span className="title">HUMIDITY </span>
                 <span className="value">{home?.main?.humidity ?? 0} %</span>
               </div>
-              <div>
+              <div className="day-stat">
                 <span className="title">WIND GUSTS </span>
                 <span className="value">
                   {Math.round(home?.wind?.gust ?? 0)} mph
                 </span>
               </div>
-              <div>
+              <div className="day-stat">
                 <span className="title">FEELS LIKE </span>
                 <span className="value">
                   {Math.round(home?.main?.feels_like ?? 0)}°F
                 </span>
               </div>
-              <div>
+              <div className="day-stat">
                 <span className="title">WIND SPEED </span>
                 <span className="value">
                   {Math.round(home?.wind?.speed ?? 0)} mph
