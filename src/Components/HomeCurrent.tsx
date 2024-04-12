@@ -43,7 +43,6 @@ const api = {
 };
 
 var firstRun = true;
-var locationFailed = false;
 
 function HomeCurrentWeather() {
   const { locationData } = useLocation(); // This uses the context we've set up
@@ -93,7 +92,6 @@ function HomeCurrentWeather() {
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
         setLocationFailed(true);
-        //locationFailed = true;
       }
 
       if (navigator.geolocation) {
