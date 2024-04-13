@@ -67,22 +67,20 @@ function HomeForecast() {
       };
 
       function Success(position: { coords: any }) {
-        setLocationData({
-          locations: [
-            { lat: position.coords.latitude, lng: position.coords.longitude },
-          ],
-        });
-        fetch(
-          `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            setWeatherData(data);
-            console.log(data);
-          })
-          .catch((error) =>
-            console.error("Failed to fetch weather data", error)
-          );
+        setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
+        if (locationData.locations[0] && locationData.locations[1]) {
+          fetch(
+            `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setWeatherData(data);
+              console.log(data);
+            })
+            .catch((error) =>
+              console.error("Failed to fetch weather data", error)
+            );
+        }
       }
 
       function Errors(err: { code: any; message: any }) {

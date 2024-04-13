@@ -45,27 +45,23 @@ const api = {
 var firstRun = true;
 
 function HomeCurrentWeather() {
-  const { locationData } = useLocation(); // This uses the context we've set up
+  const { locationData } = useLocation();
   const { setLocationData } = useLocation();
-  const [home, setWeatherData] = useState<HomeData | null>(null); // Initialize weatherData state
-  const [locationFailed, setLocationFailed] = useState(false);
+  const [home, setWeatherData] = useState<HomeData | null>(null);
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
-      // If there is already stored locationdata then use it for the api call
       const { lat, lng } = locationData.locations[0];
-      // Use the lat and lon to fetch weather data
       fetch(
         `${api.base}weather?lat=${lat}&lon=${lng}&appid=${api.key}&units=imperial`
       )
         .then((res) => res.json())
         .then((data) => {
-          setWeatherData(data); // Update state with fetched weather data
-          console.log(data); // Logging for debugging purposes
+          setWeatherData(data);
+          console.log(data);
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else if (firstRun) {
-      // If this is the splash then do the following
 
       var options = {
         highAccuracyEnabled: true,
@@ -74,30 +70,24 @@ function HomeCurrentWeather() {
       };
 
       function Success(position: { coords: any }) {
-        // If geolocation is successful
-
-        setLocationData({
-          locations: [
-            { lat: position.coords.latitude, lng: position.coords.longitude },
-          ],
-        }); // Update locationData
-
-        fetch(
-          `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            setWeatherData(data); // Update weather data with the new output from the api call
-            console.log(data);
-          })
-          .catch((error) =>
-            console.error("Failed to fetch weather data", error)
-          );
+        setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
+        if (locationData.locations[0] && locationData.locations[1]) {
+          fetch(
+            `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setWeatherData(data);
+              console.log(data);
+            })
+            .catch((error) =>
+              console.error("Failed to fetch weather data", error)
+            );
+        }
       }
 
       function Errors(err: { code: any; message: any }) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
-        setLocationFailed(true);
       }
 
       if (navigator.geolocation) {
