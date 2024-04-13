@@ -1,4 +1,4 @@
-//route for the home page
+// Route for the home page
 import HomeCurrentWeather from "../Components/HomeCurrent";
 
 function Home() {

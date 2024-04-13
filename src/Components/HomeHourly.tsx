@@ -1,5 +1,5 @@
-//This file focuses on displaying the hourly forecast
-//For help regarding how this code works, look at the comments within HomeCurrent.tsx
+// This file focuses on displaying the hourly forecast
+// For help regarding how this code works, look at the comments within HomeCurrent.tsx
 import "../Styles/Hourly.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "../Components/LocationContext";
@@ -95,12 +95,11 @@ function HomeHourly() {
           } else if (result.state === "prompt") {
             console.log(`LOCATION REQUEST 2`);
             navigator.geolocation.getCurrentPosition(Success, Errors, options);
-          } else if (result.state === "denied") {
-            
           }
         });
       } else {
         console.log("Geolocation not supported");
+        setLocationData({ locations: [{ lat: 45, lng: 45 }],});
       }
 
       firstRun = false;

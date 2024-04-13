@@ -1,4 +1,4 @@
-//used when any error occurs
+// Used when any error occurs
 
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 import "../Styles/App.css";
