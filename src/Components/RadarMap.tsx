@@ -127,7 +127,9 @@ function RadarMap() {
       mapRef.current.removeLayer(Wind.current);
       Wind.current = null;
     }
+  }, [locationData, state]); // Adding setLocationData to the dependency array as it's used inside the effect
 
+  useEffect(()=>{
     // Update map view if there are locations available
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
@@ -137,7 +139,7 @@ function RadarMap() {
       const { lat, lng } = locationData.locations[0];
       mapRef.current.setView([lat, lng], 15);
     }
-  }, [locationData, state]); // Adding setLocationData to the dependency array as it's used inside the effect
+  }, [locationData])
 
   return (
     <div>
