@@ -1,9 +1,9 @@
 // Creates the router and links to pages
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Home from "./routes/Home";
-import Radar from "./routes/Radar";
-import ErrorPage from "./routes/ErrorPage";
+import Home from "./Routes/Home";
+import Radar from "./Routes/Radar";
+import ErrorPage from "./Routes/ErrorPage";
 import { createRoot } from "react-dom/client";
 import { LocationProvider } from "./Components/LocationContext";
 import Navbar from "./Components/Navbar";
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-// wraps the RouterProvider in a LocationProvider to provide location context globally
+// Wraps the RouterProvider in a LocationProvider to provide location context globally
 createRoot(document.getElementById("root")!).render(
   <LocationProvider>
     <RouterProvider router={router} />
