@@ -21,16 +21,16 @@ interface NavbarProps {
 }
 
 // Functional component for the Navbar
-function Navbar({ onLocationUpdate }: NavbarProps) {
+function Navbar(/*{ onLocationUpdate }: NavbarProps*/) {
   const [click, setClick] = useState(false); // State to manage the mobile menu visibility
   const handleClick = () => setClick(!click); // Function to toggle the mobile menu visibility
   const closeMobileMenu = () => setClick(false); // Function to close the mobile menu when a link is clicked
 
-  const handleLocationUpdate = (newLocationData: LocationData) => {
-    // May not be necessary, ignore for now
-    console.log("New location data:", newLocationData);
-    onLocationUpdate(newLocationData);
-  };
+  // const handleLocationUpdate = (newLocationData: LocationData) => {
+  //   // May not be necessary, ignore for now
+  //   console.log("New location data:", newLocationData);
+  //   onLocationUpdate(newLocationData);
+  // };
   // Includes all the buttons for the different pages and calls on search
   return (
     <>

@@ -1,14 +1,19 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// Creates the router and links to pages
+
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
 import Radar from "./routes/Radar";
 import ErrorPage from "./routes/ErrorPage";
 import { createRoot } from "react-dom/client";
-import App from "./AppLayout";
 import { LocationProvider } from "./Components/LocationContext";
+import Navbar from "./Components/Navbar";
 
 const router = createBrowserRouter([
   {
-    element: <App />, // Main application element
+    element: <>
+    <Navbar />
+    <Outlet />
+    </>,
     errorElement: <ErrorPage />,
     children: [
       {
