@@ -1,4 +1,4 @@
-//route for the radar page
+// Route for the radar page
 
 import RadarMap from "../Components/RadarMap";
 

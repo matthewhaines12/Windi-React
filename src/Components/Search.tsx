@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// Search bar displays and changes the locationData
+
+import { useState } from "react";
 import { useLocation } from "../Components/LocationContext";
 import "../Styles/Navbar.css";
 
@@ -28,7 +30,6 @@ function Search() {
   
   const handleKeyDown = (e: any) => {
     if (e.key === 'Enter' || e.key == 'Return') {
-      // Call searchPressed function when 'Enter' key is pressed
       searchPressed();
     }
   };
@@ -39,8 +40,8 @@ function Search() {
         className="search-input"
         type="text"
         placeholder="Enter City..."
-        value={search} // Ensure input value is controlled by state
-        onKeyDown={handleKeyDown} // Call handleKeyDown on key press
+        value={search}
+        onKeyDown={handleKeyDown}
         onChange={(e) => setSearch(e.target.value)}
       />
       <button className="search-btn" onClick={searchPressed}>
