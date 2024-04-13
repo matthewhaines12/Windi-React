@@ -1,4 +1,5 @@
-// sets up navbar and the buttons within it, also calls on the search function
+// Sets up navbar and the buttons within it, also calls on the search function
+
 import { useState } from "react";
 import CustomIcon from "./CustomIcon";
 import { Link } from "react-router-dom";
@@ -16,26 +17,21 @@ interface LocationData {
 }
 
 interface NavbarProps {
-  onLocationUpdate: (newLocationData: LocationData) => void; //up
+  onLocationUpdate: (newLocationData: LocationData) => void; // Function to update the location data
 }
 
+// Functional component for the Navbar
 function Navbar({ onLocationUpdate }: NavbarProps) {
-  /* Functional component for the Navbar*/
-  const [click, setClick] =
-    useState(false); /* State to manage the mobile menu visibility*/
-  const handleClick = () =>
-    setClick(!click); /*Function to toggle the mobile menu visibility*/
-  const closeMobileMenu = () =>
-    setClick(
-      false
-    ); /* Function to close the mobile menu when a link is clicked*/
+  const [click, setClick] = useState(false); // State to manage the mobile menu visibility
+  const handleClick = () => setClick(!click); // Function to toggle the mobile menu visibility
+  const closeMobileMenu = () => setClick(false); // Function to close the mobile menu when a link is clicked
 
   const handleLocationUpdate = (newLocationData: LocationData) => {
-    // may not be necessary, ignore for now
+    // May not be necessary, ignore for now
     console.log("New location data:", newLocationData);
     onLocationUpdate(newLocationData);
   };
-  // includes all the buttons for the different pages and calls on search
+  // Includes all the buttons for the different pages and calls on search
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>

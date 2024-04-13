@@ -14,19 +14,6 @@ body {
   box-sizing: border-box;
 }
 
-/*regular page views, will have to separate when we start actually make each page*/
-/* .home, */
-/*,just general css taking care of the pages */
-/* .radar {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  background-color: #000;
-  color: #fff;
-} */
-
 .page-icon {
   margin-left: 1rem;
   font-size: 100px;

@@ -1,3 +1,7 @@
+// This file contains the location context and state management for the location data.
+// It provides a custom hook to access the location context and a provider component to wrap the
+// application with the context.
+
 import React, { createContext, useContext, ReactNode, useState } from "react";
 
 interface Location {
@@ -6,7 +10,7 @@ interface Location {
 }
 
 interface LocationData {
-  locations: Location[]; // Array of location objects
+  locations: Location[];
 }
 
 interface LocationContextType {
@@ -27,7 +31,7 @@ export const useLocation = () => {
   return context;
 };
 
-// // Provides location context and state management
+// Provides location context and state management
 export const LocationProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {

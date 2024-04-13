@@ -1,4 +1,5 @@
-//file that calls on most of the current weather data such as max, min, current, and feels like temps. Also weather description, wind, state, and country name.
+// File that calls on most of the current weather data such as max, min, current, and feels like temps.
+// Also weather description, wind, state, and country name.
 
 import "../Styles/Home.css";
 import { FaLocationArrow } from "react-icons/fa";
@@ -6,13 +7,12 @@ import HomeForecast from "./HomeForecast";
 import { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext";
 import HomeHourly from "./HomeHourly";
-import Popup from "./Popup";
 
-interface Weather { /* items found within the weather array*/    
+interface Weather {
   description: string;
 }
 
-interface Main { /* items found in the main object */
+interface Main {
   temp: number;
   humidity: number;
   feels_like: number;
@@ -20,21 +20,21 @@ interface Main { /* items found in the main object */
   temp_max: number;
 }
 
-interface Wind { /* items found in the wind object */
+interface Wind {
   speed: number;
   gust: number;
 }
 
-interface country { /* items found in the country object */
+interface Country {
   country: string;
 }
 
-interface HomeData { /* used to parse through the data that is called on from the api */
+interface HomeData {
   weather: Weather[];
   main: Main;
   wind: Wind;
   name: string;
-  sys: country;
+  sys: Country;
 }
 
 const api = {
@@ -51,7 +51,8 @@ function HomeCurrentWeather() {
   const [locationFailed, setLocationFailed] = useState(false);
 
   useEffect(() => {
-    if (locationData.locations.length > 0) { //if there is already stored locationdata then use it for the api call
+    if (locationData.locations.length > 0) {
+      // If there is already stored locationdata then use it for the api call
       const { lat, lng } = locationData.locations[0];
       // Use the lat and lon to fetch weather data
       fetch(
@@ -63,8 +64,8 @@ function HomeCurrentWeather() {
           console.log(data); // Logging for debugging purposes
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
-
-    } else if (firstRun) { //if this is the splash then do the following
+    } else if (firstRun) {
+      // If this is the splash then do the following
 
       var options = {
         highAccuracyEnabled: true,
@@ -72,17 +73,22 @@ function HomeCurrentWeather() {
         maxAge: 0,
       };
 
-      function Success(position: { coords: any }) { //if geolocation is successful
-       
-        setLocationData({locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }],}); //update locationData
+      function Success(position: { coords: any }) {
+        // If geolocation is successful
+
+        setLocationData({
+          locations: [
+            { lat: position.coords.latitude, lng: position.coords.longitude },
+          ],
+        }); // Update locationData
 
         fetch(
           `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
         )
           .then((res) => res.json())
           .then((data) => {
-            setWeatherData(data); //update weather data with the new output from the api call
-            console.log(data); 
+            setWeatherData(data); // Update weather data with the new output from the api call
+            console.log(data);
           })
           .catch((error) =>
             console.error("Failed to fetch weather data", error)
@@ -107,30 +113,19 @@ function HomeCurrentWeather() {
         });
       } else {
         console.log("Geolocation not supported");
-        setLocationData({locations: [{ lat: 90, lng: 90 }],});
+        setLocationData({ locations: [{ lat: 45, lng: 45 }] });
       }
       firstRun = false;
-
-    } else {
-      //NEED TO ADD SOMETHING HERE LIKE AN ERROR OR DEFAULT IN CASE THERE ARE ISSUES WITH GATHERING DATA
     }
-  }, [locationData]); //includes location data so when changed, the use effect will run again
-
-  //parse through what API Call's info using home from setWeatherData and the interfaces
+  }, [locationData]);
+  // Parse through what API Call's info using home from setWeatherData and the interfaces
   return (
     <div className="home">
-      <Popup trigger={locationFailed} setTrigger={setLocationFailed}>
-        <h2>No Location Permission!</h2>
-        <br/>
-        <p>You will need to enter location manually</p>
-        <br/>
-        <p>Press the X to continue using the site.</p>
-      </Popup>
       <div className="container">
         <div className="top">
           <div className="location">
             <FaLocationArrow className="location-icon" />
-            <p>{home?.name ?? "Enter city"}</p> 
+            <p>{home?.name ?? "Enter city"}</p>
             <p>, {home?.sys?.country}</p>
           </div>
           <div className="temp">
