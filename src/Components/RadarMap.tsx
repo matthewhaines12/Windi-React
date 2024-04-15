@@ -80,7 +80,7 @@ function RadarMap() {
 
     if (state.wind && !Wind.current) {
       Wind.current = L.tileLayer(
-        "https://maps.openweathermap.org/maps/2.0/weather/WNDUV/{z}/{x}/{y}?use_norm=true&arrow_step=16&appid=51792902640cee7f3338178dbd96604a"
+        "https://maps.openweathermap.org/maps/2.0/weather/WND/{z}/{x}/{y}?use_norm=true&arrow_step=16&appid=51792902640cee7f3338178dbd96604a"
       ).addTo(mapRef.current);
     } else if (!state.wind && Wind.current != null) {
       mapRef.current.removeLayer(Wind.current);
