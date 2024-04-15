@@ -1,8 +1,9 @@
+// Creates the radar map and loads tile layers when toggled
+
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
 import L, { marker } from "leaflet";
 import { useEffect, useRef } from "react";
-import axios from "axios";
 import { useLocation } from "../Components/LocationContext";
 import * as React from "react";
 import FormLabel from "@mui/material/FormLabel";
@@ -12,7 +13,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
 function RadarMap() {
-  const { locationData } = useLocation(); // This uses the context we've set up
+  const { locationData } = useLocation();
   const mapRef = useRef<L.Map | null>(null);
   const Temp = useRef<L.TileLayer | null>(null);
   const Clouds = useRef<L.TileLayer | null>(null);
