@@ -14,13 +14,15 @@ import Switch from "@mui/material/Switch";
 function RadarMap() {
   const { locationData } = useLocation(); // This uses the context we've set up
   const mapRef = useRef<L.Map | null>(null);
-  const Temp = useRef<L.ImageOverlay | null>(null);
-  const Clouds = useRef<L.ImageOverlay | null>(null);
-  const Wind = useRef<L.ImageOverlay | null>(null);
+  const Temp = useRef<L.TileLayer | null>(null);
+  const Clouds = useRef<L.TileLayer | null>(null);
+  const Wind = useRef<L.TileLayer | null>(null);
+  const Precipitation = useRef<L.TileLayer | null>(null);
   const [state, setState] = React.useState({
     clouds: false,
     temp: false,
     wind: false,
+    precipitation: false,
   });
   const markerRef = useRef<L.Marker | null>(null);
 
@@ -33,10 +35,9 @@ function RadarMap() {
 
   useEffect(() => {
     if (!mapRef.current) {
-      // Initialize the map
-      mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3); // limit how far users can zoom out
 
-      // Add OpenStreetMap tiles
+      mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3);
+
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(mapRef.current);
@@ -59,81 +60,48 @@ function RadarMap() {
       }
     }
 
-    const weatherMapURL =
-      "http://maps.openweathermap.org/maps/2.0/weather/TA2/0/0/0?appid=51792902640cee7f3338178dbd96604a";
-
     if (state.temp && !Temp.current) {
-      // Fetch and display weather data as a map overlay
-      axios
-        .get(weatherMapURL)
-        .then((response) => {
-          const imageUrl = response.data; // Assuming this is the direct URL to the image
-          if (mapRef.current) {
-            Temp.current = L.imageOverlay(weatherMapURL, [
-              [-90, -180],
-              [90, 180],
-            ]);
-            Temp.current.addTo(mapRef.current);
-          }
-        })
-        .catch((error) => console.error("Error fetching weather data:", error));
+      Temp.current = L.tileLayer(
+        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.8&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
+      ).addTo(mapRef.current);
     } else if (!state.temp && Temp.current != null) {
       mapRef.current.removeLayer(Temp.current);
       Temp.current = null;
     }
 
-    const weatherMapURL2 =
-      "http://maps.openweathermap.org/maps/2.0/weather/CL/0/0/0?opacity=0.9&appid=51792902640cee7f3338178dbd96604a";
-
     if (state.clouds && !Clouds.current) {
-      // Fetch and display weather data as a map overlay
-      axios
-        .get(weatherMapURL2)
-        .then((response) => {
-          const imageUrl = response.data; // Assuming this is the direct URL to the image
-          if (mapRef.current) {
-            Clouds.current = L.imageOverlay(weatherMapURL2, [
-              [-90, -180],
-              [90, 180],
-            ]);
-            Clouds.current.addTo(mapRef.current);
-          }
-        })
-        .catch((error) => console.error("Error fetching weather data:", error));
+      Clouds.current = L.tileLayer(
+        "http://maps.openweathermap.org/maps/2.0/weather/CL/{z}/{x}/{y}?opacity=0.9&appid=51792902640cee7f3338178dbd96604a"
+      ).addTo(mapRef.current);
     } else if (!state.clouds && Clouds.current != null) {
       mapRef.current.removeLayer(Clouds.current);
       Clouds.current = null;
     }
 
-    const weatherMapURL3 =
-      "https://maps.openweathermap.org/maps/2.0/weather/PR0/0/0/0/?appid=51792902640cee7f3338178dbd96604a";
-
     if (state.wind && !Wind.current) {
-      // Fetch and display weather data as a map overlay
-      axios
-        .get(weatherMapURL3)
-        .then((response) => {
-          const imageUrl = response.data; // Assuming this is the direct URL to the image
-          if (mapRef.current) {
-            Wind.current = L.imageOverlay(weatherMapURL3, [
-              [-90, -180],
-              [90, 180],
-            ]);
-            Wind.current.addTo(mapRef.current);
-          }
-        })
-        .catch((error) => console.error("Error fetching weather data:", error));
+      Wind.current = L.tileLayer(
+        "https://maps.openweathermap.org/maps/2.0/weather/WNDUV/{z}/{x}/{y}?use_norm=true&arrow_step=16&appid=51792902640cee7f3338178dbd96604a"
+      ).addTo(mapRef.current);
     } else if (!state.wind && Wind.current != null) {
       mapRef.current.removeLayer(Wind.current);
       Wind.current = null;
     }
-  }, [locationData, state]); // Adding setLocationData to the dependency array as it's used inside the effect
+
+    if (state.precipitation && !Precipitation.current) {
+      Precipitation.current = L.tileLayer(
+        "https://maps.openweathermap.org/maps/2.0/weather/PR0/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a"
+      ).addTo(mapRef.current);
+    } else if (!state.precipitation && Precipitation.current != null) {
+      mapRef.current.removeLayer(Precipitation.current);
+      Precipitation.current = null;
+    }
+    console.log("State Update");
+  }, [locationData, state]);
 
   useEffect(()=>{
-    // Update map view if there are locations available
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
-      mapRef.current.setView([lat, lng], 10);
+      mapRef.current!.setView([lat, lng], 10);
     }
     if ((mapRef.current !== null) && (locationData.locations.length > 0)) {
       const { lat, lng } = locationData.locations[0];
@@ -168,13 +136,22 @@ function RadarMap() {
               }
               label="Temperature"
             />
-
             <FormControlLabel
               control={
                 <Switch
                   checked={state.wind}
                   onChange={handleChange}
                   name="wind"
+                />
+              }
+              label="Wind"
+            />
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={state.precipitation}
+                  onChange={handleChange}
+                  name="precipitation"
                 />
               }
               label="Precipitation"
