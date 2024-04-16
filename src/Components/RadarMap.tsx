@@ -2,7 +2,7 @@
 
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
-import L, { marker } from "leaflet";
+import L from "leaflet";
 import { useEffect, useRef } from "react";
 import { useLocation } from "../Components/LocationContext";
 import * as React from "react";

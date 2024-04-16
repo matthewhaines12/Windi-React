@@ -1,5 +1,3 @@
-// Search bar displays and changes the locationData
-
 import { useState } from "react";
 import { useLocation } from "../Components/LocationContext";
 import "../Styles/Navbar.css";
@@ -9,23 +7,36 @@ const api = {
   base: "https://pro.openweathermap.org/geo/1.0/",
 };
 
+// Separate function to fetch data
+const fetchData = async (search: any) => {
+  try {
+    const response = await fetch(`${api.base}direct?q=${search}&limit=1&appid=${api.key}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+    throw error;
+  }
+};
+
+
 function Search() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
   const { setLocationData } = useLocation();
 
-  const searchPressed = () => {
-    fetch(`${api.base}direct?q=${search}&limit=1&appid=${api.key}`)
-      .then((res) => res.json())
-      .then((result) => {
-        if (result && result.length > 0) {
-          setLocationData({
-            locations: [{ lat: result[0].lat, lng: result[0].lon }],
-          });
-        } else {
-          console.log("No results found.");
-        }
-      })
-      .catch((error) => console.error("Error fetching location data:", error));
+  const searchPressed = async () => {
+    try {
+      const result = await fetchData(search);
+      if (result && result.length > 0) {
+        setLocationData({
+          locations: [{ lat: result[0].lat, lng: result[0].lon }],
+        });
+      } else {
+        console.log("No results found.");
+      }
+    } catch (error) {
+      console.error("Error handling search:", error);
+    }
   };
   
   const handleKeyDown = (e: any) => {
