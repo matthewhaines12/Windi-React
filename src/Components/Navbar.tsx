@@ -12,11 +12,11 @@ function Navbar() {
           Windi
         </Link>
         <ul className="nav-menu">
-          <li className="nav-item">
+          <li className="nav-search">
             <Search />
           </li>
           <li className="nav-item">
-            <NavLink to="/" className="nav-links"> 
+            <NavLink to="/" className="nav-links">
               Home
             </NavLink>
           </li>

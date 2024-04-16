@@ -62,6 +62,10 @@
   border-bottom: 2px solid #09bef0;
 }
 
+.nav-item:active {
+  color: #09bef0;
+}
+
 .nav-links {
   color: #fff;
   display: flex;
@@ -71,7 +75,7 @@
   height: 100%;
 }
 
-.activated {
+.nav-links.active {
   color: #09bef0;
 }
 
@@ -147,6 +151,11 @@
   }
 }
 */
+
+.nav-search {
+  height: 80px;
+}
+
 .search-bar {
   display: flex;
   align-items: center;
