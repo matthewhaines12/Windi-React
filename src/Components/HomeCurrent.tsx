@@ -1,10 +1,9 @@
 // File that calls on most of the current weather data such as max, min, current, and feels like temps.
 // Also weather description, wind, state, and country name.
 
-import "../Styles/Home.css";
+import React, { ReactNode, useEffect, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import HomeForecast from "./HomeForecast";
-import { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext";
 import HomeHourly from "./HomeHourly";
 
@@ -60,55 +59,57 @@ function HomeCurrentWeather() {
           setWeatherData(data);
           console.log(data);
         })
-        .catch((error) => console.error("Failed to fetch weather data", error));
+        .catch((error) =>
+          console.error("Failed to fetch weather data", error)
+        );
     } else if (firstRun) {
-
-      var options = {
-        highAccuracyEnabled: true,
-        timeout: 10000,
-        maxAge: 0,
-      };
-
-      function Success(position: { coords: any }) {
-        setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
-        if (locationData.locations[0] && locationData.locations[1]) {
-          fetch(
-            `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              setWeatherData(data);
-              console.log(data);
-            })
-            .catch((error) =>
-              console.error("Failed to fetch weather data", error)
-            );
-        }
-      }
-
-      function Errors(err: { code: any; message: any }) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-      }
-
-      if (navigator.geolocation) {
-        navigator.permissions.query({ name: "geolocation" }).then((result) => {
-          console.log(result);
-          if (result.state === "granted") {
-            console.log(`LOCATION REQUEST 1`);
-            navigator.geolocation.getCurrentPosition(Success, Errors, options);
-          } else if (result.state === "prompt") {
-            console.log(`LOCATION REQUEST 2`);
-            navigator.geolocation.getCurrentPosition(Success, Errors, options);
-          }
-        });
-      } else {
-        console.log("Geolocation not supported");
-        setLocationData({ locations: [{ lat: 45, lng: 45 }] });
-      }
+      getLocation();
       firstRun = false;
     }
   }, [locationData]);
-  // Parse through what API Call's info using home from setWeatherData and the interfaces
+
+  function getLocation() {
+    var options = {
+      highAccuracyEnabled: true,
+      timeout: 10000,
+      maxAge: 0,
+    };
+
+    if (navigator.geolocation) {
+      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        console.log(result);
+        if (result.state === "granted" || result.state === "prompt") {
+          console.log(`LOCATION REQUEST`);
+          navigator.geolocation.getCurrentPosition(Success, Errors, options);
+        }
+      });
+    } else {
+      console.log("Geolocation not supported");
+      setLocationData({ locations: [{ lat: 45, lng: 45 }] });
+    }
+  }
+
+  function Success(position: { coords: any }) {
+    setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
+    if (locationData.locations[0] && locationData.locations[1]) {
+      fetch(
+        `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setWeatherData(data);
+          console.log(data);
+        })
+        .catch((error) =>
+          console.error("Failed to fetch weather data", error)
+        );
+    }
+  }
+
+  function Errors(err: { code: any; message: any }) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
   return (
     <div className="home">
       <div className="container">

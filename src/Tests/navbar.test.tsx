@@ -1,22 +1,48 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Navbar from "../Components/Navbar";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { LocationProvider } from "../Components/LocationContext";
+import "@testing-library/jest-dom";
 
 jest.mock("../Styles/Navbar.css", () => ({}));
 
-describe("Navbar load and interaction", ()=>{
-    test('Navbar gets created', () => {
-        const navbar = render(
-            <Router>
-                <LocationProvider>
-                    <Navbar />
-                </LocationProvider>
-            </Router>
-        );
-        expect(navbar).toContainElement;
-    });
+describe("Navbar component", () => {
+  test("renders navbar with logo", () => {
+    render(<LocationProvider><MemoryRouter><Navbar /></MemoryRouter></LocationProvider>);
+    const logoElement = screen.getByText("Windi");
+    expect(logoElement).toBeInTheDocument();
+  });
 
-    test('Navbar click')
-})
+  test("renders search component", () => {
+    render(
+      <LocationProvider>
+        <MemoryRouter>
+          <Navbar />
+        </MemoryRouter>
+      </LocationProvider>
+    );
+    const searchElement = screen.getByPlaceholderText("Enter City...");
+    expect(searchElement).toBeInTheDocument();
+  });
 
+  test("renders Home and Radar links", () => {
+    render(<LocationProvider><MemoryRouter><Navbar /></MemoryRouter></LocationProvider>);
+    const homeLink = screen.getByRole("link", { name: /home/i });
+    const radarLink = screen.getByRole("link", { name: /radar/i });
+
+    expect(homeLink).toBeInTheDocument();
+    expect(radarLink).toBeInTheDocument();
+  });
+
+  test("Home link points to '/'", () => {
+    render(<LocationProvider><MemoryRouter><Navbar /></MemoryRouter></LocationProvider>);
+    const homeLink = screen.getByRole("link", { name: /home/i });
+    expect(homeLink).toHaveAttribute("href", "/");
+  });
+
+  test("Radar link points to '/radar'", () => {
+    render(<LocationProvider><MemoryRouter><Navbar /></MemoryRouter></LocationProvider>);
+    const radarLink = screen.getByRole("link", { name: /radar/i });
+    expect(radarLink).toHaveAttribute("href", "/radar");
+  });
+});

@@ -45,6 +45,27 @@ function HomeHourly() {
     return estDate.toLocaleString();
   };
 
+  function Success(position: { coords: any }) {
+    setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
+    if (locationData.locations[0] && locationData.locations[1]) {
+      fetch(
+        `${api.base}forecast/hourly?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setWeatherData(data);
+          console.log(data);
+        })
+        .catch((error) =>
+          console.error("Failed to fetch weather data", error)
+        );
+    }
+  }
+
+  function Errors(err: { code: any; message: any }) {
+    console.warn(`ERROR(${err.code}): ${err.message}`); 
+  }
+
   useEffect(() => {
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
@@ -64,27 +85,6 @@ function HomeHourly() {
         timeout: 10000,
         maxAge: 0,
       };
-
-      function Success(position: { coords: any }) {
-        setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
-        if (locationData.locations[0] && locationData.locations[1]) {
-          fetch(
-            `${api.base}forecast/hourly?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              setWeatherData(data);
-              console.log(data);
-            })
-            .catch((error) =>
-              console.error("Failed to fetch weather data", error)
-            );
-        }
-      }
-
-      function Errors(err: { code: any; message: any }) {
-        console.warn(`ERROR(${err.code}): ${err.message}`); 
-      }
 
       if (navigator.geolocation) {
         navigator.permissions.query({ name: "geolocation" }).then((result) => {

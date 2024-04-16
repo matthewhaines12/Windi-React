@@ -10,7 +10,7 @@ import {
 
 // Mock LocationData for testing
 const mockLocationData: LocationData = {
-  locations: [{ lng: 0, lat: 0 }], // Example data
+  locations: []
 };
 
 describe("LocationProvider", () => {
@@ -53,12 +53,7 @@ describe("useLocation", () => {
   test("returns location context and state management", () => {
     // Define mock location data
     const mockLocationData = {
-      locations: [
-        {
-          lat: 0,
-          lng: 0,
-        },
-      ],
+      locations: [],
     };
 
     // Define wrapper component
