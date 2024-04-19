@@ -51,7 +51,11 @@ function HomeForecast() {
   }
 
   function Success(position: { coords: any }) {
-    setLocationData({ locations: [{ lat: position.coords.latitude, lng: position.coords.longitude }] });
+    setLocationData({
+      locations: [
+        { lat: position.coords.latitude, lng: position.coords.longitude },
+      ],
+    });
     if (locationData.locations[0] && locationData.locations[1]) {
       fetch(
         `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
@@ -61,9 +65,7 @@ function HomeForecast() {
           setWeatherData(data);
           console.log(data);
         })
-        .catch((error) =>
-          console.error("Failed to fetch weather data", error)
-        );
+        .catch((error) => console.error("Failed to fetch weather data", error));
     }
   }
 
@@ -86,7 +88,7 @@ function HomeForecast() {
         timeout: 10000,
         maxAge: 0,
       };
-   
+
       if (navigator.geolocation) {
         navigator.permissions.query({ name: "geolocation" }).then((result) => {
           console.log(result);
@@ -100,88 +102,93 @@ function HomeForecast() {
         });
       } else {
         console.log("Geolocation not supported");
-        setLocationData({ locations: [{ lat: 45, lng: 45 }],});
+        setLocationData({ locations: [{ lat: 45, lng: 45 }] });
       }
 
       firstRun = false;
     }
   }, [locationData]);
 
-  return (
-    <div className="middle">
-      <ul className="days-list">
-        <li>
-          <img
-            src={`http://openweathermap.org/img/w/${
-              forecast?.list?.[0]?.weather?.[0]?.icon ?? "02d"
-            }.png`}
-          />
-          <span>
-            {forecast?.list?.[0]?.dt && formatDate(forecast.list?.[0]?.dt)}
-          </span>
-          <span className="day-temp">
-            {Math.round(forecast?.list?.[0]?.temp?.min ?? 0)}°F/
-            {Math.round(forecast?.list?.[0]?.temp?.max ?? 0)}°F
-          </span>
-        </li>
-        <li>
-          <img
-            src={`http://openweathermap.org/img/w/${
-              forecast?.list?.[1]?.weather?.[0]?.icon ?? "02d"
-            }.png`}
-          />
-          <span>
-            {forecast?.list?.[1]?.dt && formatDate(forecast.list?.[1]?.dt)}
-          </span>
-          <span className="day-temp">
-            {Math.round(forecast?.list?.[1]?.temp?.min ?? 0)}°F/
-            {Math.round(forecast?.list?.[1]?.temp?.max ?? 0)}°F
-          </span>
-        </li>
-        <li>
-          <img
-            src={`http://openweathermap.org/img/w/${
-              forecast?.list?.[2]?.weather?.[0]?.icon ?? "02d"
-            }.png`}
-          />
-          <span>
-            {forecast?.list?.[2]?.dt && formatDate(forecast.list?.[2]?.dt)}
-          </span>
-          <span className="day-temp">
-            {Math.round(forecast?.list?.[2]?.temp?.min ?? 0)}°F/
-            {Math.round(forecast?.list?.[2]?.temp?.max ?? 0)}°F
-          </span>
-        </li>
-        <li>
-          <img
-            src={`http://openweathermap.org/img/w/${
-              forecast?.list?.[3]?.weather?.[0]?.icon ?? "02d"
-            }.png`}
-          />
-          <span>
-            {forecast?.list?.[3]?.dt && formatDate(forecast.list?.[3]?.dt)}
-          </span>
-          <span className="day-temp">
-            {Math.round(forecast?.list?.[3]?.temp?.min ?? 0)}°F/
-            {Math.round(forecast?.list?.[3]?.temp?.max ?? 0)}°F
-          </span>
-        </li>
-        <li>
-          <img
-            src={`http://openweathermap.org/img/w/${
-              forecast?.list?.[4]?.weather?.[0]?.icon ?? "02d"
-            }.png`}
-          />
-          <span>
-            {forecast?.list?.[4]?.dt && formatDate(forecast.list?.[4]?.dt)}
-          </span>
-          <span className="day-temp">
-            {Math.round(forecast?.list?.[4]?.temp?.min ?? 0)}°F/
-            {Math.round(forecast?.list?.[4]?.temp?.max ?? 0)}°F
-          </span>
-        </li>
-      </ul>
-    </div>
-  );
+  return <div className="forecast"></div>;
 }
+
 export default HomeForecast;
+
+//   return (
+//     <div className="middle">
+//       <ul className="days-list">
+//         <li>
+//           <img
+//             src={`http://openweathermap.org/img/w/${
+//               forecast?.list?.[0]?.weather?.[0]?.icon ?? "02d"
+//             }.png`}
+//           />
+//           <span>
+//             {forecast?.list?.[0]?.dt && formatDate(forecast.list?.[0]?.dt)}
+//           </span>
+//           <span className="day-temp">
+//             {Math.round(forecast?.list?.[0]?.temp?.min ?? 0)}°F/
+//             {Math.round(forecast?.list?.[0]?.temp?.max ?? 0)}°F
+//           </span>
+//         </li>
+//         <li>
+//           <img
+//             src={`http://openweathermap.org/img/w/${
+//               forecast?.list?.[1]?.weather?.[0]?.icon ?? "02d"
+//             }.png`}
+//           />
+//           <span>
+//             {forecast?.list?.[1]?.dt && formatDate(forecast.list?.[1]?.dt)}
+//           </span>
+//           <span className="day-temp">
+//             {Math.round(forecast?.list?.[1]?.temp?.min ?? 0)}°F/
+//             {Math.round(forecast?.list?.[1]?.temp?.max ?? 0)}°F
+//           </span>
+//         </li>
+//         <li>
+//           <img
+//             src={`http://openweathermap.org/img/w/${
+//               forecast?.list?.[2]?.weather?.[0]?.icon ?? "02d"
+//             }.png`}
+//           />
+//           <span>
+//             {forecast?.list?.[2]?.dt && formatDate(forecast.list?.[2]?.dt)}
+//           </span>
+//           <span className="day-temp">
+//             {Math.round(forecast?.list?.[2]?.temp?.min ?? 0)}°F/
+//             {Math.round(forecast?.list?.[2]?.temp?.max ?? 0)}°F
+//           </span>
+//         </li>
+//         <li>
+//           <img
+//             src={`http://openweathermap.org/img/w/${
+//               forecast?.list?.[3]?.weather?.[0]?.icon ?? "02d"
+//             }.png`}
+//           />
+//           <span>
+//             {forecast?.list?.[3]?.dt && formatDate(forecast.list?.[3]?.dt)}
+//           </span>
+//           <span className="day-temp">
+//             {Math.round(forecast?.list?.[3]?.temp?.min ?? 0)}°F/
+//             {Math.round(forecast?.list?.[3]?.temp?.max ?? 0)}°F
+//           </span>
+//         </li>
+//         <li>
+//           <img
+//             src={`http://openweathermap.org/img/w/${
+//               forecast?.list?.[4]?.weather?.[0]?.icon ?? "02d"
+//             }.png`}
+//           />
+//           <span>
+//             {forecast?.list?.[4]?.dt && formatDate(forecast.list?.[4]?.dt)}
+//           </span>
+//           <span className="day-temp">
+//             {Math.round(forecast?.list?.[4]?.temp?.min ?? 0)}°F/
+//             {Math.round(forecast?.list?.[4]?.temp?.max ?? 0)}°F
+//           </span>
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// }
+// export default HomeForecast;
