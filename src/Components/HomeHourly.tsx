@@ -107,115 +107,234 @@ function HomeHourly() {
     }
   }, [locationData]);
 
-  return <div className="hourly"></div>;
+  return (
+    <div className="hourly">
+      <div className="container">
+        
+        <div className="middle">
+        <div className="top">
+          <h3 className="hourly-title">Hourly Forecast</h3>
+        </div>
+          <table className="hourly-outline">
+            <thead className="hourly-times">
+              <tr>
+                <th>
+                  {hours?.list?.[0]?.dt_txt &&
+                    convertToEST(hours.list[0].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[1]?.dt_txt &&
+                    convertToEST(hours.list[1].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[2]?.dt_txt &&
+                    convertToEST(hours.list[2].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[3]?.dt_txt &&
+                    convertToEST(hours.list[3].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[4]?.dt_txt &&
+                    convertToEST(hours.list[4].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[5]?.dt_txt &&
+                    convertToEST(hours.list[5].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[6]?.dt_txt &&
+                    convertToEST(hours.list[6].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[7]?.dt_txt &&
+                    convertToEST(hours.list[7].dt_txt)}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="hourly-images">
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[0]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[1]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[2]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[3]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[4]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[5]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[6]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[7]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+              </tr>
+              <tr className="hourly-temp">
+                <td>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)} °F</td>
+                <td>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)} °F</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default HomeHourly;
 
 //   return (
-//     <>
-//       <div className="hourly">
-//         <div className="container">
-//           <div className="top">
-//             <h3 className="hourly-title">Hourly Forecast</h3>
-//           </div>
-//           <div className="middle">
-//             <table className="hourly-outline">
-//               <thead className="hourly-times">
-//                 <tr>
-//                   <th>
-//                     {hours?.list?.[0]?.dt_txt &&
-//                       convertToEST(hours.list[0].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[1]?.dt_txt &&
-//                       convertToEST(hours.list[1].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[2]?.dt_txt &&
-//                       convertToEST(hours.list[2].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[3]?.dt_txt &&
-//                       convertToEST(hours.list[3].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[4]?.dt_txt &&
-//                       convertToEST(hours.list[4].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[5]?.dt_txt &&
-//                       convertToEST(hours.list[5].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[6]?.dt_txt &&
-//                       convertToEST(hours.list[6].dt_txt)}
-//                   </th>
-//                   <th>
-//                     {hours?.list?.[7]?.dt_txt &&
-//                       convertToEST(hours.list[7].dt_txt)}
-//                   </th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 <tr className="hourly-images">
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[0]?.weather?.[0]?.icon ?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[1]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[2]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[3]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[4]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[5]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[6]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                   <td>
-//                     <img
-//                       src={`http://openweathermap.org/img/w/${(hours?.list?.[7]?.weather?.[0]?.icon?? "02d")}.png`}
-//                     />
-//                   </td>
-//                 </tr>
-//                 <tr className="hourly-temp">
-//                   <td>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)} °F</td>
-//                   <td>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)} °F</td>
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//       </div>
-//     </>
+    // <>
+    //   <div className="hourly">
+    //     <div className="container">
+    //       <div className="top">
+    //         <h3 className="hourly-title">Hourly Forecast</h3>
+    //       </div>
+    //       <div className="middle">
+    //         <table className="hourly-outline">
+    //           <thead className="hourly-times">
+    //             <tr>
+    //               <th>
+    //                 {hours?.list?.[0]?.dt_txt &&
+    //                   convertToEST(hours.list[0].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[1]?.dt_txt &&
+    //                   convertToEST(hours.list[1].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[2]?.dt_txt &&
+    //                   convertToEST(hours.list[2].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[3]?.dt_txt &&
+    //                   convertToEST(hours.list[3].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[4]?.dt_txt &&
+    //                   convertToEST(hours.list[4].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[5]?.dt_txt &&
+    //                   convertToEST(hours.list[5].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[6]?.dt_txt &&
+    //                   convertToEST(hours.list[6].dt_txt)}
+    //               </th>
+    //               <th>
+    //                 {hours?.list?.[7]?.dt_txt &&
+    //                   convertToEST(hours.list[7].dt_txt)}
+    //               </th>
+    //             </tr>
+    //           </thead>
+    //           <tbody>
+    //             <tr className="hourly-images">
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[0]?.weather?.[0]?.icon ?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[1]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[2]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[3]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[4]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[5]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[6]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //               <td>
+    //                 <img
+    //                   src={`http://openweathermap.org/img/w/${(hours?.list?.[7]?.weather?.[0]?.icon?? "02d")}.png`}
+    //                 />
+    //               </td>
+    //             </tr>
+    //             <tr className="hourly-temp">
+    //               <td>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)} °F</td>
+    //               <td>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)} °F</td>
+    //             </tr>
+    //           </tbody>
+    //         </table>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </>
 //   );
 // }
 

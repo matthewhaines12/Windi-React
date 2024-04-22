@@ -8,7 +8,7 @@ html {
   background-color: #f7f7f7;
 }
 
-.container {
+.current{
   max-width: 90%;
   margin: 0 auto;
 }
@@ -59,54 +59,23 @@ html {
   margin-bottom: 1rem;
 }
 
-.days-list {
-  display: flex;
-  justify-content: space-between;
-  justify-content: center;
-  overflow-x: auto;
-  padding: 0.5rem;
-  gap: 0.5rem;
-  list-style: none;
-  align-items: center;
-}
 
-.days-list li {
-  flex: 0 0 auto;
-  white-space: nowrap;
-  margin: 0 0.5rem;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.days-list img {
-  width: 30px;
-  height: auto;
-  margin-bottom: 0.5rem;
-}
-
-.days-list span {
-  display: block;
-  font-size: 0.9rem;
-}
-
-.day-temp {
-  font-weight: 400;
-}
 
 .day-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  display: inline-flex;
+  padding-top: 10px;
+/*  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 0.5rem;
-  margin: auto;
+  margin: auto;*/
 
 }
 
 .day-stat {
   position:relative;
   margin: auto;
-  left: 100%;
+  /*left: 100%;*/
   text-wrap:nowrap;
+  padding-inline: 10px;
 }
 
 .title {

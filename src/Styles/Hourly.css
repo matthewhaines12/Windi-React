@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
+.hourly {
+  float: left;
+}
+
 .hourly .container {
   max-width: 1200px;
   margin: 0 auto;
