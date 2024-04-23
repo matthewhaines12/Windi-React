@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .radar {
   display: flex;
   height: 90vh;
