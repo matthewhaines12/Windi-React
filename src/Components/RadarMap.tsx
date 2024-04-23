@@ -36,7 +36,6 @@ function RadarMap() {
 
   useEffect(() => {
     if (!mapRef.current) {
-
       mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -63,7 +62,7 @@ function RadarMap() {
 
     if (state.temp && !Temp.current) {
       Temp.current = L.tileLayer(
-        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.8&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
+        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.5&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
       ).addTo(mapRef.current);
     } else if (!state.temp && Temp.current != null) {
       mapRef.current.removeLayer(Temp.current);
@@ -99,68 +98,68 @@ function RadarMap() {
     console.log("State Update");
   }, [locationData, state]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
       mapRef.current!.setView([lat, lng], 10);
     }
-    if ((mapRef.current !== null) && (locationData.locations.length > 0)) {
+    if (mapRef.current !== null && locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
       mapRef.current.setView([lat, lng], 15);
     }
-  }, [locationData])
+  }, [locationData]);
 
   return (
     <div>
       <div id="map" style={{ width: "950px", height: "550px" }}>
-      <div className="switch-container">
-        <FormControl component="fieldset" variant="standard">
-          <FormLabel component="legend">Layers</FormLabel>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={state.clouds}
-                  onChange={handleChange}
-                  name="clouds"
-                />
-              }
-              label="Cloud Coverage"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={state.temp}
-                  onChange={handleChange}
-                  name="temp"
-                />
-              }
-              label="Temperature"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={state.wind}
-                  onChange={handleChange}
-                  name="wind"
-                />
-              }
-              label="Wind"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={state.precipitation}
-                  onChange={handleChange}
-                  name="precipitation"
-                />
-              }
-              label="Precipitation"
-            />
-          </FormGroup>
-        </FormControl>
+        <div className="switch-container">
+          <FormControl component="fieldset" variant="standard">
+            <FormLabel component="legend">Layers</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.clouds}
+                    onChange={handleChange}
+                    name="clouds"
+                  />
+                }
+                label="Cloud Coverage"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.temp}
+                    onChange={handleChange}
+                    name="temp"
+                  />
+                }
+                label="Temperature"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.wind}
+                    onChange={handleChange}
+                    name="wind"
+                  />
+                }
+                label="Wind"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.precipitation}
+                    onChange={handleChange}
+                    name="precipitation"
+                  />
+                }
+                label="Precipitation"
+              />
+            </FormGroup>
+          </FormControl>
+        </div>
       </div>
-      </div> 
     </div>
   );
 }
