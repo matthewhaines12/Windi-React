@@ -63,7 +63,7 @@ function RadarMap() {
 
     if (state.temp && !Temp.current) {
       Temp.current = L.tileLayer(
-        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.8&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
+        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?opacity=0.2&appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.8&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
       ).addTo(mapRef.current);
     } else if (!state.temp && Temp.current != null) {
       mapRef.current.removeLayer(Temp.current);
@@ -81,7 +81,7 @@ function RadarMap() {
 
     if (state.wind && !Wind.current) {
       Wind.current = L.tileLayer(
-        "https://maps.openweathermap.org/maps/2.0/weather/WND/{z}/{x}/{y}?use_norm=true&arrow_step=16&appid=51792902640cee7f3338178dbd96604a"
+        "https://maps.openweathermap.org/maps/2.0/weather/WND/{z}/{x}/{y}?opacity=0.4&use_norm=true&arrow_step=32&appid=51792902640cee7f3338178dbd96604a"
       ).addTo(mapRef.current);
     } else if (!state.wind && Wind.current != null) {
       mapRef.current.removeLayer(Wind.current);
@@ -90,7 +90,7 @@ function RadarMap() {
 
     if (state.precipitation && !Precipitation.current) {
       Precipitation.current = L.tileLayer(
-        "https://maps.openweathermap.org/maps/2.0/weather/PR0/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a"
+        "https://maps.openweathermap.org/maps/2.0/weather/PR0/{z}/{x}/{y}?opacity=0.5&appid=51792902640cee7f3338178dbd96604a"
       ).addTo(mapRef.current);
     } else if (!state.precipitation && Precipitation.current != null) {
       mapRef.current.removeLayer(Precipitation.current);
