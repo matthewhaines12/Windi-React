@@ -114,46 +114,52 @@ function HomeCurrentWeather() {
   return (
     <div className="current">
       <div className="top">
-        <div className="location">
-          <FaLocationArrow className="location-icon" />
-          <p>{home?.name ?? "Enter city"}</p>
-          <p>, {home?.sys?.country}</p>
+        <div className="left-info">
+          <div className="location">
+            <FaLocationArrow className="location-icon" />
+            <p>{home?.name ?? "Enter city"}</p>
+            <p>, {home?.sys?.country}</p>
+          </div>
+          <div className="temp">
+            <h1>{`${Math.round(Number(home?.main?.temp ?? 0))}°F`}</h1>
+          </div>
+
+          <div className="description">
+            <p>{home?.weather?.[0]?.description ?? "No description"}</p>
+          </div>
         </div>
-        <div className="temp">
-          <h1>{`${Math.round(Number(home?.main?.temp ?? 0))}°F`}</h1>
-        </div>
-        <div className="description">
-          <p>{home?.weather?.[0]?.description ?? "No description"}</p>
-        </div>
-        <div className="day-info">
-          <div className="day-stat">
-            <span className="title">Min/Max </span>
-            <span className="value">
-              {Math.round(home?.main?.temp_min ?? 0)}°F/
-              {Math.round(home?.main?.temp_max ?? 0)}°F
-            </span>
-          </div>
-          <div className="day-stat">
-            <span className="title">HUMIDITY </span>
-            <span className="value">{home?.main?.humidity ?? 0} %</span>
-          </div>
-          <div className="day-stat">
-            <span className="title">WIND GUSTS </span>
-            <span className="value">
-              {Math.round(home?.wind?.gust ?? 0)} mph
-            </span>
-          </div>
-          <div className="day-stat">
-            <span className="title">FEELS LIKE </span>
-            <span className="value">
-              {Math.round(home?.main?.feels_like ?? 0)}°F
-            </span>
-          </div>
-          <div className="day-stat">
-            <span className="title">WIND SPEED </span>
-            <span className="value">
-              {Math.round(home?.wind?.speed ?? 0)} mph
-            </span>
+        <div className="right-info">
+          <div className="day-info">
+            <div className="day-stat">
+              <span className="title">Min/Max </span>
+              <span className="value">
+                {Math.round(home?.main?.temp_min ?? 0)}°F/
+                {Math.round(home?.main?.temp_max ?? 0)}°F
+              </span>
+            </div>
+
+            <div className="day-stat">
+              <span className="title">HUMIDITY </span>
+              <span className="value">{home?.main?.humidity ?? 0} %</span>
+            </div>
+            <div className="day-stat">
+              <span className="title">WIND GUSTS </span>
+              <span className="value">
+                {Math.round(home?.wind?.gust ?? 0)} mph
+              </span>
+            </div>
+            <div className="day-stat">
+              <span className="title">FEELS LIKE </span>
+              <span className="value">
+                {Math.round(home?.main?.feels_like ?? 0)}°F
+              </span>
+            </div>
+            <div className="day-stat">
+              <span className="title">WIND SPEED </span>
+              <span className="value">
+                {Math.round(home?.wind?.speed ?? 0)} mph
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ html {
   background-color: #f7f7f7;
 }
 
-.current{
+.current {
   max-width: 90%;
   margin: 0 auto;
 }
@@ -18,32 +18,50 @@ html {
   align-items: center;
   padding: 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 1px solid #ccc;
+  justify-content: space-between;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
 }
 
-.temp h1 {
-  font-size: 2rem;
-  color: #333;
-  font-weight: 600;
+.left-info {
+  margin-left: 100px;
 }
 
-.description p,
-.location span {
-  font-size: 1rem;
-  color: #666;
-  font-weight: 300;
+.right-info {
+  margin-right: 100px;
 }
 
 .location {
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
+  /* margin: 0.5rem 0; */
+}
+
+.temp h1 {
+  font-size: 7rem;
+  color: #333;
+}
+
+.day-info {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Added */
+  align-items: flex-start; /* Added */
+  padding: 1rem;
+}
+
+.location {
+  display: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.description {
+  display: center;
+  align-items: center;
 }
 
 .location-icon {
@@ -59,22 +77,11 @@ html {
   margin-bottom: 1rem;
 }
 
-
-
-.day-info {
-  display: inline-flex;
-  padding-top: 10px;
-/*  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 0.5rem;
-  margin: auto;*/
-
-}
-
 .day-stat {
-  position:relative;
+  position: relative;
   margin: auto;
   /*left: 100%;*/
-  text-wrap:nowrap;
+  text-wrap: nowrap;
   padding-inline: 10px;
 }
 
