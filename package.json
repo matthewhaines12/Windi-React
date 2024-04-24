@@ -2,7 +2,7 @@
   "homepage": "https://matthewhaines12.github.io/Windi-React/",
   "name": "windi-react",
   "private": true,
-  "version": "0.0.0",
+  "version": "4.0.0",
   "type": "commonjs",
   "scripts": {
     "dev": "vite",

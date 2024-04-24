@@ -2,7 +2,7 @@
 
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
-import L from "leaflet";
+import L, {Control} from "leaflet";
 import { useEffect, useRef } from "react";
 import { useLocation } from "../Components/LocationContext";
 import * as React from "react";
@@ -11,6 +11,23 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+
+function Key(map: L.Map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Temperature Key</h4>";
+  div.innerHTML += '<i style="background: #ff0000"></i><span>>~104</span><br>';
+  div.innerHTML += '<i style="background: #FFA500"></i><span>~86</span><br>';
+  div.innerHTML += '<i style="background: #00ff00"></i><span>~68</span><br>';
+  div.innerHTML += '<i style="background: #00ffff"></i><span>~50</span><br>';
+  div.innerHTML += '<i style="background: #0000ff"></i><span>~32</span><br>';
+  div.innerHTML += '<i style="background: #9900ff"></i><span>~5</span><br>';
+  div.innerHTML += '<i style="background: #ff00ff"></i><span><-20</span><br>';
+  div.innerHTML += '<h4>Precipitation Key</h4>';
+  div.innerHTML += '<i style="background: #64cd00 "></i><span>Light Rain</span><br>';
+  div.innerHTML += '<i style="background: #FFC300 "></i><span>Moderate Rain</span><br>';
+  div.innerHTML += '<i style="background: #C70039 "></i><span>Heavy Rain</span><br>';
+  return div;
+};
 
 function RadarMap() {
   const { locationData } = useLocation();
@@ -26,6 +43,8 @@ function RadarMap() {
     precipitation: false,
   });
   const markerRef = useRef<L.Marker | null>(null);
+  const legend: L.Control = new Control({ position: "bottomright" });
+  legend.onAdd = () => Key(mapRef.current!);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -41,6 +60,8 @@ function RadarMap() {
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "&copy; OpenStreetMap contributors",
       }).addTo(mapRef.current);
+
+      legend.addTo(mapRef.current);
     }
 
     if (locationData.locations.length > 0) {
@@ -62,7 +83,7 @@ function RadarMap() {
 
     if (state.temp && !Temp.current) {
       Temp.current = L.tileLayer(
-        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.5&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
+        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.5&palette=-30:ff00ff;-15:9900ff;0:0000ff;10:00ffff;20:00ff00;40:ff0000"
       ).addTo(mapRef.current);
     } else if (!state.temp && Temp.current != null) {
       mapRef.current.removeLayer(Temp.current);
@@ -158,6 +179,9 @@ function RadarMap() {
               />
             </FormGroup>
           </FormControl>
+        </div>
+        <div className="map-legend">
+          
         </div>
       </div>
     </div>
