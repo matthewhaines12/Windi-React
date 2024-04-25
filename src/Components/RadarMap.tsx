@@ -2,7 +2,7 @@
 
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
-import L from "leaflet";
+import L, {Control, map} from "leaflet";
 import { useEffect, useRef } from "react";
 import { useLocation } from "../Components/LocationContext";
 import * as React from "react";
@@ -11,6 +11,36 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+
+function Key(map: L.Map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Temperature Key</h4>";
+  div.innerHTML += '<i style="background: #ff0000"></i><span>>~104</span><br>';
+  div.innerHTML += '<i style="background: #FFA500"></i><span>~86</span><br>';
+  div.innerHTML += '<i style="background: #00ff00"></i><span>~68</span><br>';
+  div.innerHTML += '<i style="background: #00ffff"></i><span>~50</span><br>';
+  div.innerHTML += '<i style="background: #0000ff"></i><span>~32</span><br>';
+  div.innerHTML += '<i style="background: #9900ff"></i><span>~5</span><br>';
+  div.innerHTML += '<i style="background: #ff00ff"></i><span><-20</span><br>';
+  div.innerHTML += '<h4>Precipitation Key</h4>';
+  div.innerHTML += '<i style="background: #64cd00 "></i><span>Light Rain</span><br>';
+  div.innerHTML += '<i style="background: #FFC300 "></i><span>Moderate Rain</span><br>';
+  div.innerHTML += '<i style="background: #C70039 "></i><span>Heavy Rain</span><br>';
+  return div;
+};
+
+var Stadia_AlidadeSmoothDark = L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}",
+        {
+          minZoom: 0,
+          maxZoom: 20,
+          attribution:
+            '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          ext: "png",
+        }
+      )
+var Main_Map = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors",
+});
 
 function RadarMap() {
   const { locationData } = useLocation();
@@ -24,8 +54,11 @@ function RadarMap() {
     temp: false,
     wind: false,
     precipitation: false,
+    mapType: false,
   });
   const markerRef = useRef<L.Marker | null>(null);
+  const legend: L.Control = new Control({ position: "bottomright" });
+  legend.onAdd = () => Key(mapRef.current!);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -38,9 +71,9 @@ function RadarMap() {
     if (!mapRef.current) {
       mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3);
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-      }).addTo(mapRef.current);
+      Main_Map.addTo(mapRef.current);
+
+      legend.addTo(mapRef.current);
     }
 
     if (locationData.locations.length > 0) {
@@ -60,9 +93,17 @@ function RadarMap() {
       }
     }
 
+    if(state.mapType) {
+      mapRef.current.removeLayer(Main_Map);
+      Stadia_AlidadeSmoothDark.addTo(mapRef.current).bringToBack();
+    }else if (!state.mapType) {
+      Main_Map.addTo(mapRef.current).bringToBack();
+      Stadia_AlidadeSmoothDark.remove();
+    }
+
     if (state.temp && !Temp.current) {
       Temp.current = L.tileLayer(
-        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.5&palette=-65:821692;-55:821692;-45:821692;-40:821692;-30:8257db;-20:208cec;-10:20c4e8;0:23dddd;10:c2ff28;20:fff028;25:ffc228;30:fc8014"
+        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.7&palette=-30:ff00ff;0:0000ff;10:00ffff;20:00ff00;40:ff0000"
       ).addTo(mapRef.current);
     } else if (!state.temp && Temp.current != null) {
       mapRef.current.removeLayer(Temp.current);
@@ -95,7 +136,6 @@ function RadarMap() {
       mapRef.current.removeLayer(Precipitation.current);
       Precipitation.current = null;
     }
-    console.log("State Update");
   }, [locationData, state]);
 
   useEffect(() => {
@@ -114,6 +154,19 @@ function RadarMap() {
       <div id="map" style={{ width: "950px", height: "550px" }}>
         <div className="switch-container">
           <FormControl component="fieldset" variant="standard">
+            <FormLabel component="legend">Map</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.mapType}
+                    onChange={handleChange}
+                    name="mapType"
+                  />
+                }
+                label="Dark Mode"
+              />
+            </FormGroup>
             <FormLabel component="legend">Layers</FormLabel>
             <FormGroup>
               <FormControlLabel
@@ -158,6 +211,9 @@ function RadarMap() {
               />
             </FormGroup>
           </FormControl>
+        </div>
+        <div className="map-legend">
+          
         </div>
       </div>
     </div>
