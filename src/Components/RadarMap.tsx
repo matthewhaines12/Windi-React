@@ -35,7 +35,7 @@ var Stadia_AlidadeSmoothDark = L.tileLayer("https://tiles.stadiamaps.com/tiles/a
           maxZoom: 20,
           attribution:
             '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          ext: "png",
+          ext: "png", //Not an error, but will cause an error if deleted
         }
       )
 var Main_Map = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -74,6 +74,11 @@ function RadarMap() {
       Main_Map.addTo(mapRef.current);
 
       legend.addTo(mapRef.current);
+    }
+    
+    if(mapRef.current && !state.mapType) { //Refreshes the map when the page is refreshed (and also on each layer toggle)
+      Main_Map.remove();
+      Main_Map.addTo(mapRef.current);
     }
 
     if (locationData.locations.length > 0) {

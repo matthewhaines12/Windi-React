@@ -427,6 +427,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
   background: #fff;
   background: rgba(255, 255, 255, 0.8);
   margin: 0;
+}
+.leaflet-control-attribution{
   max-width: 75%;
 }
 .leaflet-control-attribution,
