@@ -39,10 +39,12 @@ function HomeHourly() {
 
   const convertToEST = (utcTime: string): string => {
     const utcDate = new Date(utcTime.replace(/ /, "T") + "Z");
-    const estDate = new Date(
-      utcDate.toLocaleString("en-US", { timeZone: "America/New_York" })
-    );
-    return estDate.toLocaleString();
+    const estHour = utcDate.toLocaleString("en-US", {
+      hour: "numeric",
+      hour12: true,
+      timeZone: "America/New_York",
+    });
+    return estHour;
   };
 
   function Success(position: { coords: any }) {
@@ -107,7 +109,120 @@ function HomeHourly() {
     }
   }, [locationData]);
 
-  return <div className="hourly"></div>;
+  return (
+    <div className="hourly">
+      <div className="container">
+        <div className="middle">
+          <table className="hourly-outline">
+            <thead className="hourly-times">
+              <tr>
+                <th>
+                  {hours?.list?.[0]?.dt_txt &&
+                    convertToEST(hours.list[0].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[1]?.dt_txt &&
+                    convertToEST(hours.list[1].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[2]?.dt_txt &&
+                    convertToEST(hours.list[2].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[3]?.dt_txt &&
+                    convertToEST(hours.list[3].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[4]?.dt_txt &&
+                    convertToEST(hours.list[4].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[5]?.dt_txt &&
+                    convertToEST(hours.list[5].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[6]?.dt_txt &&
+                    convertToEST(hours.list[6].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[7]?.dt_txt &&
+                    convertToEST(hours.list[7].dt_txt)}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="hourly-items">
+                <td>
+                  <h3>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[0]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[1]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[2]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[3]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[4]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[5]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[6]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <h3>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)} °F</h3>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[7]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default HomeHourly;

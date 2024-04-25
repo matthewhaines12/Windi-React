@@ -3,10 +3,12 @@
 
 import React, { ReactNode, useEffect, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
-import HomeForecast from "./HomeForecast";
 import { useLocation } from "./LocationContext";
-import HomeHourly from "./HomeHourly";
 import "../Styles/Home.css";
+import { FiWind } from "react-icons/fi";
+import { WiHumidity } from "react-icons/wi";
+import { MdOutlineKeyboardDoubleArrowUp } from "react-icons/md";
+import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 
 interface Weather {
   description: string;
@@ -114,7 +116,26 @@ function HomeCurrentWeather() {
   return (
     <div className="current">
       <div className="top">
-        <div className="left-info">
+        
+        <div className="info-col1">
+          <div className="day-info">
+            <div className="high-low">
+              <p>
+              <MdOutlineKeyboardDoubleArrowUp className="up-arrow" /> 
+             
+                {Math.round(home?.main?.temp_max ?? 0)}°F{" "}
+              </p>
+              <p>
+              <MdKeyboardDoubleArrowDown className="down-arrow" />
+
+          
+                {Math.round(home?.main?.temp_min ?? 0)}°F{" "}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="info">
           <div className="location">
             <FaLocationArrow className="location-icon" />
             <p>{home?.name ?? "Enter city"}</p>
@@ -123,47 +144,36 @@ function HomeCurrentWeather() {
           <div className="temp">
             <h1>{`${Math.round(Number(home?.main?.temp ?? 0))}°F`}</h1>
           </div>
-
           <div className="description">
             <p>{home?.weather?.[0]?.description ?? "No description"}</p>
           </div>
         </div>
-        <div className="right-info">
-          <div className="day-info">
-            <div className="day-stat">
-              <span className="title">Min/Max </span>
-              <span className="value">
-                {Math.round(home?.main?.temp_min ?? 0)}°F/
-                {Math.round(home?.main?.temp_max ?? 0)}°F
-              </span>
-            </div>
 
+        
+          {/* <div className="day-stat">
+            <span className="title">FEELS LIKE </span>
+            <span className="value">
+              {Math.round(home?.main?.feels_like ?? 0)}°F
+            </span>
+          </div> */}
+
+          <div className="info-col2">
+            <div className="day-info-container">
             <div className="day-stat">
-              <span className="title">HUMIDITY </span>
-              <span className="value">{home?.main?.humidity ?? 0} %</span>
-            </div>
-            <div className="day-stat">
-              <span className="title">WIND GUSTS </span>
-              <span className="value">
-                {Math.round(home?.wind?.gust ?? 0)} mph
-              </span>
-            </div>
-            <div className="day-stat">
-              <span className="title">FEELS LIKE </span>
-              <span className="value">
-                {Math.round(home?.main?.feels_like ?? 0)}°F
-              </span>
-            </div>
-            <div className="day-stat">
-              <span className="title">WIND SPEED </span>
+            <FiWind className="wind-icon" />
               <span className="value">
                 {Math.round(home?.wind?.speed ?? 0)} mph
               </span>
             </div>
+            <div className="day-stat">
+              <WiHumidity className="humidity-icon"/>
+              <span className="value">{home?.main?.humidity ?? 0} %</span>
+            </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }
 

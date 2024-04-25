@@ -1,21 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 .hourly {
-  float: left;
+  
 }
 
 .hourly .container {
-  max-width: 1200px;
+  max-width: 650px;
   margin: 0 auto;
   padding: 20px;
+  /* margin-left: 50px; */
 }
 
-.hourly .top {
+.hourly .middle {
   text-align: center;
   padding-bottom: 20px;
+  /* background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  background-position: 100%;
+  border-radius: 5px;;
+  width: 100%; /* Expand the background across the width */
+  margin-left: auto; /* Reset margin */
+  margin-right: auto; /* Reset margin */
+  
 }
 
-.hourly .top .hourly-title {
+.hourly .middle .hourly-title {
   margin: 0;
   font-size: 24px;
   color: #333;
@@ -23,32 +32,32 @@
 
 .hourly .hourly-outline {
   width: 100%;
-  border-collapse: collapse;
+  /* border-spacing: 8px; */
 }
 
 .hourly .hourly-outline th,
 .hourly .hourly-outline td {
   text-align: center;
+  border-radius: 10px; /* Increased border-radius for a bubble effect */
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #dadada;
+  background-color: #fff; /* Background color for each bubble */
 }
 
 .hourly .hourly-times th {
-  background-color: #282828;
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: normal;
 }
 
-.hourly .hourly-images img,
-.hourly .hourly-temp td {
-  vertical-align: middle;
+.hourly .hourly-images img {
+  display: block; /* Ensure the icons are displayed as blocks */
+  margin: 0 auto; /* Center the icons horizontally within the bubble */
 }
 
 .hourly .hourly-temp td {
-  background-color: #f2f2f2;
   color: #333;
 }
-
+/* 
 @media (max-width: 768px) {
   .hourly .container {
     padding: 10px;
@@ -62,4 +71,4 @@
   .hourly .top .hourly-title {
     font-size: 20px;
   }
-}
+} */
