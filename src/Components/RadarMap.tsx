@@ -2,7 +2,7 @@
 
 import "../../src/Styles/Radar.css";
 import "../../src/Styles/leaflet.css";
-import L, {Control} from "leaflet";
+import L, {Control, map} from "leaflet";
 import { useEffect, useRef } from "react";
 import { useLocation } from "../Components/LocationContext";
 import * as React from "react";
@@ -29,6 +29,19 @@ function Key(map: L.Map) {
   return div;
 };
 
+var Stadia_AlidadeSmoothDark = L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}",
+        {
+          minZoom: 0,
+          maxZoom: 20,
+          attribution:
+            '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          ext: "png",
+        }
+      )
+var Main_Map = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors",
+});
+
 function RadarMap() {
   const { locationData } = useLocation();
   const mapRef = useRef<L.Map | null>(null);
@@ -41,6 +54,7 @@ function RadarMap() {
     temp: false,
     wind: false,
     precipitation: false,
+    mapType: false,
   });
   const markerRef = useRef<L.Marker | null>(null);
   const legend: L.Control = new Control({ position: "bottomright" });
@@ -57,9 +71,7 @@ function RadarMap() {
     if (!mapRef.current) {
       mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3);
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors",
-      }).addTo(mapRef.current);
+      Main_Map.addTo(mapRef.current);
 
       legend.addTo(mapRef.current);
     }
@@ -81,9 +93,17 @@ function RadarMap() {
       }
     }
 
+    if(state.mapType) {
+      mapRef.current.removeLayer(Main_Map);
+      Stadia_AlidadeSmoothDark.addTo(mapRef.current).bringToBack();
+    }else if (!state.mapType) {
+      Main_Map.addTo(mapRef.current).bringToBack();
+      Stadia_AlidadeSmoothDark.remove();
+    }
+
     if (state.temp && !Temp.current) {
       Temp.current = L.tileLayer(
-        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.5&palette=-30:ff00ff;-15:9900ff;0:0000ff;10:00ffff;20:00ff00;40:ff0000"
+        "http://maps.openweathermap.org/maps/2.0/weather/TA2/{z}/{x}/{y}?appid=51792902640cee7f3338178dbd96604a&fill_bound=true&opacity=0.7&palette=-30:ff00ff;0:0000ff;10:00ffff;20:00ff00;40:ff0000"
       ).addTo(mapRef.current);
     } else if (!state.temp && Temp.current != null) {
       mapRef.current.removeLayer(Temp.current);
@@ -116,7 +136,6 @@ function RadarMap() {
       mapRef.current.removeLayer(Precipitation.current);
       Precipitation.current = null;
     }
-    console.log("State Update");
   }, [locationData, state]);
 
   useEffect(() => {
@@ -135,6 +154,19 @@ function RadarMap() {
       <div id="map" style={{ width: "950px", height: "550px" }}>
         <div className="switch-container">
           <FormControl component="fieldset" variant="standard">
+            <FormLabel component="legend">Map</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.mapType}
+                    onChange={handleChange}
+                    name="mapType"
+                  />
+                }
+                label="Dark Mode"
+              />
+            </FormGroup>
             <FormLabel component="legend">Layers</FormLabel>
             <FormGroup>
               <FormControlLabel
