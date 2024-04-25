@@ -153,7 +153,7 @@ function HomeHourly() {
             <tbody>
               <tr className="hourly-items">
                 <td>
-                  <h3>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[0]?.weather?.[0]?.icon ?? "02d"
@@ -161,7 +161,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[1]?.weather?.[0]?.icon ?? "02d"
@@ -169,7 +169,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[2]?.weather?.[0]?.icon ?? "02d"
@@ -177,7 +177,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[3]?.weather?.[0]?.icon ?? "02d"
@@ -185,7 +185,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[4]?.weather?.[0]?.icon ?? "02d"
@@ -193,7 +193,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[5]?.weather?.[0]?.icon ?? "02d"
@@ -201,7 +201,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[6]?.weather?.[0]?.icon ?? "02d"
@@ -209,7 +209,7 @@ function HomeHourly() {
                   />
                 </td>
                 <td>
-                  <h3>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)} °F</h3>
+                  <p>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)}°F</p>
                   <img
                     src={`http://openweathermap.org/img/w/${
                       hours?.list?.[7]?.weather?.[0]?.icon ?? "02d"

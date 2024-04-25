@@ -18,29 +18,31 @@ html {
 .top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 1rem;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
-  width: 80%;
+  width: 90%;
 }
 
 /* Temperature section */
 .temp {
   justify-content: center;
+  margin:0 40px 0 40px;
 }
 
 /* Container for location, temperature, and description */
 .info {
+  display: flex;
   position: relative;
   justify-content: center;
 }
 
 /* Left column of additional information */
-.info-col1 {
-  margin-left: 20px; /* Adjusted for better spacing */
+.info-col1, .info-col2{
+  display: flex;
 }
 
 /* Location section */
@@ -58,11 +60,7 @@ html {
 }
 
 /* Right column of additional information */
-.info-col2 {
-  position: relative;
- 
-  padding-left: 10px;
-}
+
 
 /* Container for the daily information */
 .day-info {
@@ -71,6 +69,7 @@ html {
   flex-direction: column;
   align-items: flex-start;
   padding-top: 10px;
+  justify-content: center;
 }
 
 /* Individual statistic */

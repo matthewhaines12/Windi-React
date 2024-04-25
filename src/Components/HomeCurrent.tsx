@@ -117,6 +117,9 @@ function HomeCurrentWeather() {
     <div className="current">
       <div className="top">
         
+        
+
+        <div className="info">
         <div className="info-col1">
           <div className="day-info">
             <div className="high-low">
@@ -135,7 +138,7 @@ function HomeCurrentWeather() {
           </div>
         </div>
 
-        <div className="info">
+        <div>
           <div className="location">
             <FaLocationArrow className="location-icon" />
             <p>{home?.name ?? "Enter city"}</p>
@@ -148,17 +151,8 @@ function HomeCurrentWeather() {
             <p>{home?.weather?.[0]?.description ?? "No description"}</p>
           </div>
         </div>
-
-        
-          {/* <div className="day-stat">
-            <span className="title">FEELS LIKE </span>
-            <span className="value">
-              {Math.round(home?.main?.feels_like ?? 0)}°F
-            </span>
-          </div> */}
-
           <div className="info-col2">
-            <div className="day-info-container">
+            <div className="day-info">
             <div className="day-stat">
             <FiWind className="wind-icon" />
               <span className="value">
@@ -171,6 +165,17 @@ function HomeCurrentWeather() {
             </div>
             </div>
           </div>
+        </div>
+
+        
+          {/* <div className="day-stat">
+            <span className="title">FEELS LIKE </span>
+            <span className="value">
+              {Math.round(home?.main?.feels_like ?? 0)}°F
+            </span>
+          </div> */}
+
+          
         </div>
       </div>
    

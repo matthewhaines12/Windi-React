@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-.hourly {
+/* .hourly {
   
-}
+} */
 
 .hourly .container {
-  max-width: 650px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
   /* margin-left: 50px; */
@@ -47,6 +47,11 @@
 .hourly .hourly-times th {
   color: rgb(0, 0, 0);
   font-weight: normal;
+  font-size: 13px;
+}
+
+.hourly-items td p {
+  font-size: 20px; 
 }
 
 .hourly .hourly-images img {
