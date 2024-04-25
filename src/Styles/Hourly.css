@@ -9,6 +9,7 @@
   margin: 0 auto;
   padding: 20px;
   /* margin-left: 50px; */
+  float : left;
 }
 
 .hourly .middle {

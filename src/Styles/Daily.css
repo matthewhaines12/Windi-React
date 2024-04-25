@@ -2,29 +2,18 @@
   float: right;
 }
 
-.days-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  padding: 0.5rem;
-  gap: 0.5rem;
-  list-style: none;
+.info-block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+  gap: 10px; /* Gap between each item */
 }
 
-.days-list li {
-  width: 60px;
-  height: 60px;
-  background-color: #f0f0f0;
-  border-radius: 50%;
+.info-item {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dadada;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.days-list img {
-  width: 30px;
-  height: auto;
-  margin-bottom: 0.5rem;
+  /* font-size: 18px; */
+  color: #333;
 }
