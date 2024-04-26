@@ -26,7 +26,7 @@
   float: middle;
   background-color: white;
   border-radius: 10px;
-  max-width: 50%;
+  max-width: 60%;
 }
 
 .forecast .container {
@@ -94,4 +94,13 @@
 
 .daily-temp td {
   color: #333;
+}
+
+.forecast .container {
+  float : middle;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  height: 100%;
 }

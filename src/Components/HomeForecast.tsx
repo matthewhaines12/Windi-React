@@ -5,6 +5,7 @@ import "../Styles/Home.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "./LocationContext";
 import "../Styles/Daily.css";
+import { MdKeyboardDoubleArrowDown, MdOutlineKeyboardDoubleArrowUp } from "react-icons/md";
 
 const api = {
   key: "51792902640cee7f3338178dbd96604a",
@@ -109,7 +110,7 @@ function HomeForecast() {
   }, [locationData]);
 
   return (
-    <div className="forecast" style={{ transform: "scale(0.9)" }}>
+    <div className="forecast" /*{style={{ transform: "scale(0.9)" }}}*/>
       <div className="container">
         <h1>6-Day Forecast</h1>
         <div className="middle">
@@ -141,7 +142,7 @@ function HomeForecast() {
                 <td>
                   <div className="daily-temp">
                     <p>
-                      {Math.round(forecast?.list?.[1]?.temp?.min ?? 0)}°F /
+                      <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
                       {Math.round(forecast?.list?.[1]?.temp?.max ?? 0)}°F
                     </p>
                     <img
@@ -149,12 +150,16 @@ function HomeForecast() {
                         forecast?.list?.[1]?.weather?.[0]?.icon ?? "02d"
                       }.png`}
                     />
+                    <p>
+                      {Math.round(forecast?.list?.[1]?.temp?.min ?? 0)}°F
+                      <MdKeyboardDoubleArrowDown className="down-arrow" />
+                    </p>
                   </div>
                 </td>
                 <td>
                   <div className="daily-temp">
                     <p>
-                      {Math.round(forecast?.list?.[2]?.temp?.min ?? 0)}°F /
+                      <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
                       {Math.round(forecast?.list?.[2]?.temp?.max ?? 0)}°F
                     </p>
                     <img
@@ -162,12 +167,16 @@ function HomeForecast() {
                         forecast?.list?.[2]?.weather?.[0]?.icon ?? "02d"
                       }.png`}
                     />
+                    <p>
+                      {Math.round(forecast?.list?.[2]?.temp?.min ?? 0)}°F
+                      <MdKeyboardDoubleArrowDown className="down-arrow" />
+                    </p>
                   </div>
                 </td>
                 <td>
                   <div className="daily-temp">
                     <p>
-                      {Math.round(forecast?.list?.[3]?.temp?.min ?? 0)}°F /
+                      <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
                       {Math.round(forecast?.list?.[3]?.temp?.max ?? 0)}°F
                     </p>
                     <img
@@ -175,12 +184,16 @@ function HomeForecast() {
                         forecast?.list?.[3]?.weather?.[0]?.icon ?? "02d"
                       }.png`}
                     />
+                    <p>
+                      {Math.round(forecast?.list?.[3]?.temp?.min ?? 0)}°F
+                      <MdKeyboardDoubleArrowDown className="down-arrow" />
+                    </p>
                   </div>
                 </td>
                 <td>
                   <div className="daily-temp">
                     <p>
-                      {Math.round(forecast?.list?.[4]?.temp?.min ?? 0)}°F /
+                      <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
                       {Math.round(forecast?.list?.[4]?.temp?.max ?? 0)}°F
                     </p>
                     <img
@@ -188,12 +201,16 @@ function HomeForecast() {
                         forecast?.list?.[4]?.weather?.[0]?.icon ?? "02d"
                       }.png`}
                     />
+                    <p>
+                      {Math.round(forecast?.list?.[4]?.temp?.min ?? 0)}°F
+                      <MdKeyboardDoubleArrowDown className="down-arrow" />
+                    </p>
                   </div>
                 </td>
                 <td>
                   <div className="daily-temp">
                     <p>
-                      {Math.round(forecast?.list?.[5]?.temp?.min ?? 0)}°F /
+                      <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
                       {Math.round(forecast?.list?.[5]?.temp?.max ?? 0)}°F
                     </p>
                     <img
@@ -201,19 +218,27 @@ function HomeForecast() {
                         forecast?.list?.[5]?.weather?.[0]?.icon ?? "02d"
                       }.png`}
                     />
+                    <p>
+                      {Math.round(forecast?.list?.[5]?.temp?.min ?? 0)}°F
+                      <MdKeyboardDoubleArrowDown className="down-arrow" />
+                    </p>
                   </div>
                 </td>
                 <td>
                   <div className="daily-temp">
                     <p>
-                      {Math.round(forecast?.list?.[5]?.temp?.min ?? 0)}°F /
-                      {Math.round(forecast?.list?.[5]?.temp?.max ?? 0)}°F
+                      <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
+                      {Math.round(forecast?.list?.[6]?.temp?.max ?? 0)}°F
                     </p>
                     <img
                       src={`http://openweathermap.org/img/w/${
-                        forecast?.list?.[5]?.weather?.[0]?.icon ?? "02d"
+                        forecast?.list?.[6]?.weather?.[0]?.icon ?? "02d"
                       }.png`}
                     />
+                    <p>
+                      {Math.round(forecast?.list?.[6]?.temp?.min ?? 0)}°F
+                      <MdKeyboardDoubleArrowDown className="down-arrow" />
+                    </p>
                   </div>
                 </td>
               </tr>

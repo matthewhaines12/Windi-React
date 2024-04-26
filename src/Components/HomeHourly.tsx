@@ -110,7 +110,7 @@ function HomeHourly() {
   }, [locationData]);
 
   return (
-    <div className="hourly" style={{ transform: 'scale(0.9)' }}>
+    <div className="hourly" /*{style={{ transform: 'scale(0.9)' }}}*/>
         <div className="container">
           <h1>Today's Forecast</h1>
           <div className="middle">

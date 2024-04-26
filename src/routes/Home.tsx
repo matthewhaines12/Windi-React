@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="HomeContainer">
       <HomeCurrentWeather />
-      <br />
+      <br></br>
       <div className="HomeDivider">
         <HomeHourly />
         <HomeForecast />

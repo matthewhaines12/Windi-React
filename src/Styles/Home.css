@@ -8,7 +8,7 @@ html {
 
 /* Container for the current weather */
 .current {
-  max-width: 90%;
+  max-width: 80%;
   margin: 0 auto;
   display: flex;
   justify-content: center; /* Center content horizontally */
@@ -24,7 +24,7 @@ html {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
-  width: 90%;
+  width: 100%;
 }
 
 /* Temperature section */
@@ -112,12 +112,12 @@ html {
 }
 
 .HomeContainer {
-  margin: auto;
+  margin: 10px auto;
 }
 
 .HomeDivider{
   display: flex;
-  max-width: 90%;
+  max-width: 80%;
   margin:auto;
-  justify-content: center;
+  justify-content: space-between;
 }
