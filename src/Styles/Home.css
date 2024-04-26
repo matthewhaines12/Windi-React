@@ -110,3 +110,14 @@ html {
     margin: 10px 0; /* Adjusted for better spacing */
   }
 }
+
+.HomeContainer {
+  margin: auto;
+}
+
+.HomeDivider{
+  display: flex;
+  max-width: 90%;
+  margin:auto;
+  justify-content: center;
+}

@@ -8,8 +8,11 @@ function Home() {
   return (
     <div className="HomeContainer">
       <HomeCurrentWeather />
-      <HomeHourly />
-      <HomeForecast />
+      <br />
+      <div className="HomeDivider">
+        <HomeHourly />
+        <HomeForecast />
+      </div>
     </div>
   );
 }

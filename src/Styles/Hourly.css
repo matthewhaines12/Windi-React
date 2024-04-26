@@ -12,7 +12,7 @@
   border-radius: 10px;
   padding: 20px;
   margin: 0 auto;
-  max-width: 650px;
+  height: 100%;
 }
 
 .hourly .middle {
@@ -81,3 +81,6 @@
     font-size: 20px;
   }
 } */
+.hourly{
+  max-width: 50%;
+}

@@ -26,9 +26,7 @@
   float: middle;
   background-color: white;
   border-radius: 10px;
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 650px;
+  max-width: 50%;
 }
 
 .forecast .container {
@@ -64,4 +62,36 @@
 .forecast .day-temp img {
   width: 50px;
   height: 50px;
+}
+
+.daily-outline{
+  width:100%;
+}
+
+.daily-outline th,
+.daily-outline td {
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #dadada;
+  background-color: #fff;
+}
+
+.daily-days th {
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  font-size: 13px;
+}
+
+.daily-items td p {
+  font-size: 20px;
+}
+
+.daily-images img {
+  display: block;
+  margin: 0 auto;
+}
+
+.daily-temp td {
+  color: #333;
 }
