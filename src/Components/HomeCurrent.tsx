@@ -1,6 +1,5 @@
 // File that calls on most of the current weather data such as max, min, current, and feels like temps.
 // Also weather description, wind, state, and country name.
-
 import React, { ReactNode, useEffect, useState } from "react";
 import { FaLocationArrow } from "react-icons/fa";
 import { useLocation } from "./LocationContext";
@@ -12,6 +11,7 @@ import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 
 interface Weather {
   description: string;
+  icon: string;
 }
 
 interface Main {
@@ -149,6 +149,11 @@ function HomeCurrentWeather() {
           </div>
           <div className="description">
             <p>{home?.weather?.[0]?.description ?? "No description"}</p>
+            <img
+                  src={`http://openweathermap.org/img/w/${home?.weather?.[0]?.icon
+                     ?? "02d"
+                  }.png`}
+                />
           </div>
         </div>
           <div className="info-col2">
