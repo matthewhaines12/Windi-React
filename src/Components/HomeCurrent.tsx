@@ -114,7 +114,7 @@ function HomeCurrentWeather() {
   }
 
   return (
-    <div className="current">
+    <div className="current" style={{ transform: 'scale(0.9)' }}>
       <div className="top">
         
         

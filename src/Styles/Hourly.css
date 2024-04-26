@@ -4,12 +4,15 @@
   
 } */
 
+
+ 
 .hourly .container {
-  max-width: 500px;
-  margin: 0 auto;
+  float : middle;
+  background-color: white;
+  border-radius: 10px;
   padding: 20px;
-  /* margin-left: 50px; */
-  float : left;
+  margin: 0 auto;
+  max-width: 650px;
 }
 
 .hourly .middle {

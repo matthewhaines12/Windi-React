@@ -1,11 +1,16 @@
-.forecast {
-  float: right;
+/*.forecast {
+  float : middle;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 650px;
 }
 
 .info-block {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-  gap: 10px; /* Gap between each item */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px; 
 }
 
 .info-item {
@@ -14,6 +19,49 @@
   border-radius: 10px;
   border: 1px solid #dadada;
   text-align: center;
-  /* font-size: 18px; */
   color: #333;
+}*/
+
+.forecast {
+  float: middle;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+.forecast .container {
+  text-align: left;
+}
+
+.forecast .middle {
+  padding-bottom: 20px;
+}
+
+.forecast .forecast-days {
+  display: flex;
+  justify-content: space-around;
+}
+
+.forecast .day-item {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dadada;
+  text-align: center;
+}
+
+.forecast .day-temp {
+  margin-top: 10px;
+}
+
+.forecast .day-temp p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.forecast .day-temp img {
+  width: 50px;
+  height: 50px;
 }
