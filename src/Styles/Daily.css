@@ -24,9 +24,10 @@
 
 .forecast {
   float: middle;
-  background-color: white;
+  background-color: #fff;
   border-radius: 10px;
   max-width: 60%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .forecast .container {
@@ -42,7 +43,7 @@
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #dadada;
+  /* border: 1px solid #dadada; */
   text-align: center;
 }
 
@@ -71,6 +72,7 @@
   padding: 10px;
   border: 1px solid #dadada;
   background-color: #fff;
+  background-color: rgba(221, 221, 221, 0.1);
 }
 
 .daily-days th {

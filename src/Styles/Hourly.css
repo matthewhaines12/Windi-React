@@ -7,7 +7,8 @@
 
  
 .hourly .container {
-  background-color: white;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 20px;
   height: 100%;
@@ -41,7 +42,8 @@
   border-radius: 10px; /* Increased border-radius for a bubble effect */
   padding: 10px;
   border: 1px solid #dadada;
-  background-color: #fff; /* Background color for each bubble */
+  background-color: rgba(221, 221, 221, 0.1);
+  /* box-shadow: 0px, 0px, 10px rgba(0, 0, 0, 0.9); */
 }
 
 .hourly .hourly-times th {

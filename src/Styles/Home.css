@@ -110,8 +110,10 @@ html {
 }
 
 /* Add media queries for responsive design */
-@media only screen and (aspect-ratio: 16/10), (max-width: 1200px) {
+ @media only screen and (aspect-ratio: 16/10), (max-width: 1200px) {
   .HomeDivider {
     justify-content: space-evenly;
   }
-}
+} 
+
+
