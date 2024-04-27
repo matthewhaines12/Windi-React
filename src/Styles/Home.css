@@ -98,13 +98,6 @@ html {
   font-weight: 600;
 }
 
-/* Add media queries for responsive design */
-@media only screen and (aspect-ratio: 16/10), (max-width: 1200px) {
-  .HomeDivider {
-    justify-content: space-evenly;
-  }
-}
-
 .HomeContainer {
   margin: 10px auto;
 }
@@ -114,4 +107,11 @@ html {
   max-width: 80%;
   margin:auto;
   justify-content: space-between;
+}
+
+/* Add media queries for responsive design */
+@media only screen and (aspect-ratio: 16/10), (max-width: 1200px) {
+  .HomeDivider {
+    justify-content: space-evenly;
+  }
 }
