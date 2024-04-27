@@ -99,14 +99,9 @@ html {
 }
 
 /* Add media queries for responsive design */
-@media (max-width: 768px) {
-  .top {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .info-col1,
-  .info-col2 {
-    margin: 10px 0; /* Adjusted for better spacing */
+@media (aspect-ratio: 16/10) {
+  .HomeDivider {
+    justify-content: space-evenly;
   }
 }
 
