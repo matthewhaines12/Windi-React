@@ -7,24 +7,20 @@
 
  
 .hourly .container {
-  float : middle;
   background-color: white;
   border-radius: 10px;
   padding: 20px;
-  margin: 0 auto;
   height: 100%;
+  align-content: space-around;
 }
 
 .hourly .middle {
   text-align: center;
-  padding-bottom: 20px;
-  /* background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   background-position: 100%;
   border-radius: 5px;;
-  width: 100%; /* Expand the background across the width */
-  margin-left: auto; /* Reset margin */
-  margin-right: auto; /* Reset margin */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   
 }
 
