@@ -54,10 +54,11 @@ function HomeCurrentWeather() {
   const { setLocationData } = useLocation();
   const [home, setWeatherData] = useState<HomeData | null>(null);
   const defaultCity = "New York";
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   
   function fetchDefaultCityWeather() {
+    setLoading(true);
     fetch(`${api.base}weather?q=${defaultCity}&appid=${api.key}&units=imperial`)
       .then((res) => res.json())
       .then((data) => {
@@ -86,6 +87,7 @@ function HomeCurrentWeather() {
   }
 
   function Success(position: { coords: any }) {
+    setLoading(true);
     setLocationData({
       locations: [
         { lat: position.coords.latitude, lng: position.coords.longitude },
@@ -121,19 +123,19 @@ function HomeCurrentWeather() {
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else {
       fetchDefaultCityWeather();
-    }
+    
 
       if (firstRun) {
         getLocation();
         firstRun = false;
       }
-    
+    }  
   }, [locationData]);
 
 
-  // if (loading) {
-  //   return <div className="loading">Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="current">

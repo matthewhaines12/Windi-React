@@ -37,9 +37,10 @@ function HomeHourly() {
   const { setLocationData } = useLocation();
   const [hours, setWeatherData] = useState<HourlyData | null>(null);
   const defaultCity = "New York";
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   function fetchWeather(lat: number, lng: number) {
+    setLoading(true);
     fetch(
       `${api.base}forecast/hourly?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
     )
@@ -52,6 +53,7 @@ function HomeHourly() {
   }
 
   function fetchDefaultCityWeather() {
+    setLoading(true);
     fetch(
       `${api.base}forecast/hourly?q=${defaultCity}&appid=${api.key}&units=imperial`
     )
@@ -74,6 +76,7 @@ function HomeHourly() {
   };
 
   function Success(position: { coords: any }) {
+    setLoading(true);
     setLocationData({
       locations: [
         { lat: position.coords.latitude, lng: position.coords.longitude },
@@ -104,7 +107,7 @@ function HomeHourly() {
       fetchWeather(lat, lng);
     } else {
       fetchDefaultCityWeather();
-    }
+    
 
     if (firstRun) {
       var options = {
@@ -131,6 +134,7 @@ function HomeHourly() {
 
       firstRun = false;
     }
+  }
   }, [locationData]);
 
   if (loading) {

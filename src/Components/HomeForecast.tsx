@@ -31,10 +31,11 @@ function HomeForecast() {
   const { setLocationData } = useLocation();
   const [forecast, setWeatherData] = useState<HomeForecastData | null>(null);
   const defaultCity = "New York";
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
 
   function fetchWeather(lat: number, lng: number) {
+    setLoading(true);
     fetch(
       `${api.base}forecast/daily?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
     )
@@ -47,6 +48,7 @@ function HomeForecast() {
     }
 
     function fetchDefaultCityWeather() {
+      setLoading(true);
       fetch(`${api.base}forecast/daily?q=${defaultCity}&appid=${api.key}&units=imperial`)
         .then((res) => res.json())
         .then((data) => {
@@ -75,6 +77,7 @@ function HomeForecast() {
   }
 
   function Success(position: { coords: any }) {
+    setLoading(true);
     setLocationData({
       locations: [
         { lat: position.coords.latitude, lng: position.coords.longitude },
@@ -101,7 +104,7 @@ function HomeForecast() {
       fetchWeather(lat, lng);
     } else {
     fetchDefaultCityWeather();
-    }
+    
 
     if (firstRun) {
       var options = {
@@ -128,6 +131,7 @@ function HomeForecast() {
 
       firstRun = false;
     }
+  }
   }, [locationData]);
 
   if (loading) { 

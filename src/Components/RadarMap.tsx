@@ -66,10 +66,13 @@ function RadarMap() {
       [event.target.name]: event.target.checked,
     });
   };
+  const defaultLocation = { lat: 40.7128, lng: -74.0060 }; 
+
 
   useEffect(() => {
     if (!mapRef.current) {
-      mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3);
+      mapRef.current = L.map("map", { minZoom: 3 }).setView([defaultLocation.lat, defaultLocation.lng], 10); // Set default view to New York
+      //  mapRef.current = L.map("map", { minZoom: 3 }).setView([0, 0], 3);
 
       Main_Map.addTo(mapRef.current);
 
@@ -144,6 +147,9 @@ function RadarMap() {
   }, [locationData, state]);
 
   useEffect(() => {
+    if (mapRef.current !== null && locationData.locations.length === 0) {
+      mapRef.current.setView([defaultLocation.lat, defaultLocation.lng], 10); // Set default view to New York
+    }
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
       mapRef.current!.setView([lat, lng], 10);
