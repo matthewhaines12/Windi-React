@@ -109,6 +109,13 @@ html {
   justify-content: space-between;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 /* Add media queries for responsive design */
  @media only screen and (aspect-ratio: 16/10), (max-width: 1200px) {
   .HomeDivider {

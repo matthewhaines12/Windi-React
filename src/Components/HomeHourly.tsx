@@ -36,6 +36,32 @@ function HomeHourly() {
   const { locationData } = useLocation();
   const { setLocationData } = useLocation();
   const [hours, setWeatherData] = useState<HourlyData | null>(null);
+  const defaultCity = "New York";
+  const [loading, setLoading] = useState(true);
+
+  function fetchWeather(lat: number, lng: number) {
+    fetch(
+      `${api.base}forecast/hourly?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setWeatherData(data);
+        setLoading(false);
+      })
+      .catch((error) => console.error("Failed to fetch weather data", error));
+  }
+
+  function fetchDefaultCityWeather() {
+    fetch(
+      `${api.base}forecast/hourly?q=${defaultCity}&appid=${api.key}&units=imperial`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setWeatherData(data);
+        setLoading(false);
+      })
+      .catch((error) => console.error("Failed to fetch weather data", error));
+  }
 
   const convertToEST = (utcTime: string): string => {
     const utcDate = new Date(utcTime.replace(/ /, "T") + "Z");
@@ -53,17 +79,19 @@ function HomeHourly() {
         { lat: position.coords.latitude, lng: position.coords.longitude },
       ],
     });
-    if (locationData.locations[0] && locationData.locations[1]) {
-      fetch(
-        `${api.base}forecast/hourly?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setWeatherData(data);
-          console.log(data);
-        })
-        .catch((error) => console.error("Failed to fetch weather data", error));
-    }
+    fetchWeather(position.coords.latitude, position.coords.longitude);
+    // if (locationData.locations[0] && locationData.locations[1]) {
+    //   fetch(
+    //     `${api.base}forecast/hourly?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
+    //   )
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setWeatherData(data);
+    //       console.log(data);
+    //     })
+    //     .catch((error) => console.error("Failed to fetch weather data", error));
+    // }
+    // unessary code
   }
 
   function Errors(err: { code: any; message: any }) {
@@ -73,16 +101,12 @@ function HomeHourly() {
   useEffect(() => {
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
-      fetch(
-        `${api.base}forecast/hourly?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setWeatherData(data);
-          console.log(data);
-        })
-        .catch((error) => console.error("Failed to fetch weather data", error));
-    } else if (firstRun) {
+      fetchWeather(lat, lng);
+    } else {
+      fetchDefaultCityWeather();
+    }
+
+    if (firstRun) {
       var options = {
         highAccuracyEnabled: true,
         timeout: 10000,
@@ -109,119 +133,123 @@ function HomeHourly() {
     }
   }, [locationData]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="hourly">
-        <div className="container">
-          <div className="middle">
-            <table className="hourly-outline">
-              <thead className="hourly-times">
-                <tr>
-                  <th>
-                    {hours?.list?.[0]?.dt_txt &&
-                      convertToEST(hours.list[0].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[1]?.dt_txt &&
-                      convertToEST(hours.list[1].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[2]?.dt_txt &&
-                      convertToEST(hours.list[2].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[3]?.dt_txt &&
-                      convertToEST(hours.list[3].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[4]?.dt_txt &&
-                      convertToEST(hours.list[4].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[5]?.dt_txt &&
-                      convertToEST(hours.list[5].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[6]?.dt_txt &&
-                      convertToEST(hours.list[6].dt_txt)}
-                  </th>
-                  <th>
-                    {hours?.list?.[7]?.dt_txt &&
-                      convertToEST(hours.list[7].dt_txt)}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="hourly-items">
-                  <td>
-                    <p>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[0]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[1]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[2]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[3]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[4]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[5]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[6]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                  <td>
-                    <p>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)}°F</p>
-                    <img
-                      src={`http://openweathermap.org/img/w/${
-                        hours?.list?.[7]?.weather?.[0]?.icon ?? "02d"
-                      }.png`}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <div className="container">
+        <div className="middle">
+          <table className="hourly-outline">
+            <thead className="hourly-times">
+              <tr>
+                <th>
+                  {hours?.list?.[0]?.dt_txt &&
+                    convertToEST(hours.list[0].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[1]?.dt_txt &&
+                    convertToEST(hours.list[1].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[2]?.dt_txt &&
+                    convertToEST(hours.list[2].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[3]?.dt_txt &&
+                    convertToEST(hours.list[3].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[4]?.dt_txt &&
+                    convertToEST(hours.list[4].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[5]?.dt_txt &&
+                    convertToEST(hours.list[5].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[6]?.dt_txt &&
+                    convertToEST(hours.list[6].dt_txt)}
+                </th>
+                <th>
+                  {hours?.list?.[7]?.dt_txt &&
+                    convertToEST(hours.list[7].dt_txt)}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="hourly-items">
+                <td>
+                  <p>{Math.round(hours?.list?.[0]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[0]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[1]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[1]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[2]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[2]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[3]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[3]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[4]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[4]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[5]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[5]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[6]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[6]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+                <td>
+                  <p>{Math.round(hours?.list?.[7]?.main?.temp ?? 0)}°F</p>
+                  <img
+                    src={`http://openweathermap.org/img/w/${
+                      hours?.list?.[7]?.weather?.[0]?.icon ?? "02d"
+                    }.png`}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
   );
 }
 

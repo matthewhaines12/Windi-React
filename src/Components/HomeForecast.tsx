@@ -30,6 +30,31 @@ function HomeForecast() {
   const { locationData } = useLocation();
   const { setLocationData } = useLocation();
   const [forecast, setWeatherData] = useState<HomeForecastData | null>(null);
+  const defaultCity = "New York";
+  const [loading, setLoading] = useState(true);
+
+
+  function fetchWeather(lat: number, lng: number) {
+    fetch(
+      `${api.base}forecast/daily?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setWeatherData(data);
+        setLoading(false);
+      })
+      .catch((error) => console.error("Failed to fetch weather data", error));
+    }
+
+    function fetchDefaultCityWeather() {
+      fetch(`${api.base}forecast/daily?q=${defaultCity}&appid=${api.key}&units=imperial`)
+        .then((res) => res.json())
+        .then((data) => {
+          setWeatherData(data);
+          setLoading(false);
+        })
+        .catch((error) => console.error("Failed to fetch weather data", error));
+    }
 
   const formatDate = (timestamp: number | undefined): string => {
     if (!timestamp) return "";
@@ -55,33 +80,30 @@ function HomeForecast() {
         { lat: position.coords.latitude, lng: position.coords.longitude },
       ],
     });
-    if (locationData.locations[0] && locationData.locations[1]) {
-      fetch(
-        `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setWeatherData(data);
-          console.log(data);
-        })
-        .catch((error) => console.error("Failed to fetch weather data", error));
-    }
+    fetchWeather(position.coords.latitude, position.coords.longitude);
+
+    // if (locationData.locations[0] && locationData.locations[1]) {
+    //   fetch(
+    //     `${api.base}forecast/daily?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&APPID=${api.key}&units=imperial`
+    //   )
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setWeatherData(data);
+    //       setLoading(false);
+    //     })
+    //     .catch((error) => console.error("Failed to fetch weather data", error));
+    // }
   }
 
   useEffect(() => {
     if (locationData.locations.length > 0) {
       const { lat, lng } = locationData.locations[0];
+      fetchWeather(lat, lng);
+    } else {
+    fetchDefaultCityWeather();
+    }
 
-      fetch(
-        `${api.base}forecast/daily?lat=${lat}&lon=${lng}&APPID=${api.key}&units=imperial`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setWeatherData(data);
-          console.log(data);
-        })
-        .catch((error) => console.error("Failed to fetch weather data", error));
-    } else if (firstRun) {
+    if (firstRun) {
       var options = {
         highAccuracyEnabled: true,
         timeout: 10000,
@@ -107,6 +129,10 @@ function HomeForecast() {
       firstRun = false;
     }
   }, [locationData]);
+
+  if (loading) { 
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="forecast">

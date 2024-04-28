@@ -7,7 +7,10 @@ import { useLocation } from "./LocationContext";
 import "../Styles/Home.css";
 import { FiWind } from "react-icons/fi";
 import { WiHumidity } from "react-icons/wi";
-import { MdOutlineKeyboardDoubleArrowUp, MdKeyboardDoubleArrowDown } from "react-icons/md";
+import {
+  MdOutlineKeyboardDoubleArrowUp,
+  MdKeyboardDoubleArrowDown,
+} from "react-icons/md";
 
 interface Weather {
   description: string;
@@ -50,24 +53,19 @@ function HomeCurrentWeather() {
   const { locationData } = useLocation();
   const { setLocationData } = useLocation();
   const [home, setWeatherData] = useState<HomeData | null>(null);
+  const defaultCity = "New York";
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (locationData.locations.length > 0) {
-      const { lat, lng } = locationData.locations[0];
-      fetch(
-        `${api.base}weather?lat=${lat}&lon=${lng}&appid=${api.key}&units=imperial`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setWeatherData(data);
-          console.log(data);
-        })
-        .catch((error) => console.error("Failed to fetch weather data", error));
-    } else if (firstRun) {
-      getLocation();
-      firstRun = false;
-    }
-  }, [locationData]);
+  
+  function fetchDefaultCityWeather() {
+    fetch(`${api.base}weather?q=${defaultCity}&appid=${api.key}&units=imperial`)
+      .then((res) => res.json())
+      .then((data) => {
+        setWeatherData(data);
+        setLoading(false);
+      })
+      .catch((error) => console.error("Failed to fetch weather data", error));
+  }
 
   function getLocation() {
     var options = {
@@ -78,14 +76,11 @@ function HomeCurrentWeather() {
 
     if (navigator.geolocation) {
       navigator.permissions.query({ name: "geolocation" }).then((result) => {
-        console.log(result);
         if (result.state === "granted" || result.state === "prompt") {
-          console.log(`LOCATION REQUEST`);
           navigator.geolocation.getCurrentPosition(Success, Errors, options);
         }
       });
     } else {
-      console.log("Geolocation not supported");
       setLocationData({ locations: [{ lat: 45, lng: 45 }] });
     }
   }
@@ -96,69 +91,101 @@ function HomeCurrentWeather() {
         { lat: position.coords.latitude, lng: position.coords.longitude },
       ],
     });
-    if (locationData.locations[0] && locationData.locations[1]) {
+    // if (locationData.locations[0] && locationData.locations[1]) { // unnessary check
       fetch(
         `${api.base}weather?lat=${locationData.locations[0]}&lon=${locationData.locations[1]}&appid=${api.key}&units=imperial`
       )
         .then((res) => res.json())
         .then((data) => {
           setWeatherData(data);
-          console.log(data);
+          setLoading(false);
         })
         .catch((error) => console.error("Failed to fetch weather data", error));
-    }
+    // }
   }
 
   function Errors(err: { code: any; message: any }) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
+  useEffect(() => {
+    if (locationData.locations.length > 0) {
+      const { lat, lng } = locationData.locations[0];
+      fetch(
+        `${api.base}weather?lat=${lat}&lon=${lng}&appid=${api.key}&units=imperial`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setWeatherData(data);
+        })
+        .catch((error) => console.error("Failed to fetch weather data", error));
+    } else {
+      fetchDefaultCityWeather();
+     
+
+      if (firstRun) {
+        getLocation();
+        firstRun = false;
+      }
+    }
+  }, [locationData]);
+
+
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
   return (
-    <div className="current" >
+    <div className="current">
       <div className="top">
-        <div className="info" style={{ transform: 'scale(0.9)' }}>
-        <div className="info-col1">
-          <div className="day-info">
-            <div className="high-low">
-              <p>
-                <MdOutlineKeyboardDoubleArrowUp className="up-arrow" /> 
-                {Math.round(home?.main?.temp_max ?? 0)}°F{" "}
-              </p>
-              <p>
-                <MdKeyboardDoubleArrowDown className="down-arrow"  style={{ verticalAlign: "middle" }}/>
-                {Math.round(home?.main?.temp_min ?? 0)}°F{" "}
-              </p>
+        <div className="info" style={{ transform: "scale(0.9)" }}>
+          <div className="info-col1">
+            <div className="day-info">
+              <div className="high-low">
+                <p>
+                  <MdOutlineKeyboardDoubleArrowUp className="up-arrow" />
+                  {Math.round(home?.main?.temp_max ?? 0)}°F{" "}
+                </p>
+                <p>
+                  <MdKeyboardDoubleArrowDown
+                    className="down-arrow"
+                    style={{ verticalAlign: "middle" }}
+                  />
+                  {Math.round(home?.main?.temp_min ?? 0)}°F{" "}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <div className="location">
-            <FaLocationArrow className="location-icon" />
-            <p>{home?.name ?? "Enter city"}</p>
-            <p>, {home?.sys?.country}</p>
+          <div>
+            <div className="location">
+              <FaLocationArrow className="location-icon" />
+              <p>{home?.name ?? "Enter city"}</p>
+              <p>, {home?.sys?.country}</p>
+            </div>
+            <div className="temp">
+              <h1>{`${Math.round(Number(home?.main?.temp ?? 0))}°F`}</h1>
+            </div>
+            <div className="description">
+              <p>{home?.weather?.[0]?.description ?? "No description"}</p>
+              <img
+                src={`http://openweathermap.org/img/w/${
+                  home?.weather?.[0]?.icon ?? "02d"
+                }.png`}
+              />
+            </div>
           </div>
-          <div className="temp">
-            <h1>{`${Math.round(Number(home?.main?.temp ?? 0))}°F`}</h1>
-          </div>
-          <div className="description">
-            <p>{home?.weather?.[0]?.description ?? "No description"}</p>
-            <img
-              src={`http://openweathermap.org/img/w/${home?.weather?.[0]?.icon ?? "02d"}.png`}
-            />
-          </div>
-        </div>
           <div className="info-col2">
             <div className="day-info">
-            <div className="day-stat">
-            <FiWind className="wind-icon" />
-              <span className="value">
-                {Math.round(home?.wind?.speed ?? 0)} mph
-              </span>
-            </div>
-            <div className="day-stat">
-              <WiHumidity className="humidity-icon" />
-              <span className="value">{home?.main?.humidity ?? 0} %</span>
-            </div>
+              <div className="day-stat">
+                <FiWind className="wind-icon" />
+                <span className="value">
+                  {Math.round(home?.wind?.speed ?? 0)} mph
+                </span>
+              </div>
+              <div className="day-stat">
+                <WiHumidity className="humidity-icon" />
+                <span className="value">{home?.main?.humidity ?? 0} %</span>
+              </div>
             </div>
           </div>
         </div>
