@@ -121,19 +121,19 @@ function HomeCurrentWeather() {
         .catch((error) => console.error("Failed to fetch weather data", error));
     } else {
       fetchDefaultCityWeather();
-     
+    }
 
       if (firstRun) {
         getLocation();
         firstRun = false;
       }
-    }
+    
   }, [locationData]);
 
 
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div className="loading">Loading...</div>;
+  // }
 
   return (
     <div className="current">
